@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -17,14 +16,13 @@
       theme: {
         extend: {
           colors: {
-            // ألوان مخصصة للوضع الليلي الجديد (أكثر حيادية وراحة)
             dark: {
-              bg: '#111827',       // Gray 900 (خلفية الصفحة)
-              surface: '#1f2937',  // Gray 800 (خلفية الكروت)
-              border: '#374151',   // Gray 700 (الحدود)
-              text: '#f3f4f6',     // Gray 100 (النص الأساسي)
-              muted: '#9ca3af',    // Gray 400 (النص الثانوي)
-              input: '#111827'     // خلفية المدخلات
+              bg: '#111827',
+              surface: '#1f2937',
+              border: '#374151',
+              text: '#f3f4f6',
+              muted: '#9ca3af',
+              input: '#111827'
             }
           }
         }
@@ -35,9 +33,13 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap');
     
-    body { font-family: 'Tajawal','Cairo',system-ui,sans-serif; background:#f9fafb; color:#111827; transition: background-color 0.3s, color 0.3s; }
+    body {
+      font-family: 'Tajawal','Cairo',system-ui,sans-serif;
+      background:#f9fafb;
+      color:#111827;
+      transition: background-color 0.3s, color 0.3s;
+    }
     
-    /* --- الوضع الليلي الجديد (Modern Dark Mode) --- */
     body.dark-mode { background-color: #111827; color: #f3f4f6; }
     
     body.dark-mode .bg-white, 
@@ -50,7 +52,6 @@
     body.dark-mode .bg-gray-50 { background-color: #111827 !important; }
     body.dark-mode .bg-gray-100 { background-color: #374151 !important; color: white !important; }
     
-    /* الجداول في الوضع الليلي */
     body.dark-mode th { 
         background-color: #1f2937 !important; 
         color: #9ca3af !important; 
@@ -58,7 +59,6 @@
     }
     body.dark-mode td { border-bottom-color: #374151 !important; }
     
-    /* المدخلات (Inputs) */
     body.dark-mode input, 
     body.dark-mode select, 
     body.dark-mode textarea { 
@@ -69,11 +69,31 @@
     body.dark-mode input::placeholder, 
     body.dark-mode textarea::placeholder { color: #6b7280 !important; }
     
-    /* النافبار */
-    nav { background:#ffffff; border-radius:16px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); padding:12px; display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 20px; transition: background-color 0.3s; }
-    body.dark-mode nav { background-color: #1f2937 !important; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3); }
+    nav {
+      background:#ffffff;
+      border-radius:16px;
+      box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);
+      padding:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
+    }
+    body.dark-mode nav {
+      background-color: #1f2937 !important;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+    }
 
-    .nav-btn { border-radius:8px; font-weight:600; padding:8px 16px; transition:all .2s; background:#f3f4f6; color:#4b5563; border: 1px solid transparent; }
+    .nav-btn {
+      border-radius:8px;
+      font-weight:600;
+      padding:8px 16px;
+      transition:all .2s;
+      background:#f3f4f6;
+      color:#4b5563;
+      border: 1px solid transparent;
+    }
     .nav-btn:hover { background:#e5e7eb; transform:translateY(-1px); }
     .nav-btn.active { background:#7c3aed; color:#fff; box-shadow:0 4px 12px rgba(124, 58, 237, 0.3); }
     
@@ -81,10 +101,19 @@
     body.dark-mode .nav-btn:hover { background:#4b5563; color: white; }
     body.dark-mode .nav-btn.active { background:#8b5cf6; color:#fff; box-shadow:0 4px 12px rgba(139, 92, 246, 0.4); }
 
-    /* General Styles */
     .bg-white { border-radius:16px; box-shadow:0 1px 3px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); }
     table { border-collapse:separate; border-spacing:0; width:100%; font-size:.9rem; }
-    th { background:#f9fafb; font-weight:700; text-align:right; padding:12px 16px; border-bottom:2px solid #e5e7eb; color: #4b5563; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+    th {
+      background:#f9fafb;
+      font-weight:700;
+      text-align:right;
+      padding:12px 16px;
+      border-bottom:2px solid #e5e7eb;
+      color: #4b5563;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
     td { padding:12px 16px; border-bottom:1px solid #f3f4f6; vertical-align: middle; }
     
     .badge { padding:.25rem .6rem; border-radius:9999px; font-size:.7rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; }
@@ -104,11 +133,28 @@
     .rotate-0 { transform: rotate(0deg); }
     .-rotate-90 { transform: rotate(90deg); } 
 
-    @media print {
-      body * { visibility: hidden; }
-      #printable-area, #printable-area * { visibility: visible; }
-      #printable-area { position: absolute; left: 0; top: 0; width: 100%; }
-      .no-print { display: none !important; }
+@media print {
+  body * { visibility: hidden; }
+
+  /* نسمح بطباعة التقارير أو سند القبض/الصرف حسب الصفحة المفتوحة */
+  #printable-area, #printable-area *,
+  #printable-receipt, #printable-receipt * {
+    visibility: visible;
+  }
+
+  #printable-area,
+  #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
     }
   </style>
 </head>
@@ -129,6 +175,7 @@
     <button class="nav-btn mr-auto" onclick="toggleDarkMode()">🌙/☀️</button>
   </nav>
 
+  <!-- ========================== DASHBOARD ========================== -->
   <section id="dashboard-view" class="view">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">لوحة المعلومات</h2>
@@ -174,6 +221,7 @@
     </div>
   </section>
 
+  <!-- ========================== PROPERTIES ========================== -->
   <section id="properties-view" class="view hidden">
     <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">العقارات والوحدات</h2>
@@ -202,6 +250,7 @@
     <div id="properties-container" class="space-y-6"></div>
   </section>
 
+  <!-- ========================== LEASES ========================== -->
   <section id="leases-view" class="view hidden">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة العقود</h2>
@@ -234,232 +283,248 @@
       </div>
     </section>
   
-    <section id="tenants-view" class="view hidden">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل المستأجرين</h2>
-      </div>
-      <div class="bg-white p-4 rounded-xl mb-4 shadow-sm">
-        <input id="tenants-search" class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none" placeholder="بحث عن مستأجر بالاسم، الهاتف أو البريد..." oninput="renderTenants()">
-      </div>
-      <div class="table-wrap bg-white shadow-sm">
-        <table class="min-w-full">
-          <thead>
-            <tr>
-              <th>الاسم</th>
-              <th>معلومات الاتصال</th>
-              <th>الوحدات</th>
-              <th>الإيجار السنوي</th>
-              <th>المدفوع</th>
-              <th>الرصيد المتبقي</th>
-              <th>الإجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="tenants-table-body"></tbody>
-        </table>
-      </div>
-    </section>
-  
-    <section id="cheques-view" class="view hidden">
-      <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة الشيكات</h2>
-          <button onclick="openChequeModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">إضافة شيك جديد</button>
-      </div>
-      <div class="table-wrap bg-white shadow-sm">
-        <table class="min-w-full">
-          <thead>
-            <tr>
-              <th>الحالة</th> <th>الاستحقاق</th>
-              <th>المستأجر</th>
-              <th>القيمة</th>
-              <th>البنك / رقم الشيك</th>
-              <th>صورة الشيك</th> <th>الإجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="cheques-table-body"></tbody>
-        </table>
-      </div>
-    </section>
-  
-    <section id="payments-view" class="view hidden">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل الدفعات المالية</h2>
-        <button onclick="openPaymentModal()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow">تسجيل دفعة جديدة</button>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div class="bg-white p-4 rounded shadow border-t-4 border-emerald-500 text-center">
-          <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي الدفعات</p>
-          <p id="payments-total" class="font-bold text-xl text-emerald-700 dark:text-emerald-400">0</p>
-        </div>
-      </div>
-      <div class="table-wrap bg-white shadow-sm">
-        <table class="min-w-full">
-          <thead>
-            <tr>
-              <th>التاريخ</th>
-              <th>المستأجر / الوحدة</th>
-              <th>النوع</th>
-              <th>المبلغ</th>
-              <th>المستحق / المتبقي</th>
-              <th>الحالة</th>
-              <th>السند</th>
-            </tr>
-          </thead>
-          <tbody id="payments-table-body"></tbody>
-        </table>
-      </div>
-    </section>
-  
-    <section id="expenses-view" class="view hidden">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">المصروفات</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-          <form id="new-expense-form" class="bg-white p-6 rounded-xl shadow-sm space-y-4 h-fit">
-              <h3 class="font-bold text-gray-700 dark:text-gray-200">إضافة مصروف جديد</h3>
-              <input id="expense-date" type="date" class="w-full border p-2 rounded" required>
-              <div>
-                  <label class="text-xs text-gray-500 dark:text-gray-400">نوع المصروف</label>
-                  <select id="expense-type" class="w-full border p-2 rounded" required>
-                      <option value="">اختر النوع...</option>
-                      <option value="صيانة">صيانة</option>
-                      <option value="رسوم كهرباء وماء">رسوم كهرباء وماء</option>
-                      <option value="رسوم بلدية">رسوم بلدية</option>
-                      <option value="محكمة">محكمة</option>
-                      <option value="أخرى">أخرى</option>
-                  </select>
-              </div>
-              
-              <input id="expense-amount" type="number" placeholder="المبلغ (AED)" class="w-full border p-2 rounded" required>
-              <textarea id="expense-details" placeholder="تفاصيل المصروف..." class="w-full border p-2 rounded h-24" required></textarea>
-              <button class="w-full bg-rose-600 text-white py-2 rounded shadow">تسجيل المصروف</button>
-          </form>
-          <div class="md:col-span-2 table-wrap bg-white shadow-sm rounded-xl">
-               <table class="min-w-full">
-                  <thead><tr><th>التاريخ</th><th>النوع</th><th>المبلغ</th><th>البيان</th><th class="text-center">السند / تحكم</th></tr></thead>
-                  <tbody id="expenses-table-body"></tbody>
-               </table>
-          </div>
-      </div>
-    </section>
+  <!-- ========================== TENANTS ========================== -->
+  <section id="tenants-view" class="view hidden">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل المستأجرين</h2>
+    </div>
+    <div class="bg-white p-4 rounded-xl mb-4 shadow-sm">
+      <input id="tenants-search" class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none" placeholder="بحث عن مستأجر بالاسم، الهاتف أو البريد..." oninput="renderTenants()">
+    </div>
+    <div class="table-wrap bg-white shadow-sm">
+      <table class="min-w-full">
+        <thead>
+          <tr>
+            <th>الاسم</th>
+            <th>معلومات الاتصال</th>
+            <th>الوحدات</th>
+            <th>الإيجار السنوي</th>
+            <th>المدفوع</th>
+            <th>الرصيد المتبقي</th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="tenants-table-body"></tbody>
+      </table>
+    </div>
+  </section>
 
-    <section id="salaries-view" class="view hidden">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">رواتب الحارس والعمال</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="md:col-span-1">
-              <form id="salary-form" class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm space-y-4 sticky top-4">
-                  <h3 class="font-bold text-gray-700 dark:text-gray-200 border-b dark:border-dark-border pb-2">تسجيل راتب جديد</h3>
-                  
-                  <div>
-                      <label class="text-xs text-gray-500 dark:text-gray-400">اسم الموظف</label>
-                      <input id="sal-name" class="w-full border p-2 rounded" placeholder="مثال: محمد علي" required>
-                  </div>
+  <!-- ========================== CHEQUES ========================== -->
+  <section id="cheques-view" class="view hidden">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة الشيكات</h2>
+        <button onclick="openChequeModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">إضافة شيك جديد</button>
+    </div>
+    <div class="table-wrap bg-white shadow-sm">
+      <table class="min-w-full">
+        <thead>
+          <tr>
+            <th>الحالة</th>
+            <th>الاستحقاق</th>
+            <th>المستأجر</th>
+            <th>القيمة</th>
+            <th>البنك / رقم الشيك</th>
+            <th>صورة الشيك</th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="cheques-table-body"></tbody>
+      </table>
+    </div>
+  </section>
 
-                  <div>
-                      <label class="text-xs text-gray-500 dark:text-gray-400">الوظيفة</label>
-                      <select id="sal-role" class="w-full border p-2 rounded">
-                          <option value="حارس">حارس</option>
-                          <option value="عامل نظافة">عامل نظافة</option>
-                          <option value="صيانة">فني صيانة</option>
-                          <option value="إداري">إداري</option>
-                          <option value="آخر">آخر</option>
-                      </select>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2">
-                      <div>
-                          <label class="text-xs text-gray-500 dark:text-gray-400">المبلغ</label>
-                          <input id="sal-amount" type="number" class="w-full border p-2 rounded" required>
-                      </div>
-                      <div>
-                          <label class="text-xs text-gray-500 dark:text-gray-400">التاريخ</label>
-                          <input id="sal-date" type="date" class="w-full border p-2 rounded" required>
-                      </div>
-                  </div>
-
-                  <div class="bg-gray-50 dark:bg-gray-800 p-3 rounded border dark:border-gray-700">
-                      <label class="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-2">راتب شهر:</label>
-                      <div class="flex gap-2">
-                          <select id="sal-month" class="w-2/3 border p-2 rounded text-sm">
-                              <option value="يناير">يناير</option><option value="فبراير">فبراير</option>
-                              <option value="مارس">مارس</option><option value="أبريل">أبريل</option>
-                              <option value="مايو">مايو</option><option value="يونيو">يونيو</option>
-                              <option value="يوليو">يوليو</option><option value="أغسطس">أغسطس</option>
-                              <option value="سبتمبر">سبتمبر</option><option value="أكتوبر">أكتوبر</option>
-                              <option value="نوفمبر">نوفمبر</option><option value="ديسمبر">ديسمبر</option>
-                          </select>
-                          <select id="sal-year" class="w-1/3 border p-2 rounded text-sm"></select>
-                      </div>
-                  </div>
-
-                  <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded shadow transition-colors">تسجيل الراتب</button>
-              </form>
-          </div>
-
-          <div class="md:col-span-2 space-y-6">
-              <div class="grid grid-cols-2 gap-4">
-                  <div class="bg-white dark:bg-dark-surface p-4 rounded-xl shadow border-r-4 border-indigo-500">
-                      <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي الرواتب المدفوعة</p>
-                      <p id="total-salaries" class="text-xl font-bold text-gray-800 dark:text-white">0 AED</p>
-                  </div>
-                  <div class="bg-white dark:bg-dark-surface p-4 rounded-xl shadow border-r-4 border-teal-500">
-                      <p class="text-xs text-gray-500 dark:text-gray-400">عدد العمليات</p>
-                      <p id="count-salaries" class="text-xl font-bold text-gray-800 dark:text-white">0</p>
-                  </div>
-              </div>
-
-              <div class="table-wrap bg-white dark:bg-dark-surface shadow-sm rounded-xl">
-                  <table class="min-w-full">
-                      <thead class="bg-gray-50 dark:bg-dark-bg">
-                          <tr>
-                              <th class="py-3 px-4">التاريخ</th>
-                              <th class="py-3 px-4">الموظف</th>
-                              <th class="py-3 px-4">المبلغ</th>
-                              <th class="py-3 px-4">البيان</th>
-                              <th class="py-3 px-4 text-center">السند</th>
-                              <th class="py-3 px-4 text-center">حذف</th>
-                          </tr>
-                      </thead>
-                      <tbody id="salaries-table-body" class="divide-y divide-gray-100 dark:divide-gray-700"></tbody>
-                  </table>
-              </div>
-          </div>
+  <!-- ========================== PAYMENTS ========================== -->
+  <section id="payments-view" class="view hidden">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل الدفعات المالية</h2>
+      <button onclick="openPaymentModal()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow">تسجيل دفعة جديدة</button>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white p-4 rounded shadow border-t-4 border-emerald-500 text-center">
+        <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي الدفعات</p>
+        <p id="payments-total" class="font-bold text-xl text-emerald-700 dark:text-emerald-400">0</p>
       </div>
-    </section>
+    </div>
+    <div class="table-wrap bg-white shadow-sm">
+      <table class="min-w-full">
+        <thead>
+          <tr>
+            <th>التاريخ</th>
+            <th>المستأجر / الوحدة</th>
+            <th>النوع</th>
+            <th>المبلغ</th>
+            <th>المستحق / المتبقي</th>
+            <th>الحالة</th>
+            <th>السند</th>
+          </tr>
+        </thead>
+        <tbody id="payments-table-body"></tbody>
+      </table>
+    </div>
+  </section>
 
-    <section id="receipts-history-view" class="view hidden">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">سجل السندات (قبض وصرف)</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div class="bg-white p-4 rounded-xl shadow border-r-4 border-emerald-500 text-center">
-              <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي سندات القبض (الدفعات)</p>
-              <p id="total-receipt-vouchers" class="font-bold text-xl text-emerald-700 dark:text-emerald-400">0 AED</p>
-          </div>
-          <div class="bg-white p-4 rounded-xl shadow border-r-4 border-rose-500 text-center">
-              <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي سندات الصرف (الرواتب والمصروفات)</p>
-              <p id="total-payment-vouchers" class="font-bold text-xl text-rose-700 dark:text-rose-400">0 AED</p>
-          </div>
-           <div class="bg-white p-4 rounded-xl shadow border-r-4 border-blue-500 text-center">
-              <p class="text-xs text-gray-500 dark:text-gray-400">عدد السندات الكلي</p>
-              <p id="total-vouchers-count" class="font-bold text-xl text-blue-700 dark:text-blue-400">0</p>
-          </div>
-      </div>
-
-      <div class="table-wrap bg-white shadow-sm">
-          <table class="min-w-full">
-              <thead>
+  <!-- ========================== EXPENSES ========================== -->
+  <section id="expenses-view" class="view hidden">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">المصروفات</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+        <form id="new-expense-form" class="bg-white p-6 rounded-xl shadow-sm space-y-4 h-fit">
+            <h3 class="font-bold text-gray-700 dark:text-gray-200">إضافة مصروف جديد</h3>
+            <input id="expense-date" type="date" class="w-full border p-2 rounded" required>
+            <div>
+                <label class="text-xs text-gray-500 dark:text-gray-400">نوع المصروف</label>
+                <select id="expense-type" class="w-full border p-2 rounded" required>
+                    <option value="">اختر النوع...</option>
+                    <option value="صيانة">صيانة</option>
+                    <option value="رسوم كهرباء وماء">رسوم كهرباء وماء</option>
+                    <option value="رسوم بلدية">رسوم بلدية</option>
+                    <option value="محكمة">محكمة</option>
+                    <option value="أخرى">أخرى</option>
+                </select>
+            </div>
+            <input id="expense-amount" type="number" placeholder="المبلغ (AED)" class="w-full border p-2 rounded" required>
+            <textarea id="expense-details" placeholder="تفاصيل المصروف..." class="w-full border p-2 rounded h-24" required></textarea>
+            <button class="w-full bg-rose-600 text-white py-2 rounded shadow">تسجيل المصروف</button>
+        </form>
+        <div class="md:col-span-2 table-wrap bg-white shadow-sm rounded-xl">
+             <table class="min-w-full">
+                <thead>
                   <tr>
-                      <th class="w-[100px]">التاريخ</th>
-                      <th class="w-[100px]">النوع</th>
-                      <th class="w-[120px]">المبلغ</th>
-                      <th class="w-[200px]">الطرف الآخر</th>
-                      <th>البيان</th>
-                      <th class="w-[80px]">عرض السند</th>
+                    <th>التاريخ</th>
+                    <th>النوع</th>
+                    <th>المبلغ</th>
+                    <th>البيان</th>
+                    <th class="text-center">السند / تحكم</th>
                   </tr>
-              </thead>
-              <tbody id="receipts-history-table-body"></tbody>
-          </table>
-      </div>
-    </section>
+                </thead>
+                <tbody id="expenses-table-body"></tbody>
+             </table>
+        </div>
+    </div>
+  </section>
 
+  <!-- ========================== SALARIES ========================== -->
+  <section id="salaries-view" class="view hidden">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">رواتب الحارس والعمال</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-1">
+            <form id="salary-form" class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm space-y-4 sticky top-4">
+                <h3 class="font-bold text-gray-700 dark:text-gray-200 border-b dark:border-dark-border pb-2">تسجيل راتب جديد</h3>
+                
+                <div>
+                    <label class="text-xs text-gray-500 dark:text-gray-400">اسم الموظف</label>
+                    <input id="sal-name" class="w-full border p-2 rounded" placeholder="مثال: محمد علي" required>
+                </div>
+
+                <div>
+                    <label class="text-xs text-gray-500 dark:text-gray-400">الوظيفة</label>
+                    <select id="sal-role" class="w-full border p-2 rounded">
+                        <option value="حارس">حارس</option>
+                        <option value="عامل نظافة">عامل نظافة</option>
+                        <option value="صيانة">فني صيانة</option>
+                        <option value="إداري">إداري</option>
+                        <option value="آخر">آخر</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-xs text-gray-500 dark:text-gray-400">المبلغ</label>
+                        <input id="sal-amount" type="number" class="w-full border p-2 rounded" required>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 dark:text-gray-400">التاريخ</label>
+                        <input id="sal-date" type="date" class="w-full border p-2 rounded" required>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-gray-800 p-3 rounded border dark:border-gray-700">
+                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-2">راتب شهر:</label>
+                    <div class="flex gap-2">
+                        <select id="sal-month" class="w-2/3 border p-2 rounded text-sm">
+                            <option value="يناير">يناير</option><option value="فبراير">فبراير</option>
+                            <option value="مارس">مارس</option><option value="أبريل">أبريل</option>
+                            <option value="مايو">مايو</option><option value="يونيو">يونيو</option>
+                            <option value="يوليو">يوليو</option><option value="أغسطس">أغسطس</option>
+                            <option value="سبتمبر">سبتمبر</option><option value="أكتوبر">أكتوبر</option>
+                            <option value="نوفمبر">نوفمبر</option><option value="ديسمبر">ديسمبر</option>
+                        </select>
+                        <select id="sal-year" class="w-1/3 border p-2 rounded text-sm"></select>
+                    </div>
+                </div>
+
+                <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded shadow transition-colors">تسجيل الراتب</button>
+            </form>
+        </div>
+
+        <div class="md:col-span-2 space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-dark-surface p-4 rounded-xl shadow border-r-4 border-indigo-500">
+                    <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي الرواتب المدفوعة</p>
+                    <p id="total-salaries" class="text-xl font-bold text-gray-800 dark:text-white">0 AED</p>
+                </div>
+                <div class="bg-white dark:bg-dark-surface p-4 rounded-xl shadow border-r-4 border-teal-500">
+                    <p class="text-xs text-gray-500 dark:text-gray-400">عدد العمليات</p>
+                    <p id="count-salaries" class="text-xl font-bold text-gray-800 dark:text-white">0</p>
+                </div>
+            </div>
+
+            <div class="table-wrap bg-white dark:bg-dark-surface shadow-sm rounded-xl">
+                <table class="min-w-full">
+                    <thead class="bg-gray-50 dark:bg-dark-bg">
+                        <tr>
+                            <th class="py-3 px-4">التاريخ</th>
+                            <th class="py-3 px-4">الموظف</th>
+                            <th class="py-3 px-4">المبلغ</th>
+                            <th class="py-3 px-4">البيان</th>
+                            <th class="py-3 px-4 text-center">السند</th>
+                            <th class="py-3 px-4 text-center">حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salaries-table-body" class="divide-y divide-gray-100 dark:divide-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- ========================== RECEIPTS HISTORY ========================== -->
+  <section id="receipts-history-view" class="view hidden">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">سجل السندات (قبض وصرف)</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white p-4 rounded-xl shadow border-r-4 border-emerald-500 text-center">
+            <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي سندات القبض (الدفعات)</p>
+            <p id="total-receipt-vouchers" class="font-bold text-xl text-emerald-700 dark:text-emerald-400">0 AED</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-r-4 border-rose-500 text-center">
+            <p class="text-xs text-gray-500 dark:text-gray-400">إجمالي سندات الصرف (الرواتب والمصروفات)</p>
+            <p id="total-payment-vouchers" class="font-bold text-xl text-rose-700 dark:text-rose-400">0 AED</p>
+        </div>
+         <div class="bg-white p-4 rounded-xl shadow border-r-4 border-blue-500 text-center">
+            <p class="text-xs text-gray-500 dark:text-gray-400">عدد السندات الكلي</p>
+            <p id="total-vouchers-count" class="font-bold text-xl text-blue-700 dark:text-blue-400">0</p>
+        </div>
+    </div>
+
+    <div class="table-wrap bg-white shadow-sm">
+        <table class="min-w-full">
+            <thead>
+                <tr>
+                    <th class="w-[100px]">التاريخ</th>
+                    <th class="w-[100px]">النوع</th>
+                    <th class="w-[120px]">المبلغ</th>
+                    <th class="w-[200px]">الطرف الآخر</th>
+                    <th>البيان</th>
+                    <th class="w-[80px]">عرض السند</th>
+                </tr>
+            </thead>
+            <tbody id="receipts-history-table-body"></tbody>
+        </table>
+    </div>
+  </section>
+
+  <!-- ========================== RECEIPT PREVIEW ========================== -->
   <section id="receipt-view" class="view hidden">
     <div class="max-w-4xl mx-auto">
       <h2 id="receipt-main-title" class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">إصدار سند</h2>
@@ -528,6 +593,7 @@
     </div>
   </section>
 
+  <!-- ========================== REPORTS ========================== -->
   <section id="reports-view" class="view hidden">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white">التقارير الشاملة</h2>
@@ -552,6 +618,7 @@
     </div>
   </section>
 
+  <!-- ========================== SETTINGS ========================== -->
   <section id="settings-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">إعدادات النظام</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -576,6 +643,9 @@
     </div>
   </section>
 
+  <!-- ========================== MODALS ========================== -->
+
+  <!-- Property Modal -->
   <div id="property-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-[fadeIn_0.2s_ease-out]">
       <div class="p-6 border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-600 flex justify-between items-center">
@@ -598,23 +668,52 @@
     </div>
   </div>
 
+  <!-- Unit Modal -->
   <div id="unit-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden">
       <div class="p-6 border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-600"><h3 class="text-xl font-bold">بيانات الوحدة</h3></div>
       <form id="unit-form" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
         <input type="hidden" id="unit-prop-id"><input type="hidden" id="unit-id">
-        <div class="md:col-span-2"><label class="text-xs text-gray-500 dark:text-gray-400">اسم/رقم الوحدة</label><input id="unit-name" class="border p-2 rounded w-full" required></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">النوع</label><input id="unit-type" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">الاستخدام</label><input id="unit-usage" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">الحالة</label>
-           <select id="unit-status" class="border p-2 rounded w-full"><option value="شاغرة">شاغرة</option><option value="مؤجرة">مؤجرة</option><option value="منتهية">منتهية</option></select>
+        <div class="md:col-span-2">
+          <label class="text-xs text-gray-500 dark:text-gray-400">اسم/رقم الوحدة</label>
+          <input id="unit-name" class="border p-2 rounded w-full" required>
         </div>
-        <div class="md:col-span-2 border-t dark:border-gray-600 pt-4 mt-2"><p class="font-bold text-gray-700 dark:text-gray-300 mb-2">بيانات العقد الحالي (إن وجد)</p></div>
-        <div class="md:col-span-2"><input id="unit-tenant" placeholder="اسم المستأجر" class="border p-2 rounded w-full"></div>
-        <div><input id="unit-rent" type="number" placeholder="القيمة الإيجارية" class="border p-2 rounded w-full"></div>
-        <div><input id="unit-contractNo" placeholder="رقم العقد" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">بداية العقد</label><input id="unit-start" type="date" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">نهاية العقد</label><input id="unit-end" type="date" class="border p-2 rounded w-full"></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">النوع</label>
+          <input id="unit-type" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الاستخدام</label>
+          <input id="unit-usage" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الحالة</label>
+          <select id="unit-status" class="border p-2 rounded w-full">
+            <option value="شاغرة">شاغرة</option>
+            <option value="مؤجرة">مؤجرة</option>
+            <option value="منتهية">منتهية</option>
+          </select>
+        </div>
+        <div class="md:col-span-2 border-t dark:border-gray-600 pt-4 mt-2">
+          <p class="font-bold text-gray-700 dark:text-gray-300 mb-2">بيانات العقد الحالي (إن وجد)</p>
+        </div>
+        <div class="md:col-span-2">
+          <input id="unit-tenant" placeholder="اسم المستأجر" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <input id="unit-rent" type="number" placeholder="القيمة الإيجارية" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <input id="unit-contractNo" placeholder="رقم العقد" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">بداية العقد</label>
+          <input id="unit-start" type="date" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">نهاية العقد</label>
+          <input id="unit-end" type="date" class="border p-2 rounded w-full">
+        </div>
         <div class="md:col-span-2 flex justify-end gap-3 mt-4 border-t dark:border-gray-600 pt-4">
           <button type="button" onclick="closeUnitModal()" class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded">إلغاء</button>
           <button class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 shadow">حفظ التغييرات</button>
@@ -623,6 +722,7 @@
     </div>
   </div>
 
+  <!-- Lease Modal -->
   <div id="lease-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
        <form id="lease-form" class="p-6 space-y-4">
@@ -637,7 +737,10 @@
             <div><label class="text-xs">من</label><input id="lease-start" type="date" class="w-full border p-2 rounded"></div>
             <div><label class="text-xs">إلى</label><input id="lease-end" type="date" class="w-full border p-2 rounded"></div>
          </div>
-         <select id="lease-status" class="w-full border p-2 rounded"><option value="مؤجرة">مؤجرة</option><option value="منتهية">منتهية</option></select>
+         <select id="lease-status" class="w-full border p-2 rounded">
+           <option value="مؤجرة">مؤجرة</option>
+           <option value="منتهية">منتهية</option>
+         </select>
          <div class="flex justify-between pt-4">
             <button type="button" onclick="cancelLease()" class="text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 px-3 py-1 rounded">إلغاء العقد وإخلاء الوحدة</button>
             <div class="flex gap-2">
@@ -649,12 +752,19 @@
     </div>
   </div>
 
+  <!-- Add Lease Modal -->
   <div id="add-lease-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="add-lease-form" class="p-6 space-y-4">
         <h3 class="font-bold text-xl mb-4">عقد جديد</h3>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">العقار</label><select id="add-lease-prop" class="w-full border p-2 rounded"></select></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">الوحدة</label><select id="add-lease-unit" class="w-full border p-2 rounded"></select></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">العقار</label>
+          <select id="add-lease-prop" class="w-full border p-2 rounded"></select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الوحدة</label>
+          <select id="add-lease-unit" class="w-full border p-2 rounded"></select>
+        </div>
         <input id="add-lease-tenant" class="w-full border p-2 rounded" placeholder="اسم المستأجر" required>
         <div class="grid grid-cols-2 gap-3">
              <input id="add-lease-rent" type="number" class="border p-2 rounded" placeholder="القيمة السنوية">
@@ -673,13 +783,21 @@
     </div>
   </div>
 
+  <!-- Payment Modal -->
   <div id="payment-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="payment-form" class="p-6 space-y-4">
         <h3 class="font-bold text-lg">تسجيل دفعة جديدة</h3>
         <input id="pay-date" type="date" class="w-full border p-2 rounded" required>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">العقد</label><select id="pay-contract" class="w-full border p-2 rounded"></select></div>
-        <select id="pay-type" class="w-full border p-2 rounded"><option>نقدي</option><option>شيك</option><option>تحويل بنكي</option></select>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">العقد</label>
+          <select id="pay-contract" class="w-full border p-2 rounded"></select>
+        </div>
+        <select id="pay-type" class="w-full border p-2 rounded">
+          <option>نقدي</option>
+          <option>شيك</option>
+          <option>تحويل بنكي</option>
+        </select>
         <input id="pay-amount" type="number" placeholder="المبلغ (AED)" class="w-full border p-2 rounded font-bold text-lg" required>
         <input id="pay-desc" placeholder="ملاحظات / وصف" class="w-full border p-2 rounded">
         <div class="flex justify-end gap-3 pt-4">
@@ -690,6 +808,7 @@
     </div>
   </div>
 
+  <!-- Tenant Modal -->
   <div id="tenant-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
      <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-md p-6">
         <h3 class="font-bold text-lg mb-4">بيانات الاتصال</h3>
@@ -705,6 +824,7 @@
      </div>
   </div>
 
+  <!-- Cheque Modal -->
   <div id="cheque-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="new-cheque-form" class="p-6 space-y-4">
@@ -720,12 +840,24 @@
         </div>
         
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">رقم الشيك</label><input id="cheque-number" class="w-full border p-2 rounded" required></div>
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">القيمة</label><input id="cheque-value" type="number" class="w-full border p-2 rounded" required></div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">رقم الشيك</label>
+            <input id="cheque-number" class="w-full border p-2 rounded" required>
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">القيمة</label>
+            <input id="cheque-value" type="number" class="w-full border p-2 rounded" required>
+          </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">تاريخ الاستحقاق</label><input id="cheque-due-date" type="date" class="w-full border p-2 rounded" required></div>
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">البنك</label><input id="cheque-bank" class="w-full border p-2 rounded"></div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">تاريخ الاستحقاق</label>
+            <input id="cheque-due-date" type="date" class="w-full border p-2 rounded" required>
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">البنك</label>
+            <input id="cheque-bank" class="w-full border p-2 rounded">
+          </div>
         </div>
         
         <div>
@@ -733,7 +865,10 @@
           <input id="cheque-image" type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
         </div>
         
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">ملاحظات</label><input id="cheque-purpose" class="w-full border p-2 rounded"></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">ملاحظات</label>
+          <input id="cheque-purpose" class="w-full border p-2 rounded">
+        </div>
         
         <div class="flex justify-end gap-3 pt-4 border-t dark:border-gray-700">
           <button type="button" onclick="closeChequeModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded text-gray-800">إلغاء</button>
@@ -772,6 +907,8 @@
 
   let properties = [], cheques = [], expenses = [], payments = [], tenantsContacts = {}, salaries = [];
   let contractLogs = JSON.parse(localStorage.getItem('logs') || "[]");
+  // عدّادات أرقام السندات (سند قبض / سند صرف)
+  let voucherCounters = { rv: 1, pv: 1 };
 
   // ================= UTILS & LOCAL STORAGE =================
   function formatAED(n){ return (n||0).toLocaleString('en-US') + ' AED'; }
@@ -784,7 +921,15 @@
   function clearLogs(){ contractLogs=[]; localStorage.setItem('logs','[]'); renderLogs(); }
   
   function saveToLocal(){
-    localStorage.setItem('re_data_v2', JSON.stringify({ properties, cheques, expenses, payments, tenantsContacts, salaries }));
+    localStorage.setItem('re_data_v2', JSON.stringify({ 
+      properties,
+      cheques,
+      expenses,
+      payments,
+      tenantsContacts,
+      salaries,
+      voucherCounters
+    }));
   }
   
   function loadFromLocal(){
@@ -798,7 +943,8 @@
         payments = o.payments||[]; 
         tenantsContacts = o.tenantsContacts||{};
         if(o.salaries) salaries = o.salaries;
-        
+        if(o.voucherCounters) voucherCounters = o.voucherCounters;
+
         // Data migration: ensure expenses have an ID and type if missing
         expenses = expenses.map(e => ({
             id: e.id || 'EXP-' + Date.now() + Math.floor(Math.random() * 1000),
@@ -811,18 +957,26 @@
         // Data migration: ensure cheques have ID, status, and imageUrl (New requirements)
         cheques = cheques.map(c => ({
             ...c,
-            id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random() * 1000), // Ensure unique ID
-            // Default status based on due date if not present
+            id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random() * 1000),
             status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'), 
             imageUrl: c.imageUrl || null 
         }));
-
 
       } catch(e) { console.error("Error loading data", e); }
     } else {
       properties = JSON.parse(JSON.stringify(initialProperties));
       saveToLocal();
     }
+  }
+
+  // توليد رقم سند متسلسل حسب النوع (قبض / صرف)
+  function getNextVoucherNo(kind){
+    const key = kind === 'receipt' ? 'rv' : 'pv';
+    const prefix = kind === 'receipt' ? 'RV-' : 'PV-';
+    const current = voucherCounters[key] || 1;
+    voucherCounters[key] = current + 1;
+    saveToLocal();
+    return prefix + String(current).padStart(5,'0');
   }
 
   // ================= VIEW LOGIC =================
@@ -836,7 +990,7 @@
     else if(id==='properties') renderProperties();
     else if(id==='leases') renderLeases();
     else if(id==='tenants') renderTenants();
-    else if(id==='cheques') renderCheques(); // Render Cheques
+    else if(id==='cheques') renderCheques();
     else if(id==='payments') renderPayments();
     else if(id==='expenses') renderExpenses();
     else if(id==='salaries') renderSalaries();
@@ -844,7 +998,7 @@
     else if(id==='reports') renderReports();
   }
 
-  // ================= DASHBOARD & PROPERTIES (Unchanged Logic) =================
+  // ================= DASHBOARD & PROPERTIES =================
   let leasesChart, financeChart;
   function updateDashboard(){
     document.getElementById('current-date-display').textContent = new Date().toLocaleDateString('ar-AE', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
@@ -881,9 +1035,16 @@
     financeChart = new Chart(document.getElementById('financeChart'), {
       type:'bar',
       data:{ labels:['المتوقع سنوياً', 'المقبوض فعلياً'], datasets:[{ label:'AED', data:[stats.totalRent, collected], backgroundColor:['#3b82f6', '#10b981'], borderRadius: 6 }] },
-      options:{ scales:{ y:{ beginAtZero:true, grid:{ color: gridColor }, ticks:{ color: textColor } }, x:{ ticks:{ color: textColor }, grid:{ display: false } } }, plugins: { legend: { labels: { color: textColor } } } }
+      options:{ 
+        scales:{ 
+          y:{ beginAtZero:true, grid:{ color: gridColor }, ticks:{ color: textColor } }, 
+          x:{ ticks:{ color: textColor }, grid:{ display: false } } 
+        }, 
+        plugins: { legend: { labels: { color: textColor } } } 
+      }
     });
   }
+
   function renderLogs(){
      const el=document.getElementById('contractLogs'); el.innerHTML='';
      contractLogs.forEach(l=>{
@@ -894,7 +1055,6 @@
   }
 
   function renderProperties(){
-    // ... (Property rendering logic, unchanged)
     const container = document.getElementById('properties-container'); 
     container.innerHTML = '';
     const search = document.getElementById('prop-search').value.toLowerCase();
@@ -948,12 +1108,18 @@
                    </thead>
                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                       ${(search ? filteredUnits : p.units).map(u=>{
-                         const statusClass = u.status==='مؤجرة'?'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200':(u.status==='منتهية'?'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200':'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200');
+                         const statusClass = u.status==='مؤجرة'
+                           ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
+                           : (u.status==='منتهية'
+                             ? 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200'
+                             : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200');
                          return `
                          <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                             <td class="px-4 py-3 font-bold text-gray-700 dark:text-gray-200">${u.name}</td>
                             <td class="px-4 py-3 text-xs text-gray-500 dark:text-gray-400">${u.type||'-'}</td>
-                            <td class="px-4 py-3"><span class="px-2 py-1 rounded text-[10px] font-bold ${statusClass}">${u.status}</span></td>
+                            <td class="px-4 py-3">
+                              <span class="px-2 py-1 rounded text-[10px] font-bold ${statusClass}">${u.status}</span>
+                            </td>
                             <td class="px-4 py-3 text-sm max-w-[150px] truncate" title="${u.tenant||''}">${u.tenant||'-'}</td>
                             <td class="px-4 py-3 font-mono text-emerald-700 dark:text-emerald-400 font-bold text-sm">${u.rent ? u.rent.toLocaleString() : '-'}</td>
                             <td class="px-4 py-3 text-xs font-mono truncate-text text-gray-500 dark:text-gray-400" title="${u.contractNo||''}">${u.contractNo||'-'}</td>
@@ -967,6 +1133,7 @@
                                <div class="flex gap-1">
                                   <button onclick="openUnitModal('${p.id}','${u.id}')" class="p-1.5 hover:bg-blue-50 dark:hover:bg-gray-700 text-blue-600 dark:text-blue-400 rounded transition-colors" title="تعديل">✏️</button>
                                   <button onclick="openLeaseModal('${p.id}','${u.id}')" class="p-1.5 hover:bg-purple-50 dark:hover:bg-gray-700 text-purple-600 dark:text-purple-400 rounded transition-colors" title="العقد">📑</button>
+                                  <button onclick="deleteUnit('${p.id}','${u.id}')" class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400 rounded transition-colors" title="حذف الوحدة">🗑️</button>
                                </div>
                             </td>
                          </tr>`;
@@ -980,6 +1147,7 @@
        container.appendChild(card);
     });
   }
+
   function toggleUnitVisibility(propId) {
     const content = document.getElementById(`units-content-${propId}`);
     const icon = document.getElementById(`icon-${propId}`);
@@ -993,6 +1161,7 @@
       icon.classList.add('-rotate-90');
     }
   }
+
   function expandAllProperties() {
     properties.forEach(p => {
         const content = document.getElementById(`units-content-${p.id}`);
@@ -1004,6 +1173,7 @@
         }
     });
   }
+
   function collapseAllProperties() {
     properties.forEach(p => {
         const content = document.getElementById(`units-content-${p.id}`);
@@ -1015,6 +1185,7 @@
         }
     });
   }
+
   function deleteProperty(id){
       if(confirm('هل أنت متأكد من حذف هذا العقار وجميع وحداته؟ لا يمكن التراجع عن هذا الإجراء.')){
           properties = properties.filter(p => p.id !== id);
@@ -1025,9 +1196,26 @@
       }
   }
 
-  // ================= LEASES, MODALS, TENANTS & PAYMENTS (Unchanged Logic) =================
+  // حذف وحدة واحدة من عقار
+  function deleteUnit(propId, unitId){
+    if(!confirm('هل تريد حذف هذه الوحدة نهائياً؟')) return;
+    const prop = properties.find(p => p.id === propId);
+    if(!prop) return;
+    prop.units = prop.units.filter(u => u.id !== unitId);
+    saveToLocal();
+    renderProperties();
+    updateDashboard();
+    logAction(`تم حذف الوحدة ${unitId} من العقار ${propId}`);
+  }
+
+  // ================= LEASES, MODALS, TENANTS & PAYMENTS =================
   let leaseSort={key:'end',dir:'asc'};
-  function setLeaseSort(k){ if(leaseSort.key===k) leaseSort.dir=leaseSort.dir==='asc'?'desc':'asc'; else {leaseSort.key=k; leaseSort.dir='asc';} renderLeases(); }
+  function setLeaseSort(k){
+    if(leaseSort.key===k) leaseSort.dir=leaseSort.dir==='asc'?'desc':'asc';
+    else {leaseSort.key=k; leaseSort.dir='asc';}
+    renderLeases();
+  }
+
   function renderLeases(){
      const tbody = document.getElementById('leases-table-body'); tbody.innerHTML='';
      const search = document.getElementById('lease-search-input').value.toLowerCase();
@@ -1066,8 +1254,10 @@
         tbody.appendChild(tr);
      });
   }
+
   function openPropertyModal(){ document.getElementById('property-modal').classList.remove('hidden'); }
   function closePropertyModal(){ document.getElementById('property-modal').classList.add('hidden'); }
+
   document.getElementById('property-form').addEventListener('submit', e=>{
     e.preventDefault();
     properties.push({
@@ -1105,7 +1295,9 @@
         document.getElementById('unit-prop-id').value = propId;
      }
   }
+
   function closeUnitModal(){ document.getElementById('unit-modal').classList.add('hidden'); }
+
   document.getElementById('unit-form').addEventListener('submit', e=>{
      e.preventDefault();
      const pid = document.getElementById('unit-prop-id').value;
@@ -1142,6 +1334,7 @@
       document.getElementById('add-lease-unit').innerHTML = '<option value="">اختر العقار أولاً</option>';
       document.getElementById('add-lease-form').reset();
   }
+
   function closeAddLeaseModal(){ document.getElementById('add-lease-modal').classList.add('hidden'); }
   
   document.getElementById('add-lease-prop').addEventListener('change', function(){
@@ -1184,7 +1377,9 @@
      document.getElementById('lease-end').value=u.end||'';
      document.getElementById('lease-status').value=u.status;
   }
+
   function closeLeaseModal(){ document.getElementById('lease-modal').classList.add('hidden'); }
+
   function cancelLease(){
      if(!confirm('هل أنت متأكد من إلغاء العقد؟ سيتم تحويل الوحدة لشاغرة.')) return;
      const pid = document.getElementById('lease-prop-id').value;
@@ -1193,6 +1388,7 @@
      u.status='شاغرة'; u.tenant=''; u.rent=0; u.contractNo=''; u.start=''; u.end='';
      saveToLocal(); closeLeaseModal(); showView('leases'); logAction(`تم إلغاء عقد ${u.name}`);
   }
+
   function getTenantsData(){
      const map = {};
      properties.forEach(p=>p.units.forEach(u=>{
@@ -1210,13 +1406,14 @@
      });
      return Object.values(map).map(t=>({...t, balance: t.rent - t.paid}));
   }
+
   function getTenantNames() {
-      // Get names of all tenants currently in an active lease
       return Object.keys(getTenantsData().reduce((acc, t) => {
           if (t.units && t.units.length > 0) acc[t.name] = true;
           return acc;
       }, {}));
   }
+
   function renderTenants(){
      const tbody = document.getElementById('tenants-table-body'); tbody.innerHTML = '';
      const search = document.getElementById('tenants-search').value.toLowerCase();
@@ -1236,14 +1433,19 @@
         tbody.appendChild(tr);
      });
   }
+
   function openTenantModal(name=''){
      document.getElementById('tenant-modal').classList.remove('hidden');
      document.getElementById('tenant-name').value = name;
      if(name && tenantsContacts[name]){
         document.getElementById('tenant-phone').value = tenantsContacts[name].phone;
         document.getElementById('tenant-email').value = tenantsContacts[name].email;
+     } else {
+        document.getElementById('tenant-phone').value = '';
+        document.getElementById('tenant-email').value = '';
      }
   }
+
   function closeTenantModal(){ 
      const name = document.getElementById('tenant-name').value;
      if(name) {
@@ -1255,6 +1457,7 @@
      }
      document.getElementById('tenant-modal').classList.add('hidden'); 
   }
+
   function openPaymentModal(){
      const m = document.getElementById('payment-modal'); m.classList.remove('hidden');
      const sel = document.getElementById('pay-contract'); sel.innerHTML='';
@@ -1267,7 +1470,9 @@
         }
      }));
   }
+
   function closePaymentModal(){ document.getElementById('payment-modal').classList.add('hidden'); }
+
   document.getElementById('payment-form').addEventListener('submit', e=>{
      e.preventDefault();
      const data = JSON.parse(document.getElementById('pay-contract').value);
@@ -1285,13 +1490,17 @@
      });
      saveToLocal(); closePaymentModal(); renderPayments(); updateDashboard(); logAction(`دفعة ${amt} من ${data.t}`);
   });
+
   function renderPayments(){
      const tbody = document.getElementById('payments-table-body'); tbody.innerHTML='';
      payments.sort((a,b)=> new Date(b.date)-new Date(a.date)).forEach(p=>{
         const tr = document.createElement('tr');
         tr.innerHTML = `
            <td class="text-sm">${p.date}</td>
-           <td><div class="font-bold text-sm">${p.tenant}</div><div class="text-xs text-gray-500 dark:text-gray-400">${p.unit}</div></td>
+           <td>
+             <div class="font-bold text-sm">${p.tenant}</div>
+             <div class="text-xs text-gray-500 dark:text-gray-400">${p.unit}</div>
+           </td>
            <td><span class="badge badge-blue">${p.type}</span></td>
            <td class="font-bold text-emerald-700 dark:text-emerald-400 font-mono">${formatAED(p.amount)}</td>
            <td class="text-xs text-gray-500 dark:text-gray-400 font-mono">${formatAED(p.due)} / <span class="text-rose-500 dark:text-rose-400">${formatAED(p.due-p.amount)}</span></td>
@@ -1304,9 +1513,7 @@
      document.getElementById('payments-total').textContent = formatAED(total);
   }
 
-  // ================= NEW CHEQUE LOGIC (REQ 1, 2, 3, 4, 5) =================
-  
-  // REQ 2: Utility to convert file to base64 for local storage saving
+  // ================= NEW CHEQUE LOGIC =================
   function fileToBase64(file) {
       return new Promise((resolve, reject) => {
           if (!file) {
@@ -1320,7 +1527,6 @@
       });
   }
 
-  // REQ 3: Toggle manual tenant input based on select value
   function toggleTenantInput() {
       const selectEl = document.getElementById('cheque-tenant-select');
       const manualEl = document.getElementById('cheque-tenant-manual');
@@ -1333,13 +1539,11 @@
       }
   }
 
-  // REQ 1: Open Cheque Modal and populate tenant list
   function openChequeModal(){ 
       const m = document.getElementById('cheque-modal'); 
       m.classList.remove('hidden'); 
       document.getElementById('new-cheque-form').reset();
       
-      // Populate tenant select (REQ 3)
       const selectEl = document.getElementById('cheque-tenant-select');
       selectEl.innerHTML = '<option value="">اختر مستأجر حالي...</option>';
       
@@ -1351,20 +1555,18 @@
       });
       selectEl.innerHTML += '<option value="other">-- مستأجر جديد / آخر --</option>';
       
-      toggleTenantInput(); // Ensure manual input is hidden/visible correctly
+      toggleTenantInput();
   }
+
   function closeChequeModal(){ document.getElementById('cheque-modal').classList.add('hidden'); }
 
-  // REQ 1: Form submission logic
   document.getElementById('new-cheque-form').addEventListener('submit', async e=>{
       e.preventDefault();
       
       const tenantSelect = document.getElementById('cheque-tenant-select').value;
       const tenantManual = document.getElementById('cheque-tenant-manual').value;
 
-      const tenantName = tenantSelect === 'other' 
-          ? tenantManual
-          : tenantSelect;
+      const tenantName = tenantSelect === 'other' ? tenantManual : tenantSelect;
 
       if (!tenantName) {
           alert("الرجاء تحديد أو إدخال اسم المستأجر.");
@@ -1372,7 +1574,7 @@
       }
 
       const imageFile = document.getElementById('cheque-image').files[0];
-      const imageUrl = await fileToBase64(imageFile); // REQ 2: Convert and save image
+      const imageUrl = await fileToBase64(imageFile);
 
       cheques.push({
           id: 'CHQ-'+Date.now(), 
@@ -1382,13 +1584,12 @@
           dueDate: document.getElementById('cheque-due-date').value,
           bank: document.getElementById('cheque-bank').value,
           purpose: document.getElementById('cheque-purpose').value,
-          status: 'بانتظار الصرف', // REQ 4: Default status
+          status: 'بانتظار الصرف',
           imageUrl: imageUrl 
       });
       saveToLocal(); closeChequeModal(); renderCheques(); logAction(`تم تسجيل شيك جديد للمستأجر: ${tenantName}`);
   });
 
-  // REQ 5: Logic to change status and add payment if 'مصروف'
   function changeChequeStatus(id, newStatus) {
       const chequeIndex = cheques.findIndex(c => c.id === id);
       if (chequeIndex === -1) return;
@@ -1397,15 +1598,13 @@
       cheque.status = newStatus;
 
       if (newStatus === 'مصروف') {
-          // Prevent duplicate payments if status is changed back and forth
           const paymentExists = payments.some(p => p.chequeId === id);
           
           if (!paymentExists) {
-              // Add to Payments array
               payments.push({
                   id: 'PAY-CHQ-'+Date.now(),
-                  chequeId: id, // Link back to the cheque
-                  date: new Date().toISOString().substring(0, 10), // Payment date is today
+                  chequeId: id,
+                  date: new Date().toISOString().substring(0, 10),
                   tenant: cheque.tenant,
                   unit: 'شيك مصرف', 
                   contract: cheque.chequeNo, 
@@ -1417,7 +1616,6 @@
               logAction(`تم صرف الشيك رقم ${cheque.chequeNo} وتم تسجيله كدفعة مقبوضة.`);
           }
       } else {
-          // If status changes from 'مصروف' to anything else, remove the payment record
           payments = payments.filter(p => p.chequeId !== id);
       }
       
@@ -1427,7 +1625,6 @@
       renderPayments();
   }
 
-  // Utility to display image in a new window
   function viewChequeImage(imageUrl) {
       if (!imageUrl) return;
       const w = window.open('', '_blank');
@@ -1435,7 +1632,10 @@
           <!DOCTYPE html>
           <html lang="ar" dir="rtl">
           <head><title>صورة الشيك</title>
-          <style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;}img{max-width:90vw;max-height:90vh;border:10px solid white;box-shadow:0 0 20px rgba(0,0,0,0.5);}</style>
+          <style>
+            body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;}
+            img{max-width:90vw;max-height:90vh;border:10px solid white;box-shadow:0 0 20px rgba(0,0,0,0.5);}
+          </style>
           </head>
           <body><img src="${imageUrl}" alt="صورة الشيك"></body>
           </html>
@@ -1443,16 +1643,14 @@
       w.document.close();
   }
   
-  // Updated renderCheques to display status and new controls
   function renderCheques(){
      const tbody = document.getElementById('cheques-table-body'); tbody.innerHTML='';
-     cheques.sort((a,b)=> new Date(b.dueDate)-new Date(a.dueDate)).forEach((c,i)=>{
+     cheques.sort((a,b)=> new Date(b.dueDate)-new Date(a.dueDate)).forEach((c)=>{
         
         let statusClass = 'badge-amber';
         if (c.status === 'مصروف') statusClass = 'badge-green';
         else if (c.status === 'راجع') statusClass = 'badge-red';
 
-        // Options for the status select dropdown
         const statusOptions = ['بانتظار الصرف', 'مصروف', 'راجع'];
         const selectOptions = statusOptions.map(s => 
             `<option value="${s}" ${c.status === s ? 'selected' : ''}>${s}</option>`
@@ -1482,24 +1680,21 @@
   function deleteCheque(id){
       if(confirm('هل أنت متأكد من حذف هذا الشيك؟ سيتم حذفه من سجل الدفعات إذا كان مصروفاً.')){
           cheques = cheques.filter(c => c.id !== id);
-          // Also remove linked payment if it was cashed
           payments = payments.filter(p => p.chequeId !== id);
           saveToLocal(); renderCheques(); renderPayments(); updateDashboard();
           logAction(`تم حذف الشيك ${id}`);
       }
   }
 
-
-  // ================= EXPENSES, SALARIES, REPORTS (Unchanged Logic) =================
+  // ================= EXPENSES, SALARIES, REPORTS =================
   function renderReceiptsHistory(){
       const tbody = document.getElementById('receipts-history-table-body'); tbody.innerHTML = '';
       
       let allVouchers = [];
       let totalReceipts = 0;
-      let totalSalaries = 0;
-      let totalExpenses = 0;
+      let totalSalariesVal = 0;
+      let totalExpensesVal = 0;
 
-      // 1. Collect Payment Vouchers (Receipts)
       payments.forEach(p => {
           totalReceipts += p.amount;
           allVouchers.push({
@@ -1513,9 +1708,8 @@
           });
       });
 
-      // 2. Collect Salary Vouchers (Payments)
       salaries.forEach(s => {
-           totalSalaries += s.amount;
+           totalSalariesVal += s.amount;
            allVouchers.push({
               id: s.id,
               type: 'صرف',
@@ -1527,9 +1721,8 @@
           });
       });
       
-      // 3. Collect Expense Vouchers (Payments)
       expenses.forEach(e => {
-           totalExpenses += e.amount;
+           totalExpensesVal += e.amount;
            allVouchers.push({
               id: e.id,
               type: 'صرف',
@@ -1563,72 +1756,75 @@
       });
       
       document.getElementById('total-receipt-vouchers').textContent = formatAED(totalReceipts);
-      document.getElementById('total-payment-vouchers').textContent = formatAED(totalSalaries + totalExpenses); 
+      document.getElementById('total-payment-vouchers').textContent = formatAED(totalSalariesVal + totalExpensesVal); 
       document.getElementById('total-vouchers-count').textContent = allVouchers.length;
   }
   
   function previewReceipt(id, type='payment'){
-     // Switch View
      showView('receipt');
      
-     // Elements
      const titleEl = document.getElementById('rv-title');
      const subTitleEl = document.getElementById('rv-subtitle');
      const partyLabelEl = document.getElementById('rv-party-label');
      const btnBack = document.getElementById('back-to-source-btn');
 
-     // Set Back Button action to always go to the history page
      btnBack.onclick = function() { showView('receipts-history'); };
 
      if(type === 'salary') {
-         const item = salaries.find(x => x.id == id); // Loose equality for timestamp id
+         const item = salaries.find(x => x.id == id);
          if(!item) return;
 
-         // Set Titles for "Payment Voucher"
          titleEl.textContent = "سند صرف";
          titleEl.className = "text-3xl font-black text-rose-700 tracking-wider";
          subTitleEl.textContent = "Payment Voucher";
          partyLabelEl.textContent = "اصرفوا للسيد/ة:";
 
-         // Set Data
-         document.getElementById('rv-no').textContent = 'PV-' + Math.floor(Math.random()*100000);
+         if (!item.voucherNo){
+           item.voucherNo = getNextVoucherNo('payment');
+           saveToLocal();
+         }
+
+         document.getElementById('rv-no').textContent = item.voucherNo;
          document.getElementById('rv-date-out').textContent = item.date;
          document.getElementById('rv-tenant-out').textContent = item.name + " (" + item.role + ")";
          document.getElementById('rv-amount-out').textContent = parseFloat(item.amount).toLocaleString();
          document.getElementById('rv-method-out').textContent = "نقدي / تحويل";
-         document.getElementById('rv-for-out').textContent = item.notes;
-
+         document.getElementById('rv-for-out').textContent = item.notes || '';
      } else if(type === 'expense') { 
          const item = expenses.find(x => x.id === id);
          if(!item) return;
          
-         // Set Titles for "Payment Voucher"
          titleEl.textContent = "سند صرف";
          titleEl.className = "text-3xl font-black text-rose-700 tracking-wider";
          subTitleEl.textContent = "Payment Voucher";
          partyLabelEl.textContent = "اصرفوا للجهة/الاستاذ:";
 
-         // Set Data
-         document.getElementById('rv-no').textContent = 'PV-' + Math.floor(Math.random()*100000);
+         if (!item.voucherNo){
+           item.voucherNo = getNextVoucherNo('payment');
+           saveToLocal();
+         }
+
+         document.getElementById('rv-no').textContent = item.voucherNo;
          document.getElementById('rv-date-out').textContent = item.date;
          document.getElementById('rv-tenant-out').textContent = item.type;
          document.getElementById('rv-amount-out').textContent = parseFloat(item.amount).toLocaleString();
          document.getElementById('rv-method-out').textContent = "نقدي";
          document.getElementById('rv-for-out').textContent = `دفع مبلغ ${item.amount.toLocaleString()} عن ${item.type}: ${item.details}`;
-
      } else {
-         // Default: Receipt Voucher (Rent Payment or Cashed Cheque)
-         const item = payments.find(x => x.id === id || x.chequeId === id); // Find by payment ID or cheque ID
+         const item = payments.find(x => x.id === id || x.chequeId === id);
          if(!item) return;
 
-         // Set Titles for "Receipt Voucher"
          titleEl.textContent = "سند قبض";
          titleEl.className = "text-3xl font-black text-emerald-700 tracking-wider";
          subTitleEl.textContent = "Receipt Voucher";
          partyLabelEl.textContent = "استلمنا من:";
 
-         // Set Data
-         document.getElementById('rv-no').textContent = 'RV-' + Math.floor(Math.random()*100000);
+         if (!item.voucherNo){
+           item.voucherNo = getNextVoucherNo('receipt');
+           saveToLocal();
+         }
+
+         document.getElementById('rv-no').textContent = item.voucherNo;
          document.getElementById('rv-date-out').textContent = item.date;
          document.getElementById('rv-tenant-out').textContent = item.tenant;
          document.getElementById('rv-amount-out').textContent = parseFloat(item.amount).toLocaleString();
@@ -1671,9 +1867,11 @@
         tbody.appendChild(tr);
      });
   }
+
   function deleteExpense(index){
       if(confirm('حذف هذا المصروف؟')) { expenses.splice(index, 1); saveToLocal(); renderExpenses(); }
   }
+
   document.getElementById('new-expense-form').addEventListener('submit', e=>{
       e.preventDefault();
       expenses.push({
@@ -1714,7 +1912,7 @@
             <td class="px-4 py-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">${formatAED(s.amount)}</td>
             <td class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">${s.notes || '-'}</td>
             <td class="px-4 py-3 text-center">
-                <button onclick="previewReceipt(${s.id}, 'salary')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
+                <button onclick="previewReceipt('${s.id}', 'salary')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
             </td>
             <td class="px-4 py-3 text-center">
                 <button onclick="deleteSalary(${index})" class="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1 rounded transition">🗑️</button>
@@ -1775,13 +1973,22 @@
      });
   }
 
-  // ================= SETTINGS & BACKUP (Unchanged Logic) =================
+  // ================= SETTINGS & BACKUP =================
   function exportBackupJSON(){
-     const data = { properties, cheques, expenses, payments, tenantsContacts, salaries };
+     const data = { 
+       properties,
+       cheques,
+       expenses,
+       payments,
+       tenantsContacts,
+       salaries,
+       voucherCounters
+     };
      const blob = new Blob([JSON.stringify(data)], {type:'application/json'});
      const url = URL.createObjectURL(blob);
      const a = document.createElement('a'); a.href=url; a.download='realestate_backup.json'; a.click();
   }
+
   function exportBackupExcel(){
      const wb = XLSX.utils.book_new();
      const unitsData = [];
@@ -1792,6 +1999,7 @@
      if(expenses.length > 0) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(expenses), "Expenses");
      XLSX.writeFile(wb, "RealEstate_Data.xlsx");
   }
+
   function importBackup(e){
      const file = e.target.files[0];
      if(!file) return;
@@ -1804,8 +2012,9 @@
            if(data.cheques) cheques = data.cheques;
            if(data.salaries) salaries = data.salaries;
            if(data.expenses) expenses = data.expenses; 
+           if(data.tenantsContacts) tenantsContacts = data.tenantsContacts;
+           if(data.voucherCounters) voucherCounters = data.voucherCounters;
            
-           // Re-run migration logic for imported data (important for new fields)
            expenses = expenses.map(e => ({
                id: e.id || 'EXP-' + Date.now() + Math.floor(Math.random() * 1000),
                date: e.date,
@@ -1829,7 +2038,13 @@
   }
   
   function clearAllData(){
-     properties = []; cheques = []; expenses = []; payments = []; tenantsContacts = {}; salaries = [];
+     properties = []; 
+     cheques = []; 
+     expenses = []; 
+     payments = []; 
+     tenantsContacts = {}; 
+     salaries = [];
+     voucherCounters = { rv:1, pv:1 };
      saveToLocal(); 
      location.reload();
   }
