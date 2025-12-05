@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>نظام إدارة العقارات المتكامل</title>
+  <title>نظام إدارة العقارات المتكامل (المعدل)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -175,6 +175,7 @@
         width: 190mm;
         box-shadow: none !important;
         border: none !important;
+        direction: rtl !important; /* Force RTL for printing */
       }
 
       #receipt-preview {
@@ -207,7 +208,6 @@
     <button class="nav-btn mr-auto" onclick="toggleDarkMode()">🌙/☀️</button>
   </nav>
 
-  <!-- ====== Dashboard ====== -->
   <section id="dashboard-view" class="view">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">لوحة المعلومات</h2>
@@ -253,7 +253,6 @@
     </div>
   </section>
 
-  <!-- ====== Properties ====== -->
   <section id="properties-view" class="view hidden">
     <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">العقارات والوحدات</h2>
@@ -270,7 +269,7 @@
         </div>
 
         <div class="relative">
-          <input type="text" id="prop-search" placeholder="بحث سريع..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-56 text-sm" oninput="renderProperties()">
+          <input type="text" id="prop-search" placeholder="بحث باسم العقار، الوحدة، المستأجر" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-64 text-sm" oninput="renderProperties()">
           <span class="absolute left-3 top-2.5 text-gray-400 text-sm">🔍</span>
         </div>
 
@@ -282,7 +281,6 @@
     <div id="properties-container" class="space-y-6"></div>
   </section>
 
-  <!-- ====== Leases ====== -->
   <section id="leases-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة العقود</h2>
@@ -315,7 +313,6 @@
     </div>
   </section>
 
-  <!-- ====== Tenants ====== -->
   <section id="tenants-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل المستأجرين</h2>
@@ -341,7 +338,6 @@
     </div>
   </section>
 
-  <!-- ====== Cheques ====== -->
   <section id="cheques-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة الشيكات</h2>
@@ -365,7 +361,6 @@
     </div>
   </section>
 
-  <!-- ====== Payments ====== -->
   <section id="payments-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل الدفعات المالية</h2>
@@ -395,7 +390,6 @@
     </div>
   </section>
 
-  <!-- ====== Expenses ====== -->
   <section id="expenses-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">المصروفات</h2>
     <div class="grid md:grid-cols-3 gap-6">
@@ -428,7 +422,6 @@
     </div>
   </section>
 
-  <!-- ====== Salaries ====== -->
   <section id="salaries-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">رواتب الحارس والعمال</h2>
 
@@ -514,7 +507,6 @@
     </div>
   </section>
 
-  <!-- ====== Receipts history ====== -->
   <section id="receipts-history-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">سجل السندات (قبض وصرف)</h2>
 
@@ -550,7 +542,6 @@
     </div>
   </section>
 
-  <!-- ====== Single receipt view ====== -->
   <section id="receipt-view" class="view hidden">
     <div class="max-w-4xl mx-auto">
       <h2 id="receipt-main-title" class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">إصدار سند</h2>
@@ -619,7 +610,6 @@
     </div>
   </section>
 
-  <!-- ====== Reports ====== -->
   <section id="reports-view" class="view hidden">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">التقارير الشاملة</h2>
@@ -644,7 +634,6 @@
     </div>
   </section>
 
-  <!-- ====== Settings ====== -->
   <section id="settings-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">إعدادات النظام</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -669,7 +658,6 @@
     </div>
   </section>
 
-  <!-- ====== Modals ====== -->
   <div id="property-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-[fadeIn_0.2s_ease-out]">
       <div class="p-6 border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-600 flex justify-between items-center">
@@ -823,7 +811,7 @@
         </div>
 
         <div>
-          <label class="text-xs text-gray-500 dark:text-gray-400 block mb-1">صورة الشيك (اختياري)</label>
+          <label class="text-xs text-gray-500 dark:text-gray-400 block mb-1">صورة الشيك (اختياري - حد أقصى 500 ك.ب)</label>
           <input id="cheque-image" type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
         </div>
 
@@ -937,6 +925,12 @@
           status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'),
           imageUrl: c.imageUrl || null
         }));
+        
+        // migration for salaries
+        salaries = salaries.map(s => ({
+          ...s,
+          id: s.id || 'SAL-' + Date.now() + Math.floor(Math.random() * 1000)
+        }));
 
       } catch(e) { console.error("Error loading data", e); }
     } else {
@@ -1048,9 +1042,20 @@
     const search = document.getElementById('prop-search').value.toLowerCase();
 
     properties.forEach(p=>{
-      const filteredUnits = p.units.filter(u=> u.name.toLowerCase().includes(search) || (u.tenant||'').toLowerCase().includes(search));
-      if(search && filteredUnits.length === 0) return;
+      // Check if property matches
+      const propMatch = p.name.toLowerCase().includes(search) || (p.location || '').toLowerCase().includes(search);
 
+      // Check units if property doesn't match directly
+      const filteredUnits = p.units.filter(u=> 
+          propMatch || 
+          u.name.toLowerCase().includes(search) || 
+          (u.tenant||'').toLowerCase().includes(search)
+      );
+
+      // If no match in property name AND no matching units, skip this property
+      if(search && !propMatch && filteredUnits.length === 0) return;
+
+      const displayUnits = propMatch ? p.units : filteredUnits;
       const contentId = `units-content-${p.id}`;
       const iconId = `icon-${p.id}`;
 
@@ -1095,7 +1100,7 @@
                       </tr>
                    </thead>
                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                      ${(search ? filteredUnits : p.units).map(u=>{
+                      ${displayUnits.map(u=>{
                          const statusClass = u.status==='مؤجرة'
                            ?'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
                            :(u.status==='منتهية'
@@ -1127,7 +1132,7 @@
                    </tbody>
                 </table>
              </div>
-             ${p.units.length === 0 ? '<div class="text-center py-4 text-gray-400 text-sm">لا توجد وحدات مضافة لهذا العقار</div>' : ''}
+             ${displayUnits.length === 0 ? '<div class="text-center py-4 text-gray-400 text-sm">لا توجد وحدات مطابقة للبحث</div>' : ''}
          </div>
        `;
       container.appendChild(card);
@@ -1541,6 +1546,13 @@
     }
 
     const imageFile = document.getElementById('cheque-image').files[0];
+    
+    // SAFETY CHECK FOR FILE SIZE
+    if (imageFile && imageFile.size > 500000) { // 500KB limit
+      alert("عذراً، حجم صورة الشيك كبير جداً. يرجى اختيار صورة أقل من 500 كيلوبايت لتجنب امتلاء الذاكرة.");
+      return;
+    }
+
     const imageUrl = await fileToBase64(imageFile);
 
     cheques.push({
@@ -1739,8 +1751,11 @@
 
     btnBack.onclick = function() { showView('receipts-history'); };
 
+    // Convert id to string for comparison (safeguard)
+    const idStr = String(id);
+
     if(type === 'salary') {
-      const item = salaries.find(x => x.id == id);
+      const item = salaries.find(x => String(x.id) === idStr);
       if(!item) return;
 
       setReceiptHeaderByUnit(null);
@@ -1765,7 +1780,7 @@
       document.getElementById('rv-for-out').textContent    = item.notes;
 
     } else if(type === 'expense') {
-      const item = expenses.find(x => x.id === id);
+      const item = expenses.find(x => x.id === idStr);
       if(!item) return;
 
       setReceiptHeaderByUnit(null);
@@ -1790,7 +1805,7 @@
       document.getElementById('rv-for-out').textContent = `دفع مبلغ ${item.amount.toLocaleString()} عن ${item.type}: ${item.details}`;
 
     } else {
-      const item = payments.find(x => x.id === id || x.chequeId === id);
+      const item = payments.find(x => x.id === idStr || x.chequeId === idStr);
       if(!item) return;
 
       setReceiptHeaderByUnit(item.unit);
@@ -1833,7 +1848,9 @@
     const tbody = document.getElementById('expenses-table-body');
     if(!tbody) return;
     tbody.innerHTML='';
-    expenses.sort((a,b)=> new Date(b.date)-new Date(a.date)).forEach((e,i)=>{
+    
+    // Sort logic happens here, but we use ID for deletion
+    expenses.sort((a,b)=> new Date(b.date)-new Date(a.date)).forEach((e)=>{
       const tr = document.createElement('tr');
       tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
       tr.innerHTML=`
@@ -1844,16 +1861,26 @@
            <td class="text-center">
                  <div class="flex items-center justify-center gap-2">
                      <button onclick="previewReceipt('${e.id}', 'expense')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
-                     <button onclick="deleteExpense(${i})" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition" title="حذف">🗑️</button>
+                     <button onclick="deleteExpense('${e.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition" title="حذف">🗑️</button>
                  </div>
            </td>
         `;
       tbody.appendChild(tr);
     });
   }
-  function deleteExpense(index){
-    if(confirm('حذف هذا المصروف؟')) { expenses.splice(index, 1); saveToLocal(); renderExpenses(); }
+  
+  function deleteExpense(id){
+    if(confirm('حذف هذا المصروف؟')) { 
+      // Corrected: Find index by ID instead of using sorted index
+      const index = expenses.findIndex(e => e.id === id);
+      if(index > -1) {
+        expenses.splice(index, 1); 
+        saveToLocal(); 
+        renderExpenses(); 
+      }
+    }
   }
+
   document.getElementById('new-expense-form').addEventListener('submit', e=>{
     e.preventDefault();
     const voucherNo = getNextVoucherNo('PV');
@@ -1887,7 +1914,8 @@
     tbody.innerHTML = '';
 
     let total = 0;
-    salaries.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach((s, index) => {
+    // Sort logic happens here, but we use ID for deletion
+    salaries.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach((s) => {
       total += (s.amount || 0);
       const tr = document.createElement('tr');
       tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
@@ -1897,10 +1925,10 @@
             <td class="px-4 py-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">${formatAED(s.amount)}</td>
             <td class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">${s.notes || '-'}</td>
             <td class="px-4 py-3 text-center">
-                <button onclick="previewReceipt(${s.id}, 'salary')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
+                <button onclick="previewReceipt('${s.id}', 'salary')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
             </td>
             <td class="px-4 py-3 text-center">
-                <button onclick="deleteSalary(${index})" class="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1 rounded transition">🗑️</button>
+                <button onclick="deleteSalary('${s.id}')" class="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1 rounded transition">🗑️</button>
             </td>
          `;
       tbody.appendChild(tr);
@@ -1918,7 +1946,7 @@
     const voucherNo = getNextVoucherNo('SV');
 
     const newSalary = {
-      id: Date.now(),
+      id: 'SAL-' + Date.now(),
       voucherNo: voucherNo,
       name: document.getElementById('sal-name').value,
       role: document.getElementById('sal-role').value,
@@ -1933,9 +1961,16 @@
     document.getElementById('sal-month').selectedIndex = 0;
   });
 
-  function deleteSalary(index){
+  function deleteSalary(id){
     if(confirm('هل أنت متأكد من حذف قيد الراتب هذا؟')){
-      salaries.splice(index, 1); saveToLocal(); renderSalaries();
+      // Corrected: Find index by ID instead of using sorted index
+      // Using loose equality (==) to handle if ID is number or string
+      const index = salaries.findIndex(s => s.id == id);
+      if(index > -1) {
+        salaries.splice(index, 1); 
+        saveToLocal(); 
+        renderSalaries();
+      }
     }
   }
 
@@ -2004,6 +2039,12 @@
           id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random() * 1000),
           status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'),
           imageUrl: c.imageUrl || null
+        }));
+        
+        // Ensure salaries have IDs
+        salaries = salaries.map(s => ({
+          ...s,
+          id: s.id || 'SAL-' + Date.now() + Math.floor(Math.random() * 1000)
         }));
 
         saveToLocal();
