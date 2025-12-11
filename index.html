@@ -2,14 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>نظام إدارة العقارات المتكامل (المعدل)</title>
+  <title>نظام إدارة العقارات المتكامل</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -30,6 +26,10 @@
     }
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap');
 
@@ -40,7 +40,11 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-    body.dark-mode { background-color: #111827; color: #f3f4f6; }
+    /* --- الوضع الليلي --- */
+    body.dark-mode {
+      background-color: #111827;
+      color: #f3f4f6;
+    }
 
     body.dark-mode .bg-white,
     body.dark-mode .modal-content {
@@ -52,6 +56,7 @@
     body.dark-mode .bg-gray-50 { background-color: #111827 !important; }
     body.dark-mode .bg-gray-100 { background-color: #374151 !important; color: white !important; }
 
+    /* الجداول في الوضع الليلي */
     body.dark-mode th {
       background-color: #1f2937 !important;
       color: #9ca3af !important;
@@ -59,6 +64,7 @@
     }
     body.dark-mode td { border-bottom-color: #374151 !important; }
 
+    /* المدخلات */
     body.dark-mode input,
     body.dark-mode select,
     body.dark-mode textarea {
@@ -69,6 +75,25 @@
     body.dark-mode input::placeholder,
     body.dark-mode textarea::placeholder { color: #6b7280 !important; }
 
+    /* ألوان النصوص في الوضع الليلي */
+    body.dark-mode .text-gray-900,
+    body.dark-mode .text-gray-800 {
+      color: #f9fafb !important;
+    }
+    body.dark-mode .text-gray-700 {
+      color: #e5e7eb !important;
+    }
+    body.dark-mode .text-gray-600 {
+      color: #d1d5db !important;
+    }
+    body.dark-mode .text-gray-500 {
+      color: #9ca3af !important;
+    }
+    body.dark-mode .text-gray-400 {
+      color: #6b7280 !important;
+    }
+
+    /* النافبار */
     nav {
       background:#ffffff;
       border-radius:16px;
@@ -94,15 +119,24 @@
       color:#4b5563;
       border: 1px solid transparent;
     }
-    .nav-btn:hover { background:#e5e7eb; transform:translateY(-1px); }
+    .nav-btn:hover {
+      background:#e5e7eb;
+      transform:translateY(-1px);
+    }
     .nav-btn.active {
       background:#7c3aed;
       color:#fff;
       box-shadow:0 4px 12px rgba(124, 58, 237, 0.3);
     }
 
-    body.dark-mode .nav-btn { background:#374151; color:#d1d5db; }
-    body.dark-mode .nav-btn:hover { background:#4b5563; color: white; }
+    body.dark-mode .nav-btn {
+      background:#374151;
+      color:#d1d5db;
+    }
+    body.dark-mode .nav-btn:hover {
+      background:#4b5563;
+      color: white;
+    }
     body.dark-mode .nav-btn.active {
       background:#8b5cf6;
       color:#fff;
@@ -114,8 +148,12 @@
       box-shadow:0 1px 3px rgba(0,0,0,0.1);
       border: 1px solid rgba(0,0,0,0.05);
     }
-
-    table { border-collapse:separate; border-spacing:0; width:100%; font-size:.9rem; }
+    table {
+      border-collapse:separate;
+      border-spacing:0;
+      width:100%;
+      font-size:.9rem;
+    }
     th {
       background:#f9fafb;
       font-weight:700;
@@ -127,9 +165,21 @@
       font-size: 0.8rem;
       letter-spacing: 0.05em;
     }
-    td { padding:12px 16px; border-bottom:1px solid #f3f4f6; vertical-align: middle; }
+    td {
+      padding:12px 16px;
+      border-bottom:1px solid #f3f4f6;
+      vertical-align: middle;
+    }
 
-    .badge { padding:.25rem .6rem; border-radius:9999px; font-size:.7rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; }
+    .badge {
+      padding:.25rem .6rem;
+      border-radius:9999px;
+      font-size:.7rem;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+    }
     .badge-green { background:#d1fae5; color:#047857; }
     .badge-red { background:#fee2e2; color:#b91c1c; }
     .badge-amber { background:#fef3c7; color:#b45309; }
@@ -139,31 +189,41 @@
     button:active { transform: scale(0.98); }
 
     .hidden { display:none !important; }
-    .table-wrap { overflow-x:auto; border-radius: 12px; border: 1px solid #e5e7eb; }
+    .table-wrap {
+      overflow-x:auto;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
     body.dark-mode .table-wrap { border-color: #374151; }
 
-    .truncate-text { max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .truncate-text {
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .rotate-0 { transform: rotate(0deg); }
     .-rotate-90 { transform: rotate(90deg); }
 
-    @media print {
-      @page {
-        size: A4 portrait;
-        margin: 10mm;
-      }
+    @page {
+      size: A4 portrait;
+      margin: 10mm;
+    }
 
+    /* تحسين الطباعة للسندات والتقارير */
+    @media print {
       body {
         margin: 0;
-        padding: 0;
-        background: #ffffff !important;
       }
-
       body * {
         visibility: hidden;
       }
 
-      #printable-area, #printable-area *,
-      #printable-receipt, #printable-receipt * {
+      #printable-area,
+      #printable-area *,
+      #printable-receipt,
+      #printable-receipt * {
         visibility: visible;
       }
 
@@ -173,16 +233,7 @@
         inset: 0;
         margin: 0 auto;
         width: 190mm;
-        box-shadow: none !important;
-        border: none !important;
-        direction: rtl !important; /* Force RTL for printing */
-      }
-
-      #receipt-preview {
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        page-break-inside: avoid;
       }
 
       .no-print {
@@ -208,6 +259,7 @@
     <button class="nav-btn mr-auto" onclick="toggleDarkMode()">🌙/☀️</button>
   </nav>
 
+  <!-- ============= DASHBOARD ============= -->
   <section id="dashboard-view" class="view">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">لوحة المعلومات</h2>
@@ -253,6 +305,7 @@
     </div>
   </section>
 
+  <!-- ============= PROPERTIES ============= -->
   <section id="properties-view" class="view hidden">
     <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">العقارات والوحدات</h2>
@@ -269,7 +322,7 @@
         </div>
 
         <div class="relative">
-          <input type="text" id="prop-search" placeholder="بحث باسم العقار، الوحدة، المستأجر" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-64 text-sm" oninput="renderProperties()">
+          <input type="text" id="prop-search" placeholder="بحث سريع..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-56 text-sm" oninput="renderProperties()">
           <span class="absolute left-3 top-2.5 text-gray-400 text-sm">🔍</span>
         </div>
 
@@ -281,6 +334,7 @@
     <div id="properties-container" class="space-y-6"></div>
   </section>
 
+  <!-- ============= LEASES ============= -->
   <section id="leases-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة العقود</h2>
@@ -297,22 +351,23 @@
     <div class="table-wrap bg-white shadow-sm">
       <table class="min-w-full">
         <thead>
-        <tr>
-          <th class="w-1/6">العقار / الوحدة</th>
-          <th class="w-1/6">المستأجر</th>
-          <th>القيمة</th>
-          <th>رقم العقد</th>
-          <th>البداية</th>
-          <th>النهاية</th>
-          <th>الحالة</th>
-          <th>إجراءات</th>
-        </tr>
+          <tr>
+            <th class="w-1/6">العقار / الوحدة</th>
+            <th class="w-1/6">المستأجر</th>
+            <th>القيمة</th>
+            <th>رقم العقد</th>
+            <th>البداية</th>
+            <th>النهاية</th>
+            <th>الحالة</th>
+            <th>إجراءات</th>
+          </tr>
         </thead>
         <tbody id="leases-table-body"></tbody>
       </table>
     </div>
   </section>
 
+  <!-- ============= TENANTS ============= -->
   <section id="tenants-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل المستأجرين</h2>
@@ -323,21 +378,22 @@
     <div class="table-wrap bg-white shadow-sm">
       <table class="min-w-full">
         <thead>
-        <tr>
-          <th>الاسم</th>
-          <th>معلومات الاتصال</th>
-          <th>الوحدات</th>
-          <th>الإيجار السنوي</th>
-          <th>المدفوع</th>
-          <th>الرصيد المتبقي</th>
-          <th>الإجراءات</th>
-        </tr>
+          <tr>
+            <th>الاسم</th>
+            <th>معلومات الاتصال</th>
+            <th>الوحدات</th>
+            <th>الإيجار السنوي</th>
+            <th>المدفوع</th>
+            <th>الرصيد المتبقي</th>
+            <th>الإجراءات</th>
+          </tr>
         </thead>
         <tbody id="tenants-table-body"></tbody>
       </table>
     </div>
   </section>
 
+  <!-- ============= CHEQUES ============= -->
   <section id="cheques-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إدارة الشيكات</h2>
@@ -346,21 +402,22 @@
     <div class="table-wrap bg-white shadow-sm">
       <table class="min-w-full">
         <thead>
-        <tr>
-          <th>الحالة</th>
-          <th>الاستحقاق</th>
-          <th>المستأجر</th>
-          <th>القيمة</th>
-          <th>البنك / رقم الشيك</th>
-          <th>صورة الشيك</th>
-          <th>الإجراءات</th>
-        </tr>
+          <tr>
+            <th>الحالة</th>
+            <th>الاستحقاق</th>
+            <th>المستأجر</th>
+            <th>القيمة</th>
+            <th>البنك / رقم الشيك</th>
+            <th>صورة الشيك</th>
+            <th>الإجراءات</th>
+          </tr>
         </thead>
         <tbody id="cheques-table-body"></tbody>
       </table>
     </div>
   </section>
 
+  <!-- ============= PAYMENTS ============= -->
   <section id="payments-view" class="view hidden">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">سجل الدفعات المالية</h2>
@@ -375,21 +432,22 @@
     <div class="table-wrap bg-white shadow-sm">
       <table class="min-w-full">
         <thead>
-        <tr>
-          <th>التاريخ</th>
-          <th>المستأجر / الوحدة</th>
-          <th>النوع</th>
-          <th>المبلغ</th>
-          <th>المستحق / المتبقي</th>
-          <th>الحالة</th>
-          <th>السند</th>
-        </tr>
+          <tr>
+            <th>التاريخ</th>
+            <th>المستأجر / الوحدة</th>
+            <th>النوع</th>
+            <th>المبلغ</th>
+            <th>المستحق / المتبقي</th>
+            <th>الحالة</th>
+            <th>السند</th>
+          </tr>
         </thead>
         <tbody id="payments-table-body"></tbody>
       </table>
     </div>
   </section>
 
+  <!-- ============= EXPENSES ============= -->
   <section id="expenses-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">المصروفات</h2>
     <div class="grid md:grid-cols-3 gap-6">
@@ -414,7 +472,13 @@
       <div class="md:col-span-2 table-wrap bg-white shadow-sm rounded-xl">
         <table class="min-w-full">
           <thead>
-          <tr><th>التاريخ</th><th>النوع</th><th>المبلغ</th><th>البيان</th><th class="text-center">السند / تحكم</th></tr>
+            <tr>
+              <th>التاريخ</th>
+              <th>النوع</th>
+              <th>المبلغ</th>
+              <th>البيان</th>
+              <th class="text-center">السند / تحكم</th>
+            </tr>
           </thead>
           <tbody id="expenses-table-body"></tbody>
         </table>
@@ -422,6 +486,7 @@
     </div>
   </section>
 
+  <!-- ============= SALARIES ============= -->
   <section id="salaries-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">رواتب الحارس والعمال</h2>
 
@@ -461,12 +526,18 @@
             <label class="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-2">راتب شهر:</label>
             <div class="flex gap-2">
               <select id="sal-month" class="w-2/3 border p-2 rounded text-sm">
-                <option value="يناير">يناير</option><option value="فبراير">فبراير</option>
-                <option value="مارس">مارس</option><option value="أبريل">أبريل</option>
-                <option value="مايو">مايو</option><option value="يونيو">يونيو</option>
-                <option value="يوليو">يوليو</option><option value="أغسطس">أغسطس</option>
-                <option value="سبتمبر">سبتمبر</option><option value="أكتوبر">أكتوبر</option>
-                <option value="نوفمبر">نوفمبر</option><option value="ديسمبر">ديسمبر</option>
+                <option value="يناير">يناير</option>
+                <option value="فبراير">فبراير</option>
+                <option value="مارس">مارس</option>
+                <option value="أبريل">أبريل</option>
+                <option value="مايو">مايو</option>
+                <option value="يونيو">يونيو</option>
+                <option value="يوليو">يوليو</option>
+                <option value="أغسطس">أغسطس</option>
+                <option value="سبتمبر">سبتمبر</option>
+                <option value="أكتوبر">أكتوبر</option>
+                <option value="نوفمبر">نوفمبر</option>
+                <option value="ديسمبر">ديسمبر</option>
               </select>
               <select id="sal-year" class="w-1/3 border p-2 rounded text-sm"></select>
             </div>
@@ -491,14 +562,14 @@
         <div class="table-wrap bg-white dark:bg-dark-surface shadow-sm rounded-xl">
           <table class="min-w-full">
             <thead class="bg-gray-50 dark:bg-dark-bg">
-            <tr>
-              <th class="py-3 px-4">التاريخ</th>
-              <th class="py-3 px-4">الموظف</th>
-              <th class="py-3 px-4">المبلغ</th>
-              <th class="py-3 px-4">البيان</th>
-              <th class="py-3 px-4 text-center">السند</th>
-              <th class="py-3 px-4 text-center">حذف</th>
-            </tr>
+              <tr>
+                <th class="py-3 px-4">التاريخ</th>
+                <th class="py-3 px-4">الموظف</th>
+                <th class="py-3 px-4">المبلغ</th>
+                <th class="py-3 px-4">البيان</th>
+                <th class="py-3 px-4 text-center">السند</th>
+                <th class="py-3 px-4 text-center">حذف</th>
+              </tr>
             </thead>
             <tbody id="salaries-table-body" class="divide-y divide-gray-100 dark:divide-gray-700"></tbody>
           </table>
@@ -507,6 +578,7 @@
     </div>
   </section>
 
+  <!-- ============= RECEIPTS HISTORY ============= -->
   <section id="receipts-history-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">سجل السندات (قبض وصرف)</h2>
 
@@ -528,20 +600,21 @@
     <div class="table-wrap bg-white shadow-sm">
       <table class="min-w-full">
         <thead>
-        <tr>
-          <th class="w-[100px]">التاريخ</th>
-          <th class="w-[100px]">النوع</th>
-          <th class="w-[120px]">المبلغ</th>
-          <th class="w-[200px]">الطرف الآخر</th>
-          <th>البيان</th>
-          <th class="w-[80px]">عرض السند</th>
-        </tr>
+          <tr>
+            <th class="w-[100px]">التاريخ</th>
+            <th class="w-[100px]">النوع</th>
+            <th class="w-[120px]">المبلغ</th>
+            <th class="w-[200px]">الطرف الآخر</th>
+            <th>البيان</th>
+            <th class="w-[80px]">عرض السند</th>
+          </tr>
         </thead>
         <tbody id="receipts-history-table-body"></tbody>
       </table>
     </div>
   </section>
 
+  <!-- ============= RECEIPT VIEW ============= -->
   <section id="receipt-view" class="view hidden">
     <div class="max-w-4xl mx-auto">
       <h2 id="receipt-main-title" class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">إصدار سند</h2>
@@ -557,9 +630,9 @@
             <div id="printable-receipt" class="p-4 border-2 border-double border-gray-300 text-gray-800 bg-white">
               <div class="flex justify-between items-start border-b-2 border-gray-200 pb-4 mb-6">
                 <div>
-                  <h1 id="rv-prop-name" class="text-xl font-bold text-gray-800">بناية ورثة جمعة عبيد أبوالشوارب</h1>
-                  <p id="rv-prop-location" class="text-sm text-gray-600">العين، بطحاء الحائر</p>
-                  <p id="rv-prop-phone" class="text-sm text-gray-600">00971503343600</p>
+                  <h1 id="rv-building-name" class="text-xl font-bold text-gray-800">بناية ورثة جمعة عبيد أبوالشوارب</h1>
+                  <p id="rv-building-location" class="text-sm text-gray-600">العين، بطحاء الحائر</p>
+                  <p id="rv-building-phone" class="text-sm text-gray-600">00971503343600</p>
                 </div>
                 <div class="text-center">
                   <h2 id="rv-title" class="text-3xl font-black text-emerald-700 tracking-wider">سند قبض</h2>
@@ -610,6 +683,7 @@
     </div>
   </section>
 
+  <!-- ============= REPORTS ============= -->
   <section id="reports-view" class="view hidden">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-white">التقارير الشاملة</h2>
@@ -634,6 +708,7 @@
     </div>
   </section>
 
+  <!-- ============= SETTINGS ============= -->
   <section id="settings-view" class="view hidden">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">إعدادات النظام</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -658,6 +733,9 @@
     </div>
   </section>
 
+  <!-- ============= MODALS ============= -->
+
+  <!-- Property Modal -->
   <div id="property-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-[fadeIn_0.2s_ease-out]">
       <div class="p-6 border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-600 flex justify-between items-center">
@@ -680,23 +758,55 @@
     </div>
   </div>
 
+  <!-- Unit Modal -->
   <div id="unit-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden">
-      <div class="p-6 border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-600"><h3 class="text-xl font-bold">بيانات الوحدة</h3></div>
+      <div class="p-6 border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <h3 class="text-xl font-bold">بيانات الوحدة</h3>
+      </div>
       <form id="unit-form" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="hidden" id="unit-prop-id"><input type="hidden" id="unit-id">
-        <div class="md:col-span-2"><label class="text-xs text-gray-500 dark:text-gray-400">اسم/رقم الوحدة</label><input id="unit-name" class="border p-2 rounded w-full" required></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">النوع</label><input id="unit-type" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">الاستخدام</label><input id="unit-usage" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">الحالة</label>
-          <select id="unit-status" class="border p-2 rounded w-full"><option value="شاغرة">شاغرة</option><option value="مؤجرة">مؤجرة</option><option value="منتهية">منتهية</option></select>
+        <input type="hidden" id="unit-prop-id">
+        <input type="hidden" id="unit-id">
+        <div class="md:col-span-2">
+          <label class="text-xs text-gray-500 dark:text-gray-400">اسم/رقم الوحدة</label>
+          <input id="unit-name" class="border p-2 rounded w-full" required>
         </div>
-        <div class="md:col-span-2 border-t dark:border-gray-600 pt-4 mt-2"><p class="font-bold text-gray-700 dark:text-gray-300 mb-2">بيانات العقد الحالي (إن وجد)</p></div>
-        <div class="md:col-span-2"><input id="unit-tenant" placeholder="اسم المستأجر" class="border p-2 rounded w-full"></div>
-        <div><input id="unit-rent" type="number" placeholder="القيمة الإيجارية" class="border p-2 rounded w-full"></div>
-        <div><input id="unit-contractNo" placeholder="رقم العقد" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">بداية العقد</label><input id="unit-start" type="date" class="border p-2 rounded w-full"></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">نهاية العقد</label><input id="unit-end" type="date" class="border p-2 rounded w-full"></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">النوع</label>
+          <input id="unit-type" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الاستخدام</label>
+          <input id="unit-usage" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الحالة</label>
+          <select id="unit-status" class="border p-2 rounded w-full">
+            <option value="شاغرة">شاغرة</option>
+            <option value="مؤجرة">مؤجرة</option>
+            <option value="منتهية">منتهية</option>
+          </select>
+        </div>
+        <div class="md:col-span-2 border-t dark:border-gray-600 pt-4 mt-2">
+          <p class="font-bold text-gray-700 dark:text-gray-300 mb-2">بيانات العقد الحالي (إن وجد)</p>
+        </div>
+        <div class="md:col-span-2">
+          <input id="unit-tenant" placeholder="اسم المستأجر" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <input id="unit-rent" type="number" placeholder="القيمة الإيجارية" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <input id="unit-contractNo" placeholder="رقم العقد" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">بداية العقد</label>
+          <input id="unit-start" type="date" class="border p-2 rounded w-full">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">نهاية العقد</label>
+          <input id="unit-end" type="date" class="border p-2 rounded w-full">
+        </div>
         <div class="md:col-span-2 flex justify-end gap-3 mt-4 border-t dark:border-gray-600 pt-4">
           <button type="button" onclick="closeUnitModal()" class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded">إلغاء</button>
           <button class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 shadow">حفظ التغييرات</button>
@@ -705,21 +815,32 @@
     </div>
   </div>
 
+  <!-- Lease Modal -->
   <div id="lease-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="lease-form" class="p-6 space-y-4">
         <h3 class="font-bold text-lg mb-4">تعديل بيانات العقد</h3>
-        <input type="hidden" id="lease-prop-id"><input type="hidden" id="lease-unit-id">
+        <input type="hidden" id="lease-prop-id">
+        <input type="hidden" id="lease-unit-id">
         <input id="lease-tenant" class="w-full border p-2 rounded" placeholder="المستأجر" required>
         <div class="grid grid-cols-2 gap-2">
           <input id="lease-rent" type="number" class="border p-2 rounded" placeholder="القيمة">
           <input id="lease-contractNo" class="border p-2 rounded" placeholder="رقم العقد">
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-xs">من</label><input id="lease-start" type="date" class="w-full border p-2 rounded"></div>
-          <div><label class="text-xs">إلى</label><input id="lease-end" type="date" class="w-full border p-2 rounded"></div>
+          <div>
+            <label class="text-xs">من</label>
+            <input id="lease-start" type="date" class="w-full border p-2 rounded">
+          </div>
+          <div>
+            <label class="text-xs">إلى</label>
+            <input id="lease-end" type="date" class="w-full border p-2 rounded">
+          </div>
         </div>
-        <select id="lease-status" class="w-full border p-2 rounded"><option value="مؤجرة">مؤجرة</option><option value="منتهية">منتهية</option></select>
+        <select id="lease-status" class="w-full border p-2 rounded">
+          <option value="مؤجرة">مؤجرة</option>
+          <option value="منتهية">منتهية</option>
+        </select>
         <div class="flex justify-between pt-4">
           <button type="button" onclick="cancelLease()" class="text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 px-3 py-1 rounded">إلغاء العقد وإخلاء الوحدة</button>
           <div class="flex gap-2">
@@ -731,20 +852,33 @@
     </div>
   </div>
 
+  <!-- Add Lease Modal -->
   <div id="add-lease-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="add-lease-form" class="p-6 space-y-4">
         <h3 class="font-bold text-xl mb-4">عقد جديد</h3>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">العقار</label><select id="add-lease-prop" class="w-full border p-2 rounded"></select></div>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">الوحدة</label><select id="add-lease-unit" class="w-full border p-2 rounded"></select></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">العقار</label>
+          <select id="add-lease-prop" class="w-full border p-2 rounded"></select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الوحدة</label>
+          <select id="add-lease-unit" class="w-full border p-2 rounded"></select>
+        </div>
         <input id="add-lease-tenant" class="w-full border p-2 rounded" placeholder="اسم المستأجر" required>
         <div class="grid grid-cols-2 gap-3">
           <input id="add-lease-rent" type="number" class="border p-2 rounded" placeholder="القيمة السنوية">
           <input id="add-lease-contractNo" class="border p-2 rounded" placeholder="رقم العقد">
         </div>
         <div class="grid grid-cols-2 gap-3">
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">تاريخ البدء</label><input id="add-lease-start" type="date" class="w-full border p-2 rounded"></div>
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">تاريخ الانتهاء</label><input id="add-lease-end" type="date" class="w-full border p-2 rounded"></div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">تاريخ البدء</label>
+            <input id="add-lease-start" type="date" class="w-full border p-2 rounded">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">تاريخ الانتهاء</label>
+            <input id="add-lease-end" type="date" class="w-full border p-2 rounded">
+          </div>
         </div>
         <div id="add-lease-errors" class="text-rose-600 text-sm"></div>
         <div class="flex justify-end gap-3 pt-4">
@@ -755,13 +889,21 @@
     </div>
   </div>
 
+  <!-- Payment Modal -->
   <div id="payment-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="payment-form" class="p-6 space-y-4">
         <h3 class="font-bold text-lg">تسجيل دفعة جديدة</h3>
         <input id="pay-date" type="date" class="w-full border p-2 rounded" required>
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">العقد</label><select id="pay-contract" class="w-full border p-2 rounded"></select></div>
-        <select id="pay-type" class="w-full border p-2 rounded"><option>نقدي</option><option>شيك</option><option>تحويل بنكي</option></select>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">العقد</label>
+          <select id="pay-contract" class="w-full border p-2 rounded"></select>
+        </div>
+        <select id="pay-type" class="w-full border p-2 rounded">
+          <option>نقدي</option>
+          <option>شيك</option>
+          <option>تحويل بنكي</option>
+        </select>
         <input id="pay-amount" type="number" placeholder="المبلغ (AED)" class="w-full border p-2 rounded font-bold text-lg" required>
         <input id="pay-desc" placeholder="ملاحظات / وصف" class="w-full border p-2 rounded">
         <div class="flex justify-end gap-3 pt-4">
@@ -772,6 +914,7 @@
     </div>
   </div>
 
+  <!-- Tenant Modal -->
   <div id="tenant-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-md p-6">
       <h3 class="font-bold text-lg mb-4">بيانات الاتصال</h3>
@@ -787,6 +930,7 @@
     </div>
   </div>
 
+  <!-- Cheque Modal -->
   <div id="cheque-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="new-cheque-form" class="p-6 space-y-4">
@@ -802,20 +946,35 @@
         </div>
 
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">رقم الشيك</label><input id="cheque-number" class="w-full border p-2 rounded" required></div>
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">القيمة</label><input id="cheque-value" type="number" class="w-full border p-2 rounded" required></div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">رقم الشيك</label>
+            <input id="cheque-number" class="w-full border p-2 rounded" required>
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">القيمة</label>
+            <input id="cheque-value" type="number" class="w-full border p-2 rounded" required>
+          </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">تاريخ الاستحقاق</label><input id="cheque-due-date" type="date" class="w-full border p-2 rounded" required></div>
-          <div><label class="text-xs text-gray-500 dark:text-gray-400">البنك</label><input id="cheque-bank" class="w-full border p-2 rounded"></div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">تاريخ الاستحقاق</label>
+            <input id="cheque-due-date" type="date" class="w-full border p-2 rounded" required>
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 dark:text-gray-400">البنك</label>
+            <input id="cheque-bank" class="w-full border p-2 rounded">
+          </div>
         </div>
 
         <div>
-          <label class="text-xs text-gray-500 dark:text-gray-400 block mb-1">صورة الشيك (اختياري - حد أقصى 500 ك.ب)</label>
+          <label class="text-xs text-gray-500 dark:text-gray-400 block mb-1">صورة الشيك (اختياري)</label>
           <input id="cheque-image" type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
         </div>
 
-        <div><label class="text-xs text-gray-500 dark:text-gray-400">ملاحظات</label><input id="cheque-purpose" class="w-full border p-2 rounded"></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">ملاحظات</label>
+          <input id="cheque-purpose" class="w-full border p-2 rounded">
+        </div>
 
         <div class="flex justify-end gap-3 pt-4 border-t dark:border-gray-700">
           <button type="button" onclick="closeChequeModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded text-gray-800">إلغاء</button>
@@ -829,26 +988,35 @@
   // ================= DATA =================
   const initialProperties = [
     {
-      id: "PRP65351",
-      name: "فيلا",
-      type: "فيلا",
-      usage: "سكن خاص",
-      location: "مدينة العين - فلج هزاع",
-      phone: "00971503343600",
-      units: [
-        { id: "PRP65351_U1", name: "فيلا", type: "فيلا", usage: "سكني", status: "مؤجرة", tenant: "HAMDAN ABDULLA ANAYAT GHULAM MOHAMMED", rent: 100000, contractNo: "202402876023", start: "2024-10-15", end: "2025-10-14" }
+      "id": "PRP65351",
+      "name": "فيلا",
+      "type": "فيلا",
+      "usage": "سكن خاص",
+      "location": "مدينة العين - فلج هزاع",
+      "units": [
+        {
+          "id": "PRP65351_U1",
+          "name": "فيلا",
+          "type": "فيلا",
+          "usage": "سكني",
+          "status": "مؤجرة",
+          "tenant": "HAMDAN ABDULLA ANAYAT GHULAM MOHAMMED",
+          "rent": 100000,
+          "contractNo": "202402876023",
+          "start": "2024-10-15",
+          "end": "2025-10-14"
+        }
       ]
     },
     {
-      id: "PRP11751",
-      name: "بناء زهراء ولطيفة وعايشة عبيد بالشوارب",
-      type: "بناية",
-      usage: "تجاري - صناعي",
-      location: "مدينة العين - بطحاء الحائر",
-      phone: "00971503343600",
-      units: [
-        { id:"UNT83591",name:"10-A",type:"مكتب",usage:"تجاري",status:"شاغرة" },
-        { id:"UNT83609",name:"10-B",type:"مكتب",usage:"تجاري",status:"مؤجرة",tenant:"KASHMIR AL KHDHRA TILES & PLASTER WORKS EST",rent:9000,contractNo:"202501709877",start:"2025-03-01",end:"2026-02-28" }
+      "id": "PRP11751",
+      "name": "بناء زهراء ولطيفة وعايشة عبيد بالشوارب",
+      "type": "بناية",
+      "usage": "تجاري - صناعي",
+      "location": "مدينة العين - بطحاء الحائر",
+      "units": [
+        { "id":"UNT83591","name":"10-A","type":"مكتب","usage":"تجاري","status":"شاغرة" },
+        { "id":"UNT83609","name":"10-B","type":"مكتب","usage":"تجاري","status":"مؤجرة","tenant":"KASHMIR AL KHDHRA TILES & PLASTER WORKS EST","rent":9000,"contractNo":"202501709877","start":"2025-03-01","end":"2026-02-28" }
       ]
     }
   ];
@@ -856,31 +1024,15 @@
   let properties = [], cheques = [], expenses = [], payments = [], tenantsContacts = {}, salaries = [];
   let contractLogs = JSON.parse(localStorage.getItem('logs') || "[]");
 
-  // عدّادات السندات: RV = قبض، PV = صرف مصروفات، SV = صرف رواتب
-  let voucherCounters = JSON.parse(localStorage.getItem('voucherCounters') || '{"rv":1,"pv":1,"sv":1}');
+  // Default header info
+  const defaultHeader = {
+    name: 'بناية ورثة جمعة عبيد أبوالشوارب',
+    location: 'العين، بطحاء الحائر',
+    phone: '00971503343600'
+  };
 
-  function saveVoucherCounters() {
-    localStorage.setItem('voucherCounters', JSON.stringify(voucherCounters));
-  }
-
-  function getNextVoucherNo(type) {
-    if (type === 'RV') {
-      const n = voucherCounters.rv || 1;
-      voucherCounters.rv = n + 1;
-      saveVoucherCounters();
-      return 'RV-' + String(n).padStart(5, '0');
-    } else if (type === 'PV') {
-      const n = voucherCounters.pv || 1;
-      voucherCounters.pv = n + 1;
-      saveVoucherCounters();
-      return 'PV-' + String(n).padStart(5, '0');
-    } else if (type === 'SV') {
-      const n = voucherCounters.sv || 1;
-      voucherCounters.sv = n + 1;
-      saveVoucherCounters();
-      return 'SV-' + String(n).padStart(5, '0');
-    }
-  }
+  // Voucher counters (sequential numbers)
+  let voucherCounters = { receipt: 1, expense: 1, salary: 1 };
 
   // ================= UTILS & LOCAL STORAGE =================
   function formatAED(n){ return (n||0).toLocaleString('en-US') + ' AED'; }
@@ -891,7 +1043,12 @@
     localStorage.setItem('logs', JSON.stringify(contractLogs));
     renderLogs();
   }
-  function clearLogs(){ contractLogs=[]; localStorage.setItem('logs','[]'); renderLogs(); }
+
+  function clearLogs(){
+    contractLogs=[];
+    localStorage.setItem('logs','[]');
+    renderLogs();
+  }
 
   function saveToLocal(){
     localStorage.setItem('re_data_v2', JSON.stringify({ properties, cheques, expenses, payments, tenantsContacts, salaries }));
@@ -903,68 +1060,95 @@
       try {
         const o = JSON.parse(d);
         if(o.properties) properties = o.properties;
-        cheques = o.cheques||[];
-        expenses = o.expenses||[];
-        payments = o.payments||[];
-        tenantsContacts = o.tenantsContacts||{};
-        if(o.salaries) salaries = o.salaries;
+        cheques = o.cheques || [];
+        expenses = o.expenses || [];
+        payments = o.payments || [];
+        tenantsContacts = o.tenantsContacts || {};
+        salaries = o.salaries || [];
 
-        // migration for expenses
+        // Migration: ensure expenses have ID & type
         expenses = expenses.map(e => ({
-          id: e.id || 'EXP-' + Date.now() + Math.floor(Math.random() * 1000),
+          id: e.id || 'EXP-' + Date.now() + Math.floor(Math.random()*1000),
           date: e.date,
           type: e.type || 'أخرى',
           amount: e.amount,
-          details: e.details
+          details: e.details,
+          voucherNo: e.voucherNo || null
         }));
 
-        // migration for cheques
+        // Migration: ensure cheques have ID, status, imageUrl
         cheques = cheques.map(c => ({
           ...c,
-          id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random() * 1000),
+          id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random()*1000),
           status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'),
           imageUrl: c.imageUrl || null
         }));
-        
-        // migration for salaries
-        salaries = salaries.map(s => ({
-          ...s,
-          id: s.id || 'SAL-' + Date.now() + Math.floor(Math.random() * 1000)
-        }));
-
-      } catch(e) { console.error("Error loading data", e); }
+      } catch(e){
+        console.error("Error loading data", e);
+      }
     } else {
       properties = JSON.parse(JSON.stringify(initialProperties));
       saveToLocal();
     }
+    ensureVoucherNumbers();
   }
 
-  // تحديد هيدر السند حسب العقار / الوحدة
-  function setReceiptHeaderByUnit(unitName) {
-    const nameEl  = document.getElementById('rv-prop-name');
-    const locEl   = document.getElementById('rv-prop-location');
-    const phoneEl = document.getElementById('rv-prop-phone');
+  function extractVoucherNumber(code){
+    if(!code) return null;
+    const parts = String(code).split('-');
+    const numPart = parts[parts.length - 1];
+    const n = parseInt(numPart, 10);
+    return isNaN(n) ? null : n;
+  }
 
-    let header = {
-      name: 'بناية ورثة جمعة عبيد أبوالشوارب',
-      location: 'العين، بطحاء الحائر',
-      phone: '00971503343600'
-    };
+  function recomputeVoucherCounters(){
+    voucherCounters = { receipt:1, expense:1, salary:1 };
+    payments.forEach(p => {
+      const n = extractVoucherNumber(p.voucherNo);
+      if(n && n >= voucherCounters.receipt) voucherCounters.receipt = n + 1;
+    });
+    expenses.forEach(e => {
+      const n = extractVoucherNumber(e.voucherNo);
+      if(n && n >= voucherCounters.expense) voucherCounters.expense = n + 1;
+    });
+    salaries.forEach(s => {
+      const n = extractVoucherNumber(s.voucherNo);
+      if(n && n >= voucherCounters.salary) voucherCounters.salary = n + 1;
+    });
+  }
 
-    if (unitName) {
-      for (const p of properties) {
-        if (p.units && p.units.some(u => u.name === unitName)) {
-          header.name     = p.name     || header.name;
-          header.location = p.location || header.location;
-          header.phone    = p.phone    || header.phone;
-          break;
-        }
+  function nextVoucherNumber(type){
+    if(!voucherCounters[type]) voucherCounters[type] = 1;
+    const prefixMap = { receipt:'R', expense:'P', salary:'S' };
+    const prefix = prefixMap[type] || 'V';
+    const n = voucherCounters[type]++;
+    return `${prefix}-${String(n).padStart(4,'0')}`;
+  }
+
+  function ensureVoucherNumbers(){
+    recomputeVoucherCounters();
+    let updated = false;
+
+    payments.forEach(p => {
+      if(!p.voucherNo){
+        p.voucherNo = nextVoucherNumber('receipt');
+        updated = true;
       }
-    }
+    });
+    expenses.forEach(e => {
+      if(!e.voucherNo){
+        e.voucherNo = nextVoucherNumber('expense');
+        updated = true;
+      }
+    });
+    salaries.forEach(s => {
+      if(!s.voucherNo){
+        s.voucherNo = nextVoucherNumber('salary');
+        updated = true;
+      }
+    });
 
-    nameEl.textContent  = header.name;
-    locEl.textContent   = header.location;
-    phoneEl.textContent = header.phone;
+    if(updated) saveToLocal();
   }
 
   // ================= VIEW LOGIC =================
@@ -986,14 +1170,17 @@
     else if(id==='reports') renderReports();
   }
 
+  // ================= DASHBOARD =================
   let leasesChart, financeChart;
+
   function updateDashboard(){
-    document.getElementById('current-date-display').textContent = new Date().toLocaleDateString('ar-AE', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('current-date-display').textContent =
+      new Date().toLocaleDateString('ar-AE', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
     renderLogs();
 
     const stats = { active:0, empty:0, expired:0, totalRent:0 };
     properties.forEach(p=>p.units.forEach(u=>{
-      if(u.status==='مؤجرة') { stats.active++; stats.totalRent += (u.rent||0); }
+      if(u.status==='مؤجرة'){ stats.active++; stats.totalRent += (u.rent||0); }
       else if(u.status==='منتهية') stats.expired++;
       else stats.empty++;
     }));
@@ -1013,21 +1200,45 @@
     if(leasesChart) leasesChart.destroy();
     leasesChart = new Chart(document.getElementById('leasesChart'), {
       type:'doughnut',
-      data:{ labels:['مؤجرة','شاغرة','منتهية'], datasets:[{ data:[stats.active, stats.empty, stats.expired], backgroundColor:['#10b981','#e5e7eb','#f43f5e'], borderColor: isDark?'#1f2937':'#fff' }] },
-      options: { plugins: { legend: { position: 'left', labels: { color: textColor } } } }
+      data:{
+        labels:['مؤجرة','شاغرة','منتهية'],
+        datasets:[{
+          data:[stats.active, stats.empty, stats.expired],
+          backgroundColor:['#10b981','#e5e7eb','#f43f5e'],
+          borderColor: isDark ? '#1f2937' : '#fff'
+        }]
+      },
+      options:{
+        plugins:{ legend:{ position:'left', labels:{ color:textColor } } }
+      }
     });
 
     const collected = payments.reduce((s,p)=>s+p.amount,0);
     if(financeChart) financeChart.destroy();
     financeChart = new Chart(document.getElementById('financeChart'), {
       type:'bar',
-      data:{ labels:['المتوقع سنوياً', 'المقبوض فعلياً'], datasets:[{ label:'AED', data:[stats.totalRent, collected], backgroundColor:['#3b82f6', '#10b981'], borderRadius: 6 }] },
-      options:{ scales:{ y:{ beginAtZero:true, grid:{ color: gridColor }, ticks:{ color: textColor } }, x:{ ticks:{ color: textColor }, grid:{ display: false } } }, plugins: { legend: { labels: { color: textColor } } } }
+      data:{
+        labels:['المتوقع سنوياً', 'المقبوض فعلياً'],
+        datasets:[{
+          label:'AED',
+          data:[stats.totalRent, collected],
+          backgroundColor:['#3b82f6', '#10b981'],
+          borderRadius: 6
+        }]
+      },
+      options:{
+        scales:{
+          y:{ beginAtZero:true, grid:{ color:gridColor }, ticks:{ color:textColor } },
+          x:{ ticks:{ color:textColor }, grid:{ display:false } }
+        },
+        plugins:{ legend:{ labels:{ color:textColor } } }
+      }
     });
   }
 
   function renderLogs(){
-    const el=document.getElementById('contractLogs'); el.innerHTML='';
+    const el=document.getElementById('contractLogs');
+    el.innerHTML='';
     contractLogs.forEach(l=>{
       const li=document.createElement('li');
       li.innerHTML = `<span class="text-xs text-gray-400 font-mono">[${new Date(l.t).toLocaleTimeString('ar-AE')}]</span> ${l.m}`;
@@ -1042,20 +1253,12 @@
     const search = document.getElementById('prop-search').value.toLowerCase();
 
     properties.forEach(p=>{
-      // Check if property matches
-      const propMatch = p.name.toLowerCase().includes(search) || (p.location || '').toLowerCase().includes(search);
-
-      // Check units if property doesn't match directly
-      const filteredUnits = p.units.filter(u=> 
-          propMatch || 
-          u.name.toLowerCase().includes(search) || 
-          (u.tenant||'').toLowerCase().includes(search)
+      const filteredUnits = p.units.filter(u=>
+        u.name.toLowerCase().includes(search) ||
+        (u.tenant||'').toLowerCase().includes(search)
       );
+      if(search && filteredUnits.length === 0) return;
 
-      // If no match in property name AND no matching units, skip this property
-      if(search && !propMatch && filteredUnits.length === 0) return;
-
-      const displayUnits = propMatch ? p.units : filteredUnits;
       const contentId = `units-content-${p.id}`;
       const iconId = `icon-${p.id}`;
 
@@ -1063,78 +1266,81 @@
       card.className = "bg-white dark:bg-dark-surface rounded-2xl shadow-sm border border-gray-100 dark:border-dark-border overflow-hidden transition-all duration-200 hover:shadow-md";
 
       card.innerHTML = `
-         <div class="p-4 bg-gray-50 dark:bg-dark-surface border-b dark:border-dark-border flex justify-between items-center cursor-pointer select-none" onclick="toggleUnitVisibility('${p.id}')">
-            <div class="flex items-center gap-3">
-               <div id="${iconId}" class="transition-transform duration-300 transform rotate-0 text-gray-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-               </div>
-               <div>
-                  <div class="flex items-center gap-2">
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">${p.name}</h3>
-                    <span class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-[10px] px-2 py-0.5 rounded-full font-mono">${p.id}</span>
-                  </div>
-                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">📍 ${p.location||'غير محدد'} | 🏢 ${p.units.length} وحدات</p>
-               </div>
+        <div class="p-4 bg-gray-50 dark:bg-dark-surface border-b dark:border-dark-border flex justify-between items-center cursor-pointer select-none" onclick="toggleUnitVisibility('${p.id}')">
+          <div class="flex items-center gap-3">
+            <div id="${iconId}" class="transition-transform duration-300 transform rotate-0 text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
             </div>
-            <div class="flex gap-2" onclick="event.stopPropagation()">
-               <button onclick="openUnitModal('${p.id}')" class="bg-white dark:bg-dark-surface border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-gray-700 px-3 py-1 rounded text-xs font-bold shadow-sm transition-colors">+ وحدة</button>
-               <button onclick="deleteProperty('${p.id}')" class="bg-white dark:bg-dark-surface border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700 px-3 py-1 rounded text-xs font-bold shadow-sm transition-colors">حذف</button>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">${p.name}</h3>
+                <span class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-[10px] px-2 py-0.5 rounded-full font-mono">${p.id}</span>
+              </div>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">📍 ${p.location||'غير محدد'} | 🏢 ${p.units.length} وحدات</p>
             </div>
-         </div>
+          </div>
+          <div class="flex gap-2" onclick="event.stopPropagation()">
+            <button onclick="openUnitModal('${p.id}')" class="bg-white dark:bg-dark-surface border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-gray-700 px-3 py-1 rounded text-xs font-bold shadow-sm transition-colors">+ وحدة</button>
+            <button onclick="deleteProperty('${p.id}')" class="bg-white dark:bg-dark-surface border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700 px-3 py-1 rounded text-xs font-bold shadow-sm transition-colors">حذف</button>
+          </div>
+        </div>
 
-         <div id="${contentId}" class="p-4 transition-all duration-300 ease-in-out">
-            <div class="table-wrap border dark:border-dark-border rounded-lg">
-                <table class="w-full">
-                   <thead class="bg-gray-50 dark:bg-dark-bg text-xs text-gray-500 dark:text-gray-400 uppercase">
-                      <tr>
-                        <th class="px-4 py-2">الوحدة</th>
-                        <th class="px-4 py-2">النوع</th>
-                        <th class="px-4 py-2">الحالة</th>
-                        <th class="px-4 py-2">المستأجر</th>
-                        <th class="px-4 py-2">القيمة</th>
-                        <th class="px-4 py-2">العقد</th>
-                        <th class="px-4 py-2">التواريخ</th>
-                        <th class="px-4 py-2">تحكم</th>
-                      </tr>
-                   </thead>
-                   <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                      ${displayUnits.map(u=>{
-                         const statusClass = u.status==='مؤجرة'
-                           ?'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
-                           :(u.status==='منتهية'
-                             ?'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200'
-                             :'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200');
-                         return `
-                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                            <td class="px-4 py-3 font-bold text-gray-700 dark:text-gray-200">${u.name}</td>
-                            <td class="px-4 py-3 text-xs text-gray-500 dark:text-gray-400">${u.type||'-'}</td>
-                            <td class="px-4 py-3"><span class="px-2 py-1 rounded text-[10px] font-bold ${statusClass}">${u.status}</span></td>
-                            <td class="px-4 py-3 text-sm max-w-[150px] truncate" title="${u.tenant||''}">${u.tenant||'-'}</td>
-                            <td class="px-4 py-3 font-mono text-emerald-700 dark:text-emerald-400 font-bold text-sm">${u.rent ? u.rent.toLocaleString() : '-'}</td>
-                            <td class="px-4 py-3 text-xs font-mono truncate-text text-gray-500 dark:text-gray-400" title="${u.contractNo||''}">${u.contractNo||'-'}</td>
-                            <td class="px-4 py-3 text-[10px] text-gray-400">
-                                <div class="flex flex-col">
-                                    <span>${u.start||'--'}</span>
-                                    <span>${u.end||'--'}</span>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3">
-                               <div class="flex gap-1">
-                                  <button onclick="openUnitModal('${p.id}','${u.id}')" class="p-1.5 hover:bg-blue-50 dark:hover:bg-gray-700 text-blue-600 dark:text-blue-400 rounded transition-colors" title="تعديل">✏️</button>
-                                  <button onclick="openLeaseModal('${p.id}','${u.id}')" class="p-1.5 hover:bg-purple-50 dark:hover:bg-gray-700 text-purple-600 dark:text-purple-400 rounded transition-colors" title="العقد">📑</button>
-                                  <button onclick="deleteUnit('${p.id}','${u.id}')" class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400 rounded transition-colors" title="حذف الوحدة">🗑️</button>
-                               </div>
-                            </td>
-                         </tr>`;
-                      }).join('')}
-                   </tbody>
-                </table>
-             </div>
-             ${displayUnits.length === 0 ? '<div class="text-center py-4 text-gray-400 text-sm">لا توجد وحدات مطابقة للبحث</div>' : ''}
-         </div>
-       `;
+        <div id="${contentId}" class="p-4 transition-all duration-300 ease-in-out">
+          <div class="table-wrap border dark:border-dark-border rounded-lg">
+            <table class="w-full">
+              <thead class="bg-gray-50 dark:bg-dark-bg text-xs text-gray-500 dark:text-gray-400 uppercase">
+                <tr>
+                  <th class="px-4 py-2">الوحدة</th>
+                  <th class="px-4 py-2">النوع</th>
+                  <th class="px-4 py-2">الحالة</th>
+                  <th class="px-4 py-2">المستأجر</th>
+                  <th class="px-4 py-2">القيمة</th>
+                  <th class="px-4 py-2">العقد</th>
+                  <th class="px-4 py-2">التواريخ</th>
+                  <th class="px-4 py-2">تحكم</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                ${(search ? filteredUnits : p.units).map(u=>{
+                  const statusClass =
+                    u.status==='مؤجرة'
+                      ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
+                      : (u.status==='منتهية'
+                        ? 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200'
+                        : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200');
+                  return `
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <td class="px-4 py-3 font-bold text-gray-700 dark:text-gray-200">${u.name}</td>
+                      <td class="px-4 py-3 text-xs text-gray-500 dark:text-gray-400">${u.type||'-'}</td>
+                      <td class="px-4 py-3">
+                        <span class="px-2 py-1 rounded text-[10px] font-bold ${statusClass}">${u.status}</span>
+                      </td>
+                      <td class="px-4 py-3 text-sm max-w-[150px] truncate" title="${u.tenant||''}">${u.tenant||'-'}</td>
+                      <td class="px-4 py-3 font-mono text-emerald-700 dark:text-emerald-400 font-bold text-sm">${u.rent ? u.rent.toLocaleString() : '-'}</td>
+                      <td class="px-4 py-3 text-xs font-mono truncate-text text-gray-500 dark:text-gray-400" title="${u.contractNo||''}">${u.contractNo||'-'}</td>
+                      <td class="px-4 py-3 text-[10px] text-gray-400">
+                        <div class="flex flex-col">
+                          <span>${u.start||'--'}</span>
+                          <span>${u.end||'--'}</span>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3">
+                        <div class="flex gap-1">
+                          <button onclick="openUnitModal('${p.id}','${u.id}')" class="p-1.5 hover:bg-blue-50 dark:hover:bg-gray-700 text-blue-600 dark:text-blue-400 rounded transition-colors" title="تعديل">✏️</button>
+                          <button onclick="openLeaseModal('${p.id}','${u.id}')" class="p-1.5 hover:bg-purple-50 dark:hover:bg-gray-700 text-purple-600 dark:text-purple-400 rounded transition-colors" title="العقد">📑</button>
+                          <button onclick="deleteUnit('${p.id}','${u.id}')" class="p-1.5 hover:bg-red-50 dark:hover:bg-gray-700 text-red-600 dark:text-red-400 rounded transition-colors" title="حذف الوحدة">🗑️</button>
+                        </div>
+                      </td>
+                    </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+          ${p.units.length === 0 ? '<div class="text-center py-4 text-gray-400 text-sm">لا توجد وحدات مضافة لهذا العقار</div>' : ''}
+        </div>
+      `;
       container.appendChild(card);
     });
   }
@@ -1142,6 +1348,7 @@
   function toggleUnitVisibility(propId) {
     const content = document.getElementById(`units-content-${propId}`);
     const icon = document.getElementById(`icon-${propId}`);
+    if(!content || !icon) return;
     if (content.classList.contains('hidden')) {
       content.classList.remove('hidden');
       icon.classList.remove('-rotate-90');
@@ -1152,6 +1359,7 @@
       icon.classList.add('-rotate-90');
     }
   }
+
   function expandAllProperties() {
     properties.forEach(p => {
       const content = document.getElementById(`units-content-${p.id}`);
@@ -1163,6 +1371,7 @@
       }
     });
   }
+
   function collapseAllProperties() {
     properties.forEach(p => {
       const content = document.getElementById(`units-content-${p.id}`);
@@ -1174,33 +1383,50 @@
       }
     });
   }
+
   function deleteProperty(id){
-    if(confirm('هل أنت متأكد من حذف هذا العقار وجميع وحداته؟ لا يمكن التراجع عن هذا الإجراء.')){
-      properties = properties.filter(p => p.id !== id);
-      saveToLocal();
-      renderProperties();
-      updateDashboard();
-      logAction(`تم حذف العقار ${id}`);
-    }
-  }
-  function deleteUnit(propId, unitId){
-    if(!confirm('حذف هذه الوحدة؟ سيتم حذف بيانات عقدها أيضاً.')) return;
-    const p = properties.find(pr=>pr.id===propId);
-    if(!p) return;
-    p.units = p.units.filter(u=>u.id!==unitId);
+    if(!confirm('هل أنت متأكد من حذف هذا العقار وجميع وحداته؟ لا يمكن التراجع عن هذا الإجراء.')) return;
+    const prop = properties.find(p=>p.id===id);
+    properties = properties.filter(p => p.id !== id);
     saveToLocal();
     renderProperties();
     renderLeases();
+    renderPayments();
     updateDashboard();
-    logAction(`تم حذف الوحدة ${unitId} من العقار ${propId}`);
+    logAction(`تم حذف العقار ${prop ? prop.name : id}`);
   }
 
-  // ================= LEASES & UNITS MODALS =================
+  function deleteUnit(propId, unitId){
+    if(!confirm('هل أنت متأكد من حذف هذه الوحدة؟ سيتم حذف عقدها ودفعاتها المرتبطة بها إن وُجدت.')) return;
+    const prop = properties.find(p=>p.id===propId);
+    if(!prop) return;
+    const unit = prop.units.find(u=>u.id===unitId);
+    if(!unit) return;
+
+    // حذف الدفعات المرتبطة بالعقد/الوحدة
+    payments = payments.filter(p => !(p.unit === unit.name && p.contract === unit.contractNo));
+    prop.units = prop.units.filter(u=>u.id!==unitId);
+
+    saveToLocal();
+    renderProperties();
+    renderLeases();
+    renderPayments();
+    updateDashboard();
+    logAction(`تم حذف الوحدة ${unit.name} من العقار ${prop.name}`);
+  }
+
+  // ================= LEASES =================
   let leaseSort={key:'end',dir:'asc'};
-  function setLeaseSort(k){ if(leaseSort.key===k) leaseSort.dir=leaseSort.dir==='asc'?'desc':'asc'; else {leaseSort.key=k; leaseSort.dir='asc';} renderLeases(); }
+
+  function setLeaseSort(k){
+    if(leaseSort.key===k) leaseSort.dir = leaseSort.dir==='asc'?'desc':'asc';
+    else { leaseSort.key=k; leaseSort.dir='asc'; }
+    renderLeases();
+  }
 
   function renderLeases(){
-    const tbody = document.getElementById('leases-table-body'); tbody.innerHTML='';
+    const tbody = document.getElementById('leases-table-body');
+    tbody.innerHTML='';
     const search = document.getElementById('lease-search-input').value.toLowerCase();
 
     let allLeases = [];
@@ -1208,38 +1434,47 @@
       if(u.status!=='شاغرة') allLeases.push({...u, propName:p.name, propId:p.id});
     }));
 
-    if(search) allLeases = allLeases.filter(l=> (l.contractNo||'').includes(search) || (l.tenant||'').toLowerCase().includes(search));
+    if(search){
+      allLeases = allLeases.filter(l=>
+        (l.contractNo||'').includes(search) ||
+        (l.tenant||'').toLowerCase().includes(search)
+      );
+    }
 
     allLeases.sort((a,b)=>{
       let va = a[leaseSort.key], vb = b[leaseSort.key];
-      if(leaseSort.key==='rent') return leaseSort.dir==='asc' ? (va||0)-(vb||0) : (vb||0)-(va||0);
-      return leaseSort.dir==='asc' ? (va||'').localeCompare(vb||'') : (vb||'').localeCompare(va||'');
+      if(leaseSort.key==='rent')
+        return leaseSort.dir==='asc' ? (va||0)-(vb||0) : (vb||0)-(va||0);
+      return leaseSort.dir==='asc'
+        ? (va||'').localeCompare(vb||'')
+        : (vb||'').localeCompare(va||'');
     });
 
     allLeases.forEach(l=>{
       const tr = document.createElement('tr');
       tr.className = l.status==='منتهية' ? 'bg-red-50 dark:bg-red-900/20' : '';
       tr.innerHTML = `
-           <td>
-              <div class="font-bold text-gray-800 dark:text-white">${l.name}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">${l.propName}</div>
-           </td>
-           <td class="text-sm font-semibold text-gray-700 dark:text-gray-300">${l.tenant}</td>
-           <td class="font-mono text-emerald-600 dark:text-emerald-400">${formatAED(l.rent)}</td>
-           <td class="text-xs font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded inline-block truncate-text" title="${l.contractNo}">${l.contractNo}</td>
-           <td class="text-xs">${l.start||'-'}</td>
-           <td class="text-xs ${new Date(l.end)<new Date() ? 'text-red-600 dark:text-red-400 font-bold':''}">${l.end||'-'}</td>
-           <td><span class="badge ${l.status==='مؤجرة'?'badge-green':'badge-red'}">${l.status}</span></td>
-           <td>
-              <button onclick="openLeaseModal('${l.propId}','${l.id}')" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 text-sm font-bold">إدارة</button>
-           </td>
-        `;
+        <td>
+          <div class="font-bold text-gray-800 dark:text-white">${l.name}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400">${l.propName}</div>
+        </td>
+        <td class="text-sm font-semibold text-gray-700 dark:text-gray-300">${l.tenant}</td>
+        <td class="font-mono text-emerald-600 dark:text-emerald-400">${formatAED(l.rent)}</td>
+        <td class="text-xs font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded inline-block truncate-text" title="${l.contractNo}">${l.contractNo}</td>
+        <td class="text-xs">${l.start||'-'}</td>
+        <td class="text-xs ${new Date(l.end)<new Date() ? 'text-red-600 dark:text-red-400 font-bold':''}">${l.end||'-'}</td>
+        <td><span class="badge ${l.status==='مؤجرة'?'badge-green':'badge-red'}">${l.status}</span></td>
+        <td>
+          <button onclick="openLeaseModal('${l.propId}','${l.id}')" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 text-sm font-bold">إدارة</button>
+        </td>
+      `;
       tbody.appendChild(tr);
     });
   }
 
   function openPropertyModal(){ document.getElementById('property-modal').classList.remove('hidden'); }
   function closePropertyModal(){ document.getElementById('property-modal').classList.add('hidden'); }
+
   document.getElementById('property-form').addEventListener('submit', e=>{
     e.preventDefault();
     properties.push({
@@ -1250,19 +1485,23 @@
       location: document.getElementById('prop-location').value,
       units: []
     });
-    saveToLocal(); closePropertyModal(); renderProperties(); updateDashboard();
+    saveToLocal();
+    closePropertyModal();
+    renderProperties();
+    updateDashboard();
     logAction('تمت إضافة عقار جديد');
   });
 
   function openUnitModal(propId, unitId){
-    const m = document.getElementById('unit-modal'); m.classList.remove('hidden');
+    const m = document.getElementById('unit-modal');
+    m.classList.remove('hidden');
     document.getElementById('unit-prop-id').value = propId;
     document.getElementById('unit-id').value = unitId || '';
 
     const p = properties.find(x=>x.id===propId);
     const u = unitId ? p.units.find(x=>x.id===unitId) : null;
 
-    if(u) {
+    if(u){
       document.getElementById('unit-name').value = u.name;
       document.getElementById('unit-type').value = u.type||'';
       document.getElementById('unit-usage').value = u.usage||'';
@@ -1277,7 +1516,11 @@
       document.getElementById('unit-prop-id').value = propId;
     }
   }
-  function closeUnitModal(){ document.getElementById('unit-modal').classList.add('hidden'); }
+
+  function closeUnitModal(){
+    document.getElementById('unit-modal').classList.add('hidden');
+  }
+
   document.getElementById('unit-form').addEventListener('submit', e=>{
     e.preventDefault();
     const pid = document.getElementById('unit-prop-id').value;
@@ -1303,18 +1546,27 @@
     } else {
       p.units.push(newUnit);
     }
-    saveToLocal(); closeUnitModal(); showView('properties');
+    saveToLocal();
+    closeUnitModal();
+    showView('properties');
+    updateDashboard();
   });
 
   function openAddLeaseModal(){
-    const m = document.getElementById('add-lease-modal'); m.classList.remove('hidden');
+    const m = document.getElementById('add-lease-modal');
+    m.classList.remove('hidden');
     const propSelect = document.getElementById('add-lease-prop');
     propSelect.innerHTML = '<option value="">اختر العقار...</option>';
-    properties.forEach(p => { propSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`; });
+    properties.forEach(p => {
+      propSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+    });
     document.getElementById('add-lease-unit').innerHTML = '<option value="">اختر العقار أولاً</option>';
     document.getElementById('add-lease-form').reset();
   }
-  function closeAddLeaseModal(){ document.getElementById('add-lease-modal').classList.add('hidden'); }
+
+  function closeAddLeaseModal(){
+    document.getElementById('add-lease-modal').classList.add('hidden');
+  }
 
   document.getElementById('add-lease-prop').addEventListener('change', function(){
     const propId = this.value;
@@ -1323,8 +1575,13 @@
     if(propId){
       const prop = properties.find(p => p.id === propId);
       const availableUnits = prop.units.filter(u => u.status !== 'مؤجرة');
-      if(availableUnits.length === 0){ unitSelect.innerHTML = '<option value="">لا توجد وحدات شاغرة</option>'; }
-      else { availableUnits.forEach(u => { unitSelect.innerHTML += `<option value="${u.id}">${u.name} (${u.status})</option>`; }); }
+      if(availableUnits.length === 0){
+        unitSelect.innerHTML = '<option value="">لا توجد وحدات شاغرة</option>';
+      } else {
+        availableUnits.forEach(u => {
+          unitSelect.innerHTML += `<option value="${u.id}">${u.name} (${u.status})</option>`;
+        });
+      }
     }
   });
 
@@ -1332,7 +1589,10 @@
     e.preventDefault();
     const propId = document.getElementById('add-lease-prop').value;
     const unitId = document.getElementById('add-lease-unit').value;
-    if(!propId || !unitId) { alert("الرجاء اختيار العقار والوحدة"); return; }
+    if(!propId || !unitId){
+      alert("الرجاء اختيار العقار والوحدة");
+      return;
+    }
     const prop = properties.find(p => p.id === propId);
     const unit = prop.units.find(u => u.id === unitId);
     unit.status = 'مؤجرة';
@@ -1341,11 +1601,16 @@
     unit.contractNo = document.getElementById('add-lease-contractNo').value;
     unit.start = document.getElementById('add-lease-start').value;
     unit.end = document.getElementById('add-lease-end').value;
-    saveToLocal(); closeAddLeaseModal(); showView('leases'); logAction(`تم إنشاء عقد جديد للوحدة ${unit.name}`);
+    saveToLocal();
+    closeAddLeaseModal();
+    showView('leases');
+    logAction(`تم إنشاء عقد جديد للوحدة ${unit.name}`);
+    updateDashboard();
   });
 
   function openLeaseModal(pid, uid){
-    const m = document.getElementById('lease-modal'); m.classList.remove('hidden');
+    const m = document.getElementById('lease-modal');
+    m.classList.remove('hidden');
     const u = properties.find(x=>x.id===pid).units.find(x=>x.id===uid);
     document.getElementById('lease-prop-id').value=pid;
     document.getElementById('lease-unit-id').value=uid;
@@ -1356,17 +1621,52 @@
     document.getElementById('lease-end').value=u.end||'';
     document.getElementById('lease-status').value=u.status;
   }
-  function closeLeaseModal(){ document.getElementById('lease-modal').classList.add('hidden'); }
+
+  function closeLeaseModal(){
+    document.getElementById('lease-modal').classList.add('hidden');
+  }
+
+  document.getElementById('lease-form').addEventListener('submit', e=>{
+    e.preventDefault();
+    const pid = document.getElementById('lease-prop-id').value;
+    const uid = document.getElementById('lease-unit-id').value;
+    const p = properties.find(x=>x.id===pid);
+    const u = p.units.find(x=>x.id===uid);
+
+    u.tenant = document.getElementById('lease-tenant').value;
+    u.rent = parseFloat(document.getElementById('lease-rent').value||0);
+    u.contractNo = document.getElementById('lease-contractNo').value;
+    u.start = document.getElementById('lease-start').value;
+    u.end = document.getElementById('lease-end').value;
+    u.status = document.getElementById('lease-status').value;
+
+    saveToLocal();
+    closeLeaseModal();
+    renderLeases();
+    renderProperties();
+    updateDashboard();
+    logAction(`تم تعديل بيانات عقد الوحدة ${u.name}`);
+  });
+
   function cancelLease(){
     if(!confirm('هل أنت متأكد من إلغاء العقد؟ سيتم تحويل الوحدة لشاغرة.')) return;
     const pid = document.getElementById('lease-prop-id').value;
     const uid = document.getElementById('lease-unit-id').value;
     const u = properties.find(x=>x.id===pid).units.find(x=>x.id===uid);
-    u.status='شاغرة'; u.tenant=''; u.rent=0; u.contractNo=''; u.start=''; u.end='';
-    saveToLocal(); closeLeaseModal(); showView('leases'); logAction(`تم إلغاء عقد ${u.name}`);
+    u.status='شاغرة';
+    u.tenant='';
+    u.rent=0;
+    u.contractNo='';
+    u.start='';
+    u.end='';
+    saveToLocal();
+    closeLeaseModal();
+    showView('leases');
+    updateDashboard();
+    logAction(`تم إلغاء عقد ${u.name}`);
   }
 
-  // ================= TENANTS & PAYMENTS =================
+  // ================= TENANTS =================
   function getTenantsData(){
     const map = {};
     properties.forEach(p=>p.units.forEach(u=>{
@@ -1377,64 +1677,96 @@
       }
     }));
     Object.keys(map).forEach(name=>{
-      if(tenantsContacts[name]) { map[name].phone = tenantsContacts[name].phone; map[name].email = tenantsContacts[name].email; }
+      if(tenantsContacts[name]){
+        map[name].phone = tenantsContacts[name].phone;
+        map[name].email = tenantsContacts[name].email;
+      }
     });
     payments.forEach(pay=>{
       if(map[pay.tenant]) map[pay.tenant].paid += pay.amount;
     });
     return Object.values(map).map(t=>({...t, balance: t.rent - t.paid}));
   }
-  function getTenantNames() {
-    return Object.keys(getTenantsData().reduce((acc, t) => {
-      if (t.units && t.units.length > 0) acc[t.name] = true;
-      return acc;
-    }, {}));
+
+  function getTenantNames(){
+    return Object.keys(
+      getTenantsData().reduce((acc, t)=>{
+        if(t.units && t.units.length>0) acc[t.name]=true;
+        return acc;
+      }, {})
+    );
   }
 
   function renderTenants(){
-    const tbody = document.getElementById('tenants-table-body'); tbody.innerHTML = '';
+    const tbody = document.getElementById('tenants-table-body');
+    tbody.innerHTML = '';
     const search = document.getElementById('tenants-search').value.toLowerCase();
     const data = getTenantsData().filter(t=> t.name.toLowerCase().includes(search));
 
     data.forEach(t=>{
       const tr = document.createElement('tr');
       tr.innerHTML = `
-           <td class="font-bold">${t.name}</td>
-           <td class="text-sm">📞 ${t.phone||'--'}<br>📧 ${t.email||'--'}</td>
-           <td class="text-xs text-gray-500 dark:text-gray-400">${t.units.join(', ')}</td>
-           <td class="font-mono">${formatAED(t.rent)}</td>
-           <td class="font-mono text-green-600">${formatAED(t.paid)}</td>
-           <td class="font-mono font-bold ${t.balance>0?'text-rose-600 dark:text-rose-400':'text-gray-400'}">${formatAED(t.balance)}</td>
-           <td><button onclick="openTenantModal('${t.name}')" class="text-blue-600 dark:text-blue-400 text-xs border border-blue-200 dark:border-blue-800 px-2 py-1 rounded">تحديث</button></td>
-        `;
+        <td class="font-bold">${t.name}</td>
+        <td class="text-sm">
+          📞 ${t.phone||'--'}<br>
+          📧 ${t.email||'--'}
+        </td>
+        <td class="text-xs text-gray-500 dark:text-gray-400">${t.units.join(', ')}</td>
+        <td class="font-mono">${formatAED(t.rent)}</td>
+        <td class="font-mono text-green-600">${formatAED(t.paid)}</td>
+        <td class="font-mono font-bold ${t.balance>0?'text-rose-600 dark:text-rose-400':'text-gray-400'}">${formatAED(t.balance)}</td>
+        <td>
+          <button onclick="openTenantModal('${t.name}')" class="text-blue-600 dark:text-blue-400 text-xs border border-blue-200 dark:border-blue-800 px-2 py-1 rounded">تحديث</button>
+        </td>
+      `;
       tbody.appendChild(tr);
     });
   }
+
   function openTenantModal(name=''){
-    document.getElementById('tenant-modal').classList.remove('hidden');
-    document.getElementById('tenant-name').value = name;
+    const modal = document.getElementById('tenant-modal');
+    modal.classList.remove('hidden');
+
+    const nameInput  = document.getElementById('tenant-name');
+    const phoneInput = document.getElementById('tenant-phone');
+    const emailInput = document.getElementById('tenant-email');
+
+    nameInput.value = name || '';
+    phoneInput.value = '';
+    emailInput.value = '';
+
     if(name && tenantsContacts[name]){
-      document.getElementById('tenant-phone').value = tenantsContacts[name].phone;
-      document.getElementById('tenant-email').value = tenantsContacts[name].email;
+      phoneInput.value = tenantsContacts[name].phone || '';
+      emailInput.value = tenantsContacts[name].email || '';
     }
   }
+
   function closeTenantModal(){
     const name = document.getElementById('tenant-name').value;
-    if(name) {
+    if(name){
       tenantsContacts[name] = {
         phone: document.getElementById('tenant-phone').value,
         email: document.getElementById('tenant-email').value
       };
-      saveToLocal(); renderTenants();
+      saveToLocal();
+      renderTenants();
     }
     document.getElementById('tenant-modal').classList.add('hidden');
   }
 
+  document.getElementById('tenant-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    closeTenantModal();
+  });
+
+  // ================= PAYMENTS =================
   function openPaymentModal(){
-    const m = document.getElementById('payment-modal'); m.classList.remove('hidden');
-    const sel = document.getElementById('pay-contract'); sel.innerHTML='';
+    const m = document.getElementById('payment-modal');
+    m.classList.remove('hidden');
+    const sel = document.getElementById('pay-contract');
+    sel.innerHTML='';
     properties.forEach(p=>p.units.forEach(u=>{
-      if(u.status==='مؤجرة') {
+      if(u.status==='مؤجرة'){
         const opt = document.createElement('option');
         opt.value = JSON.stringify({t:u.tenant, u:u.name, c:u.contractNo, rent:u.rent});
         opt.textContent = `${u.tenant} - (${u.name})`;
@@ -1442,17 +1774,17 @@
       }
     }));
   }
-  function closePaymentModal(){ document.getElementById('payment-modal').classList.add('hidden'); }
+
+  function closePaymentModal(){
+    document.getElementById('payment-modal').classList.add('hidden');
+  }
 
   document.getElementById('payment-form').addEventListener('submit', e=>{
     e.preventDefault();
     const data = JSON.parse(document.getElementById('pay-contract').value);
     const amt = parseFloat(document.getElementById('pay-amount').value);
-    const voucherNo = getNextVoucherNo('RV');
-
-    payments.push({
+    const payObj = {
       id: 'PAY-'+Date.now(),
-      voucherNo: voucherNo,
       date: document.getElementById('pay-date').value,
       tenant: data.t,
       unit: data.u,
@@ -1460,24 +1792,35 @@
       due: data.rent,
       type: document.getElementById('pay-type').value,
       amount: amt,
-      desc: document.getElementById('pay-desc').value
-    });
-    saveToLocal(); closePaymentModal(); renderPayments(); updateDashboard(); logAction(`دفعة ${amt} من ${data.t}`);
+      desc: document.getElementById('pay-desc').value,
+      voucherNo: nextVoucherNumber('receipt')
+    };
+    payments.push(payObj);
+    saveToLocal();
+    closePaymentModal();
+    renderPayments();
+    updateDashboard();
+    renderReceiptsHistory();
+    logAction(`دفعة ${amt} من ${data.t}`);
   });
 
   function renderPayments(){
-    const tbody = document.getElementById('payments-table-body'); tbody.innerHTML='';
+    const tbody = document.getElementById('payments-table-body');
+    tbody.innerHTML='';
     payments.sort((a,b)=> new Date(b.date)-new Date(a.date)).forEach(p=>{
       const tr = document.createElement('tr');
       tr.innerHTML = `
-           <td class="text-sm">${p.date}</td>
-           <td><div class="font-bold text-sm">${p.tenant}</div><div class="text-xs text-gray-500 dark:text-gray-400">${p.unit}</div></td>
-           <td><span class="badge badge-blue">${p.type}</span></td>
-           <td class="font-bold text-emerald-700 dark:text-emerald-400 font-mono">${formatAED(p.amount)}</td>
-           <td class="text-xs text-gray-500 dark:text-gray-400 font-mono">${formatAED(p.due)} / <span class="text-rose-500 dark:text-rose-400">${formatAED(p.due-p.amount)}</span></td>
-           <td>${p.amount>=p.due ? '<span class="badge badge-green">مكتمل</span>' : '<span class="badge badge-amber">جزئي</span>'}</td>
-           <td><button onclick="previewReceipt('${p.id}', 'payment')" class="text-purple-600 dark:text-purple-400 hover:underline text-xs">عرض السند</button></td>
-        `;
+        <td class="text-sm">${p.date}</td>
+        <td>
+          <div class="font-bold text-sm">${p.tenant}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400">${p.unit}</div>
+        </td>
+        <td><span class="badge badge-blue">${p.type}</span></td>
+        <td class="font-bold text-emerald-700 dark:text-emerald-400 font-mono">${formatAED(p.amount)}</td>
+        <td class="text-xs text-gray-500 dark:text-gray-400 font-mono">${formatAED(p.due)} / <span class="text-rose-500 dark:text-rose-400">${formatAED(p.due-p.amount)}</span></td>
+        <td>${p.amount>=p.due ? '<span class="badge badge-green">مكتمل</span>' : '<span class="badge badge-amber">جزئي</span>'}</td>
+        <td><button onclick="previewReceipt('${p.id}', 'payment')" class="text-purple-600 dark:text-purple-400 hover:underline text-xs">عرض السند</button></td>
+      `;
       tbody.appendChild(tr);
     });
     const total = payments.reduce((s,p)=>s+p.amount,0);
@@ -1528,17 +1871,17 @@
 
     toggleTenantInput();
   }
-  function closeChequeModal(){ document.getElementById('cheque-modal').classList.add('hidden'); }
+
+  function closeChequeModal(){
+    document.getElementById('cheque-modal').classList.add('hidden');
+  }
 
   document.getElementById('new-cheque-form').addEventListener('submit', async e=>{
     e.preventDefault();
 
     const tenantSelect = document.getElementById('cheque-tenant-select').value;
     const tenantManual = document.getElementById('cheque-tenant-manual').value;
-
-    const tenantName = tenantSelect === 'other'
-      ? tenantManual
-      : tenantSelect;
+    const tenantName = tenantSelect === 'other' ? tenantManual : tenantSelect;
 
     if (!tenantName) {
       alert("الرجاء تحديد أو إدخال اسم المستأجر.");
@@ -1546,13 +1889,6 @@
     }
 
     const imageFile = document.getElementById('cheque-image').files[0];
-    
-    // SAFETY CHECK FOR FILE SIZE
-    if (imageFile && imageFile.size > 500000) { // 500KB limit
-      alert("عذراً، حجم صورة الشيك كبير جداً. يرجى اختيار صورة أقل من 500 كيلوبايت لتجنب امتلاء الذاكرة.");
-      return;
-    }
-
     const imageUrl = await fileToBase64(imageFile);
 
     cheques.push({
@@ -1566,7 +1902,10 @@
       status: 'بانتظار الصرف',
       imageUrl: imageUrl
     });
-    saveToLocal(); closeChequeModal(); renderCheques(); logAction(`تم تسجيل شيك جديد للمستأجر: ${tenantName}`);
+    saveToLocal();
+    closeChequeModal();
+    renderCheques();
+    logAction(`تم تسجيل شيك جديد للمستأجر: ${tenantName}`);
   });
 
   function changeChequeStatus(id, newStatus) {
@@ -1583,7 +1922,6 @@
         payments.push({
           id: 'PAY-CHQ-'+Date.now(),
           chequeId: id,
-          voucherNo: getNextVoucherNo('RV'),
           date: new Date().toISOString().substring(0, 10),
           tenant: cheque.tenant,
           unit: 'شيك مصرف',
@@ -1591,7 +1929,8 @@
           due: cheque.value,
           type: 'شيك مصرف',
           amount: cheque.value,
-          desc: cheque.purpose || `تحصيل الشيك رقم ${cheque.chequeNo} من ${cheque.tenant}`
+          desc: cheque.purpose || `تحصيل الشيك رقم ${cheque.chequeNo} من ${cheque.tenant}`,
+          voucherNo: nextVoucherNumber('receipt')
         });
         logAction(`تم صرف الشيك رقم ${cheque.chequeNo} وتم تسجيله كدفعة مقبوضة.`);
       }
@@ -1603,25 +1942,30 @@
     renderCheques();
     updateDashboard();
     renderPayments();
+    renderReceiptsHistory();
   }
 
   function viewChequeImage(imageUrl) {
     if (!imageUrl) return;
     const w = window.open('', '_blank');
     w.document.write(`
-          <!DOCTYPE html>
-          <html lang="ar" dir="rtl">
-          <head><title>صورة الشيك</title>
-          <style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;}img{max-width:90vw;max-height:90vh;border:10px solid white;box-shadow:0 0 20px rgba(0,0,0,0.5);}</style>
-          </head>
-          <body><img src="${imageUrl}" alt="صورة الشيك"></body>
-          </html>
-      `);
+      <!DOCTYPE html>
+      <html lang="ar" dir="rtl">
+      <head><title>صورة الشيك</title>
+      <style>
+        body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;}
+        img{max-width:90vw;max-height:90vh;border:10px solid white;box-shadow:0 0 20px rgba(0,0,0,0.5);}
+      </style>
+      </head>
+      <body><img src="${imageUrl}" alt="صورة الشيك"></body>
+      </html>
+    `);
     w.document.close();
   }
 
   function renderCheques(){
-    const tbody = document.getElementById('cheques-table-body'); tbody.innerHTML='';
+    const tbody = document.getElementById('cheques-table-body');
+    tbody.innerHTML='';
     cheques.sort((a,b)=> new Date(b.dueDate)-new Date(a.dueDate)).forEach(c=>{
       let statusClass = 'badge-amber';
       if (c.status === 'مصروف') statusClass = 'badge-green';
@@ -1634,42 +1978,171 @@
 
       const tr = document.createElement('tr');
       tr.innerHTML=`
-           <td><span class="badge ${statusClass}">${c.status}</span></td>
-           <td class="font-mono">${c.dueDate}</td>
-           <td>${c.tenant}</td>
-           <td class="font-bold">${formatAED(c.value)}</td>
-           <td class="text-xs text-gray-500 dark:text-gray-400">${c.bank} - #${c.chequeNo}</td>
-           <td>
-              ${c.imageUrl ? `<button onclick="viewChequeImage('${c.imageUrl}')" class="text-purple-600 dark:text-purple-400 hover:underline text-xs">عرض الصورة</button>` : '-'}
-           </td>
-           <td>
-              <select onchange="changeChequeStatus('${c.id}', this.value)" class="text-sm border p-1 rounded bg-white dark:bg-gray-800 dark:text-white">
-                  ${selectOptions}
-              </select>
-              <button onclick="deleteCheque('${c.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition ml-2" title="حذف">🗑️</button>
-           </td>
-        `;
+        <td><span class="badge ${statusClass}">${c.status}</span></td>
+        <td class="font-mono">${c.dueDate}</td>
+        <td>${c.tenant}</td>
+        <td class="font-bold">${formatAED(c.value)}</td>
+        <td class="text-xs text-gray-500 dark:text-gray-400">${c.bank} - #${c.chequeNo}</td>
+        <td>
+          ${c.imageUrl ? `<button onclick="viewChequeImage('${c.imageUrl}')" class="text-purple-600 dark:text-purple-400 hover:underline text-xs">عرض الصورة</button>` : '-'}
+        </td>
+        <td>
+          <select onchange="changeChequeStatus('${c.id}', this.value)" class="text-sm border p-1 rounded bg-white dark:bg-gray-800 dark:text-white">
+            ${selectOptions}
+          </select>
+          <button onclick="deleteCheque('${c.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition ml-2" title="حذف">🗑️</button>
+        </td>
+      `;
       tbody.appendChild(tr);
     });
   }
 
   function deleteCheque(id){
-    if(confirm('هل أنت متأكد من حذف هذا الشيك؟ سيتم حذفه من سجل الدفعات إذا كان مصروفاً.')){
-      cheques = cheques.filter(c => c.id !== id);
-      payments = payments.filter(p => p.chequeId !== id);
-      saveToLocal(); renderCheques(); renderPayments(); updateDashboard();
-      logAction(`تم حذف الشيك ${id}`);
-    }
+    if(!confirm('هل أنت متأكد من حذف هذا الشيك؟ سيتم حذفه من سجل الدفعات إذا كان مصروفاً.')) return;
+    cheques = cheques.filter(c => c.id !== id);
+    payments = payments.filter(p => p.chequeId !== id);
+    saveToLocal();
+    renderCheques();
+    renderPayments();
+    updateDashboard();
+    renderReceiptsHistory();
+    logAction(`تم حذف الشيك ${id}`);
   }
 
-  // ================= RECEIPTS HISTORY & RECEIPT VIEW =================
+  // ================= EXPENSES =================
+  function renderExpenses(){
+    const tbody = document.getElementById('expenses-table-body');
+    if(!tbody) return;
+    tbody.innerHTML='';
+    expenses.sort((a,b)=> new Date(b.date)-new Date(a.date)).forEach((e,i)=>{
+      const tr = document.createElement('tr');
+      tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
+      tr.innerHTML=`
+        <td class="text-sm font-mono">${e.date}</td>
+        <td class="text-sm font-bold text-indigo-700 dark:text-indigo-400">${e.type}</td>
+        <td class="font-bold text-rose-600 dark:text-rose-400">${formatAED(e.amount)}</td>
+        <td class="text-sm text-gray-600 dark:text-gray-300">${e.details}</td>
+        <td class="text-center">
+          <div class="flex items-center justify-center gap-2">
+            <button onclick="previewReceipt('${e.id}', 'expense')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
+            <button onclick="deleteExpense(${i})" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition" title="حذف">🗑️</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function deleteExpense(index){
+    if(!confirm('حذف هذا المصروف؟')) return;
+    expenses.splice(index, 1);
+    saveToLocal();
+    renderExpenses();
+    renderReceiptsHistory();
+  }
+
+  document.getElementById('new-expense-form').addEventListener('submit', e=>{
+    e.preventDefault();
+    expenses.push({
+      id: 'EXP-'+Date.now(),
+      date: document.getElementById('expense-date').value,
+      type: document.getElementById('expense-type').value,
+      amount: parseFloat(document.getElementById('expense-amount').value),
+      details: document.getElementById('expense-details').value,
+      voucherNo: nextVoucherNumber('expense')
+    });
+    saveToLocal();
+    renderExpenses();
+    renderReceiptsHistory();
+    e.target.reset();
+    logAction(`تم تسجيل مصروف جديد من نوع: ${document.getElementById('expense-type').value}`);
+  });
+
+  // ================= SALARIES =================
+  function initSalaryYears(){
+    const yearSel = document.getElementById('sal-year');
+    if(!yearSel) return;
+    const currentYear = new Date().getFullYear();
+    yearSel.innerHTML = `
+      <option value="${currentYear-1}">${currentYear-1}</option>
+      <option value="${currentYear}" selected>${currentYear}</option>
+      <option value="${currentYear+1}">${currentYear+1}</option>
+    `;
+  }
+
+  function renderSalaries(){
+    initSalaryYears();
+    const tbody = document.getElementById('salaries-table-body');
+    if(!tbody) return;
+    tbody.innerHTML = '';
+
+    let total = 0;
+    salaries.sort((a,b)=> new Date(b.date) - new Date(a.date)).forEach((s,index)=>{
+      total += (s.amount || 0);
+      const tr = document.createElement('tr');
+      tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
+      tr.innerHTML = `
+        <td class="px-4 py-3 text-sm font-mono text-gray-600 dark:text-gray-300">${s.date}</td>
+        <td class="px-4 py-3 font-bold text-gray-800 dark:text-white">${s.name}</td>
+        <td class="px-4 py-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">${formatAED(s.amount)}</td>
+        <td class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">${s.notes || '-'}</td>
+        <td class="px-4 py-3 text-center">
+          <button onclick="previewReceipt('${s.id}', 'salary')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف راتب</button>
+        </td>
+        <td class="px-4 py-3 text-center">
+          <button onclick="deleteSalary(${index})" class="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1 rounded transition">🗑️</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('total-salaries').textContent = formatAED(total);
+    document.getElementById('count-salaries').textContent = salaries.length;
+  }
+
+  document.getElementById('salary-form')?.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const month = document.getElementById('sal-month').value;
+    const year = document.getElementById('sal-year').value;
+    const notes = `راتب شهر ${month} لسنة ${year}`;
+
+    const newSalary = {
+      id: 'SAL-'+Date.now(),
+      name: document.getElementById('sal-name').value,
+      role: document.getElementById('sal-role').value,
+      amount: parseFloat(document.getElementById('sal-amount').value),
+      date: document.getElementById('sal-date').value,
+      notes: notes,
+      voucherNo: nextVoucherNumber('salary')
+    };
+    salaries.push(newSalary);
+    saveToLocal();
+    renderSalaries();
+    renderReceiptsHistory();
+    this.reset();
+    logAction(`تم صرف راتب للموظف: ${newSalary.name}`);
+
+    initSalaryYears();
+    document.getElementById('sal-month').selectedIndex = 0;
+  });
+
+  function deleteSalary(index){
+    if(!confirm('هل أنت متأكد من حذف قيد الراتب هذا؟')) return;
+    salaries.splice(index, 1);
+    saveToLocal();
+    renderSalaries();
+    renderReceiptsHistory();
+  }
+
+  // ================= RECEIPTS HISTORY & PREVIEW =================
   function renderReceiptsHistory(){
-    const tbody = document.getElementById('receipts-history-table-body'); tbody.innerHTML = '';
+    const tbody = document.getElementById('receipts-history-table-body');
+    tbody.innerHTML = '';
 
     let allVouchers = [];
     let totalReceipts = 0;
-    let totalSalariesSum = 0;
-    let totalExpensesSum = 0;
+    let totalSalariesAmt = 0;
+    let totalExpensesAmt = 0;
 
     payments.forEach(p => {
       totalReceipts += p.amount;
@@ -1685,7 +2158,7 @@
     });
 
     salaries.forEach(s => {
-      totalSalariesSum += s.amount;
+      totalSalariesAmt += s.amount;
       allVouchers.push({
         id: s.id,
         type: 'صرف راتب',
@@ -1698,7 +2171,7 @@
     });
 
     expenses.forEach(e => {
-      totalExpensesSum += e.amount;
+      totalExpensesAmt += e.amount;
       allVouchers.push({
         id: e.id,
         type: 'صرف',
@@ -1710,94 +2183,100 @@
       });
     });
 
-    allVouchers.sort((a, b) => new Date(b.date) - new Date(a.date));
+    allVouchers.sort((a,b)=> new Date(b.date) - new Date(a.date));
 
     allVouchers.forEach(v => {
       const isReceipt = v.sourceType === 'payment';
-      const typeClass =
-        v.sourceType === 'payment' ? 'badge-green' :
-        (v.sourceType === 'salary' ? 'badge-blue' : 'badge-red');
-      const amountClass =
-        v.sourceType === 'payment'
-          ? 'text-emerald-700 dark:text-emerald-400'
-          : 'text-rose-700 dark:text-rose-400';
+      const typeClass = isReceipt ? 'badge-green' : 'badge-red';
+      const amountClass = isReceipt ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400';
       const tr = document.createElement('tr');
       tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
       tr.innerHTML = `
-              <td class="text-sm font-mono">${v.date}</td>
-              <td><span class="badge ${typeClass}">${v.type}</span></td>
-              <td class="font-bold font-mono ${amountClass}">${formatAED(v.amount)}</td>
-              <td class="text-sm font-bold text-gray-700 dark:text-gray-300">${v.party}</td>
-              <td class="text-xs text-gray-500 dark:text-gray-400 truncate-text max-w-[200px]" title="${v.desc}">${v.desc}</td>
-              <td>
-                  <button onclick="previewReceipt('${v.id}', '${v.sourceType}')" class="text-purple-600 dark:text-purple-400 hover:underline text-xs">عرض</button>
-              </td>
-          `;
+        <td class="text-sm font-mono">${v.date}</td>
+        <td><span class="badge ${typeClass}">${v.type}</span></td>
+        <td class="font-bold font-mono ${amountClass}">${formatAED(v.amount)}</td>
+        <td class="text-sm font-bold text-gray-700 dark:text-gray-300">${v.party}</td>
+        <td class="text-xs text-gray-500 dark:text-gray-400 truncate-text max-w-[200px]" title="${v.desc}">${v.desc}</td>
+        <td>
+          <button onclick="previewReceipt('${v.id}', '${v.sourceType}')" class="text-purple-600 dark:text-purple-400 hover:underline text-xs">عرض</button>
+        </td>
+      `;
       tbody.appendChild(tr);
     });
 
     document.getElementById('total-receipt-vouchers').textContent = formatAED(totalReceipts);
-    document.getElementById('total-payment-vouchers').textContent = formatAED(totalSalariesSum + totalExpensesSum);
+    document.getElementById('total-payment-vouchers').textContent = formatAED(totalSalariesAmt + totalExpensesAmt);
     document.getElementById('total-vouchers-count').textContent = allVouchers.length;
+  }
+
+  function findPropertyForPayment(payment){
+    if(!payment) return null;
+    for(const p of properties){
+      for(const u of p.units){
+        if(payment.unit && u.name === payment.unit) return p;
+        if(payment.contract && u.contractNo === payment.contract) return p;
+      }
+    }
+    return null;
+  }
+
+  function setReceiptHeaderByProperty(prop){
+    const nameEl = document.getElementById('rv-building-name');
+    const locEl  = document.getElementById('rv-building-location');
+    const phoneEl= document.getElementById('rv-building-phone');
+    if(prop){
+      nameEl.textContent = prop.name || defaultHeader.name;
+      locEl.textContent  = prop.location || defaultHeader.location;
+    } else {
+      nameEl.textContent = defaultHeader.name;
+      locEl.textContent  = defaultHeader.location;
+    }
+    phoneEl.textContent = defaultHeader.phone;
   }
 
   function previewReceipt(id, type='payment'){
     showView('receipt');
 
-    const titleEl = document.getElementById('rv-title');
+    const titleEl    = document.getElementById('rv-title');
     const subTitleEl = document.getElementById('rv-subtitle');
     const partyLabelEl = document.getElementById('rv-party-label');
+    const mainTitleEl = document.getElementById('receipt-main-title');
+
     const btnBack = document.getElementById('back-to-source-btn');
+    btnBack.onclick = function(){ showView('receipts-history'); };
 
-    btnBack.onclick = function() { showView('receipts-history'); };
-
-    // Convert id to string for comparison (safeguard)
-    const idStr = String(id);
-
-    if(type === 'salary') {
-      const item = salaries.find(x => String(x.id) === idStr);
+    if(type === 'salary'){
+      const item = salaries.find(x => x.id === id);
       if(!item) return;
-
-      setReceiptHeaderByUnit(null);
 
       titleEl.textContent = "سند صرف راتب";
-      titleEl.className  = "text-3xl font-black text-rose-700 tracking-wider";
+      titleEl.className = "text-3xl font-black text-rose-700 tracking-wider";
       subTitleEl.textContent = "Salary Payment Voucher";
       partyLabelEl.textContent = "اصرفوا للسيد/ة:";
+      mainTitleEl.textContent = "سند صرف راتب";
 
-      let no = item.voucherNo;
-      if (!no) {
-        no = getNextVoucherNo('SV');
-        item.voucherNo = no;
-        saveToLocal();
-      }
+      setReceiptHeaderByProperty(null);
 
-      document.getElementById('rv-no').textContent    = no;
-      document.getElementById('rv-date-out').textContent   = item.date;
-      document.getElementById('rv-tenant-out').textContent = item.name + " (" + item.role + ")";
+      document.getElementById('rv-no').textContent = item.voucherNo || '';
+      document.getElementById('rv-date-out').textContent = item.date;
+      document.getElementById('rv-tenant-out').textContent = `${item.name} (${item.role})`;
       document.getElementById('rv-amount-out').textContent = parseFloat(item.amount).toLocaleString();
       document.getElementById('rv-method-out').textContent = "نقدي / تحويل";
-      document.getElementById('rv-for-out').textContent    = item.notes;
+      document.getElementById('rv-for-out').textContent = item.notes;
 
-    } else if(type === 'expense') {
-      const item = expenses.find(x => x.id === idStr);
+    } else if(type === 'expense'){
+      const item = expenses.find(x => x.id === id);
       if(!item) return;
-
-      setReceiptHeaderByUnit(null);
 
       titleEl.textContent = "سند صرف";
       titleEl.className = "text-3xl font-black text-rose-700 tracking-wider";
       subTitleEl.textContent = "Payment Voucher";
-      partyLabelEl.textContent = "اصرفوا للجهة/الاستاذ:";
+      partyLabelEl.textContent = "اصرفوا للجهة:"; 
+      mainTitleEl.textContent = "سند صرف";
 
-      let no = item.voucherNo;
-      if (!no) {
-        no = getNextVoucherNo('PV');
-        item.voucherNo = no;
-        saveToLocal();
-      }
+      setReceiptHeaderByProperty(null);
 
-      document.getElementById('rv-no').textContent = no;
+      document.getElementById('rv-no').textContent = item.voucherNo || '';
       document.getElementById('rv-date-out').textContent = item.date;
       document.getElementById('rv-tenant-out').textContent = item.type;
       document.getElementById('rv-amount-out').textContent = parseFloat(item.amount).toLocaleString();
@@ -1805,24 +2284,19 @@
       document.getElementById('rv-for-out').textContent = `دفع مبلغ ${item.amount.toLocaleString()} عن ${item.type}: ${item.details}`;
 
     } else {
-      const item = payments.find(x => x.id === idStr || x.chequeId === idStr);
+      const item = payments.find(x => x.id === id || x.chequeId === id);
       if(!item) return;
-
-      setReceiptHeaderByUnit(item.unit);
 
       titleEl.textContent = "سند قبض";
       titleEl.className = "text-3xl font-black text-emerald-700 tracking-wider";
       subTitleEl.textContent = "Receipt Voucher";
       partyLabelEl.textContent = "استلمنا من:";
+      mainTitleEl.textContent = "سند قبض";
 
-      let no = item.voucherNo;
-      if (!no) {
-        no = getNextVoucherNo('RV');
-        item.voucherNo = no;
-        saveToLocal();
-      }
+      const prop = findPropertyForPayment(item);
+      setReceiptHeaderByProperty(prop);
 
-      document.getElementById('rv-no').textContent = no;
+      document.getElementById('rv-no').textContent = item.voucherNo || '';
       document.getElementById('rv-date-out').textContent = item.date;
       document.getElementById('rv-tenant-out').textContent = item.tenant;
       document.getElementById('rv-amount-out').textContent = parseFloat(item.amount).toLocaleString();
@@ -1843,150 +2317,21 @@
     html2pdf().set(opt).from(element).save();
   }
 
-  // ================= EXPENSES =================
-  function renderExpenses(){
-    const tbody = document.getElementById('expenses-table-body');
-    if(!tbody) return;
-    tbody.innerHTML='';
-    
-    // Sort logic happens here, but we use ID for deletion
-    expenses.sort((a,b)=> new Date(b.date)-new Date(a.date)).forEach((e)=>{
-      const tr = document.createElement('tr');
-      tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
-      tr.innerHTML=`
-           <td class="text-sm font-mono">${e.date}</td>
-           <td class="text-sm font-bold text-indigo-700 dark:text-indigo-400">${e.type}</td>
-           <td class="font-bold text-rose-600 dark:text-rose-400">${formatAED(e.amount)}</td>
-           <td class="text-sm text-gray-600 dark:text-gray-300">${e.details}</td>
-           <td class="text-center">
-                 <div class="flex items-center justify-center gap-2">
-                     <button onclick="previewReceipt('${e.id}', 'expense')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
-                     <button onclick="deleteExpense('${e.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition" title="حذف">🗑️</button>
-                 </div>
-           </td>
-        `;
-      tbody.appendChild(tr);
-    });
-  }
-  
-  function deleteExpense(id){
-    if(confirm('حذف هذا المصروف؟')) { 
-      // Corrected: Find index by ID instead of using sorted index
-      const index = expenses.findIndex(e => e.id === id);
-      if(index > -1) {
-        expenses.splice(index, 1); 
-        saveToLocal(); 
-        renderExpenses(); 
-      }
-    }
-  }
-
-  document.getElementById('new-expense-form').addEventListener('submit', e=>{
-    e.preventDefault();
-    const voucherNo = getNextVoucherNo('PV');
-    expenses.push({
-      id: 'EXP-'+Date.now(),
-      voucherNo: voucherNo,
-      date: document.getElementById('expense-date').value,
-      type: document.getElementById('expense-type').value,
-      amount: parseFloat(document.getElementById('expense-amount').value),
-      details: document.getElementById('expense-details').value
-    });
-    saveToLocal(); renderExpenses(); e.target.reset(); logAction(`تم تسجيل مصروف جديد من نوع: ${document.getElementById('expense-type').value}`);
-  });
-
-  // ================= SALARIES =================
-  function initSalaryYears(){
-    const yearSel = document.getElementById('sal-year');
-    if(!yearSel) return;
-    const currentYear = new Date().getFullYear();
-    yearSel.innerHTML = `
-        <option value="${currentYear-1}">${currentYear-1}</option>
-        <option value="${currentYear}" selected>${currentYear}</option>
-        <option value="${currentYear+1}">${currentYear+1}</option>
-      `;
-  }
-
-  function renderSalaries(){
-    initSalaryYears();
-    const tbody = document.getElementById('salaries-table-body');
-    if(!tbody) return;
-    tbody.innerHTML = '';
-
-    let total = 0;
-    // Sort logic happens here, but we use ID for deletion
-    salaries.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach((s) => {
-      total += (s.amount || 0);
-      const tr = document.createElement('tr');
-      tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
-      tr.innerHTML = `
-            <td class="px-4 py-3 text-sm font-mono text-gray-600 dark:text-gray-300">${s.date}</td>
-            <td class="px-4 py-3 font-bold text-gray-800 dark:text-white">${s.name}</td>
-            <td class="px-4 py-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">${formatAED(s.amount)}</td>
-            <td class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">${s.notes || '-'}</td>
-            <td class="px-4 py-3 text-center">
-                <button onclick="previewReceipt('${s.id}', 'salary')" class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-xs font-bold hover:bg-blue-100">🖨️ سند صرف</button>
-            </td>
-            <td class="px-4 py-3 text-center">
-                <button onclick="deleteSalary('${s.id}')" class="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1 rounded transition">🗑️</button>
-            </td>
-         `;
-      tbody.appendChild(tr);
-    });
-    document.getElementById('total-salaries').textContent = formatAED(total);
-    document.getElementById('count-salaries').textContent = salaries.length;
-  }
-
-  document.getElementById('salary-form')?.addEventListener('submit', function(e){
-    e.preventDefault();
-
-    const month = document.getElementById('sal-month').value;
-    const year = document.getElementById('sal-year').value;
-    const notes = `راتب شهر ${month} لسنة ${year}`;
-    const voucherNo = getNextVoucherNo('SV');
-
-    const newSalary = {
-      id: 'SAL-' + Date.now(),
-      voucherNo: voucherNo,
-      name: document.getElementById('sal-name').value,
-      role: document.getElementById('sal-role').value,
-      amount: parseFloat(document.getElementById('sal-amount').value),
-      date: document.getElementById('sal-date').value,
-      notes: notes
-    };
-    salaries.push(newSalary);
-    saveToLocal(); renderSalaries(); this.reset(); logAction(`تم صرف راتب للموظف: ${newSalary.name}`);
-
-    initSalaryYears();
-    document.getElementById('sal-month').selectedIndex = 0;
-  });
-
-  function deleteSalary(id){
-    if(confirm('هل أنت متأكد من حذف قيد الراتب هذا؟')){
-      // Corrected: Find index by ID instead of using sorted index
-      // Using loose equality (==) to handle if ID is number or string
-      const index = salaries.findIndex(s => s.id == id);
-      if(index > -1) {
-        salaries.splice(index, 1); 
-        saveToLocal(); 
-        renderSalaries();
-      }
-    }
-  }
-
   // ================= REPORTS =================
   function renderReports(){
     const date = new Date().toLocaleDateString('ar-AE');
     document.getElementById('report-date').textContent = date;
     const tenants = getTenantsData();
-    const list = document.getElementById('tenants-summary-list'); list.innerHTML='';
+    const list = document.getElementById('tenants-summary-list');
+    list.innerHTML='';
     tenants.forEach(t=>{
       const div = document.createElement('div');
       div.className = "border p-3 rounded bg-gray-50 flex justify-between";
       div.innerHTML = `<span><strong>${t.name}</strong> (${t.units.length} وحدات)</span> <span class="font-bold text-emerald-700">${formatAED(t.rent)}</span>`;
       list.appendChild(div);
     });
-    const lateList = document.getElementById('late-tenants-list'); lateList.innerHTML='';
+    const lateList = document.getElementById('late-tenants-list');
+    lateList.innerHTML='';
     const late = tenants.filter(t=>t.balance>0);
     if(late.length===0) lateList.innerHTML = '<li class="text-green-700">لا يوجد متأخرات ولله الحمد</li>';
     else late.forEach(t=>{
@@ -1998,11 +2343,15 @@
 
   // ================= SETTINGS & BACKUP =================
   function exportBackupJSON(){
-    const data = { properties, cheques, expenses, payments, tenantsContacts, salaries, voucherCounters };
+    const data = { properties, cheques, expenses, payments, tenantsContacts, salaries };
     const blob = new Blob([JSON.stringify(data)], {type:'application/json'});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href=url; a.download='realestate_backup.json'; a.click();
+    const a = document.createElement('a');
+    a.href=url;
+    a.download='realestate_backup.json';
+    a.click();
   }
+
   function exportBackupExcel(){
     const wb = XLSX.utils.book_new();
     const unitsData = [];
@@ -2013,6 +2362,7 @@
     if(expenses.length > 0) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(expenses), "Expenses");
     XLSX.writeFile(wb, "RealEstate_Data.xlsx");
   }
+
   function importBackup(e){
     const file = e.target.files[0];
     if(!file) return;
@@ -2025,55 +2375,80 @@
         if(data.cheques) cheques = data.cheques;
         if(data.salaries) salaries = data.salaries;
         if(data.expenses) expenses = data.expenses;
-        if(data.voucherCounters) voucherCounters = data.voucherCounters;
+        if(data.tenantsContacts) tenantsContacts = data.tenantsContacts;
 
         expenses = expenses.map(e => ({
-          id: e.id || 'EXP-' + Date.now() + Math.floor(Math.random() * 1000),
+          id: e.id || 'EXP-' + Date.now() + Math.floor(Math.random()*1000),
           date: e.date,
           type: e.type || 'أخرى',
           amount: e.amount,
-          details: e.details
+          details: e.details,
+          voucherNo: e.voucherNo || null
         }));
         cheques = cheques.map(c => ({
           ...c,
-          id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random() * 1000),
+          id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random()*1000),
           status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'),
           imageUrl: c.imageUrl || null
         }));
-        
-        // Ensure salaries have IDs
-        salaries = salaries.map(s => ({
-          ...s,
-          id: s.id || 'SAL-' + Date.now() + Math.floor(Math.random() * 1000)
-        }));
 
         saveToLocal();
-        saveVoucherCounters();
+        ensureVoucherNumbers();
         document.getElementById('backup-msg').textContent = "✅ تم استعادة البيانات بنجاح!";
         setTimeout(()=>location.reload(), 1500);
-      } catch(err){ document.getElementById('backup-msg').textContent = "❌ ملف غير صالح"; }
+      } catch(err){
+        console.error(err);
+        document.getElementById('backup-msg').textContent = "❌ ملف غير صالح";
+      }
     };
     reader.readAsText(file);
   }
 
   function clearAllData(){
-    properties = []; cheques = []; expenses = []; payments = []; tenantsContacts = {}; salaries = [];
+    properties = [];
+    cheques = [];
+    expenses = [];
+    payments = [];
+    tenantsContacts = {};
+    salaries = [];
     saveToLocal();
-    voucherCounters = { rv:1, pv:1, sv:1 };
-    saveVoucherCounters();
     location.reload();
   }
 
+  // ================= THEME =================
   function toggleDarkMode(){
-    document.body.classList.toggle('dark-mode');
+    const willBeDark = !document.body.classList.contains('dark-mode');
+
+    if (willBeDark) {
+      document.body.classList.add('dark-mode');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('re_dark_mode', '1');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('re_dark_mode', '0');
+    }
     updateDashboard();
   }
 
+  function initTheme(){
+    const saved = localStorage.getItem('re_dark_mode');
+    if (saved === '1') {
+      document.body.classList.add('dark-mode');
+      document.documentElement.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // ================= INIT =================
   window.onload = function(){
+    initTheme();
     loadFromLocal();
-    initSalaryYears();
     showView('dashboard');
   };
 </script>
+
 </body>
 </html>
