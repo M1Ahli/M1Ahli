@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -212,7 +213,26 @@
     }
 
     /* تحسين الطباعة للسندات والتقارير */
-    @media print {
+    
+    .letter-title-ar{
+      font-family:"Arabic Typesetting","Amiri","Noto Naskh Arabic",serif;
+      font-size:28px;
+      line-height:1.2;
+      font-weight:700;
+    }
+    .letter-title-en{
+      font-family:"Times New Roman", Georgia, serif;
+      font-size:18px;
+      line-height:1.25;
+      margin-top:6px;
+      font-weight:600;
+      opacity:.95;
+    }
+    body.dark-mode .letter-title{
+      border-bottom-color: rgba(255,255,255,0.18);
+    }
+
+@media print {
       body {
         margin: 0;
       }
@@ -240,7 +260,265 @@
         display: none !important;
       }
     }
-  </style>
+  
+    /* =========================================================
+       Enhanced Light/Dark Theme (Accessibility + Visual Comfort)
+       ========================================================= */
+    :root{
+      --bg:#f8fafc;
+      --surface:#ffffff;
+      --surface-2:#f1f5f9;
+      --border:rgba(15,23,42,.12);
+      --text:#0f172a;
+      --muted:#475569;
+      --muted-2:#64748b;
+      --shadow:0 1px 2px rgba(15,23,42,.06), 0 6px 18px rgba(15,23,42,.06);
+      --focus:rgba(124,58,237,.35);
+    }
+    body.dark-mode{
+      --bg:#0b1220;
+      --surface:#0f172a;
+      --surface-2:#111c33;
+      --border:rgba(148,163,184,.18);
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --muted-2:#64748b;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
+      --focus:rgba(139,92,246,.45);
+    }
+
+    body{
+      background:var(--bg) !important;
+      color:var(--text) !important;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Surfaces */
+    nav{
+      background:var(--surface) !important;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+    .bg-white,
+    .modal-content{
+      background-color:var(--surface) !important;
+      color:var(--text) !important;
+      border-color:var(--border) !important;
+      box-shadow:var(--shadow);
+    }
+    body.dark-mode .bg-gray-50{ background-color:var(--bg) !important; }
+    body.dark-mode .bg-gray-100{
+      background-color:var(--surface-2) !important;
+      color:var(--text) !important;
+    }
+
+    /* Navigation buttons */
+    .nav-btn{
+      background:var(--surface-2) !important;
+      color:var(--muted) !important;
+      border:1px solid var(--border);
+    }
+    .nav-btn:hover{
+      background:rgba(148,163,184,.18) !important;
+      transform:translateY(-1px);
+    }
+    body.dark-mode .nav-btn:hover{
+      background:rgba(148,163,184,.22) !important;
+      color:var(--text) !important;
+    }
+
+    /* Inputs */
+    input, select, textarea{
+      background-color:var(--surface) !important;
+      color:var(--text) !important;
+      border-color:var(--border) !important;
+    }
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea{
+      background-color:var(--surface-2) !important;
+      color:var(--text) !important;
+      border-color:var(--border) !important;
+    }
+    input::placeholder, textarea::placeholder{
+      color:var(--muted-2) !important;
+    }
+    input:focus, select:focus, textarea:focus{
+      outline:none !important;
+      box-shadow:0 0 0 3px var(--focus) !important;
+    }
+
+    /* Tables */
+    th{
+      background:var(--surface-2) !important;
+      color:var(--muted) !important;
+      border-bottom:1px solid var(--border) !important;
+    }
+    td{
+      border-bottom:1px solid var(--border) !important;
+      color:var(--text) !important;
+    }
+    tbody tr:hover td{
+      background:rgba(15,23,42,.03) !important;
+    }
+    body.dark-mode tbody tr:hover td{
+      background:rgba(148,163,184,.08) !important;
+    }
+
+    /* Common text utilities */
+    .text-gray-900, .text-gray-800{ color:var(--text) !important; }
+    .text-gray-700, .text-gray-600, .text-gray-500{ color:var(--muted) !important; }
+    .text-gray-400{ color:var(--muted-2) !important; }
+
+    /* Badges (softer in dark mode) */
+    body.dark-mode .badge-green{ background:rgba(16,185,129,.18) !important; color:#34d399 !important; }
+    body.dark-mode .badge-red{ background:rgba(244,63,94,.18) !important; color:#fb7185 !important; }
+    body.dark-mode .badge-amber{ background:rgba(245,158,11,.18) !important; color:#fbbf24 !important; }
+    body.dark-mode .badge-blue{ background:rgba(59,130,246,.18) !important; color:#93c5fd !important; }
+
+
+    /* ===== تحسين صفحة التقارير في الوضع الليلي ===== */
+    body.dark-mode #reports-view .bg-rose-50{
+      background-color: rgba(127,29,29,.22) !important;
+      border: 1px solid rgba(248,113,113,.20) !important;
+    }
+    body.dark-mode #reports-view .text-rose-700{ color:#fca5a5 !important; }
+    body.dark-mode #reports-view .border-rose-700{ border-color: rgba(248,113,113,.55) !important; }
+    body.dark-mode #reports-view .text-red-700{ color:#fca5a5 !important; }
+    body.dark-mode #reports-view .text-emerald-700{ color:#86efac !important; }
+    body.dark-mode #reports-view .text-green-700{ color:#86efac !important; }
+
+
+    /* ===== Letters / Notices (A4) ===== */
+    .letter-paper{
+      font-family:"Arabic Typesetting","Noto Naskh Arabic","Tahoma","Arial",sans-serif;
+      background:#ffffff;
+      color:#111827;
+            font-size:20px;
+border:1px solid rgba(0,0,0,0.10);
+      border-radius:18px;
+      padding:28px;
+      max-width:920px;
+      margin: 0 auto;
+    }
+    .letter-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+    }
+    .letter-head-lines{
+      font-weight:700;
+      line-height:1.45;
+      font-size:15px;
+    }
+    .letter-date{
+      font-weight:600;
+      font-size:14px;
+      opacity:.85;
+      white-space:nowrap;
+    }
+    .letter-title{
+      text-align:center;
+      margin: 10px 0 14px;
+      padding-bottom:12px;
+      border-bottom: 2px solid rgba(0,0,0,0.12);
+    }
+    .letter-meta{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:10px;
+      margin: 10px 0 18px;
+      font-size:13px;
+      opacity:.9;
+    }
+    .letter-columns{
+      direction:rtl;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:16px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.65);
+    }
+    body.dark-mode .letter-columns{
+      background: rgba(17,24,39,0.40);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .letter-col{
+      padding:16px 18px;
+      min-height: 380px;
+    }
+    .letter-col[dir="rtl"]{
+      direction:rtl;
+      font-family:"Arabic Typesetting","Amiri","Noto Naskh Arabic","Times New Roman",serif;
+      font-size: 28px;
+      line-height:2.0;
+      border-left:1px solid rgba(0,0,0,0.10);
+      border-right:none;
+}
+    body.dark-mode .letter-col[dir="rtl"]{
+      border-left-color: rgba(255,255,255,0.14);
+      border-right-color: transparent;
+}
+    .letter-col[dir="ltr"]{
+      direction:ltr;
+      font-family:"Times New Roman", Georgia, serif;
+      font-size:15px;
+      line-height:1.9;
+    }
+    .letter-p{
+      margin:0 0 10px 0;
+    }
+    .letter-list{
+      margin:0 0 12px 0;
+      padding-left: 20px;
+    }
+    .letter-col[dir="rtl"] .letter-list{
+      padding-left:0;
+      padding-right: 22px;
+    }
+    .letter-list li{ margin: 0 0 6px 0; }
+.letter-body{
+      font-size:inherit;
+      line-height:inherit;
+      white-space:pre-wrap;
+    }
+    .letter-edit{ outline:none; }
+    .letter-footer{
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      font-size:12.5px;
+      line-height:1.6;
+      opacity:.9;
+    }
+    .letter-footer .sig{
+      font-weight:700;
+      margin-bottom:6px;
+    }
+
+    @media print{
+      @page { size: A4; margin: 14mm; }
+      body{ background:#fff !important; }
+      nav, .no-print{ display:none !important; }
+      .view{ display:none !important; }
+      #notices-view{ display:block !important; padding:0 !important; }
+      #notice-preview{ border:none !important; background:transparent !important; padding:0 !important; min-height:auto !important; }
+      .letter-paper{
+        border:none !important;
+        border-radius:0 !important;
+        padding:0 !important;
+        max-width:none !important;
+        margin:0 !important;
+      }
+      .letter-col{ border:none !important; padding:0 !important; border-radius:0 !important; }
+    }
+</style>
 </head>
 <body class="p-4 md:p-6 max-w-[1600px] mx-auto transition-colors duration-300">
 
@@ -255,6 +533,7 @@
     <button id="nav-salaries" class="nav-btn" onclick="showView('salaries')">👨‍🔧 الرواتب</button>
     <button id="nav-receipts-history" class="nav-btn" onclick="showView('receipts-history')">🧾 السندات</button>
     <button id="nav-reports" class="nav-btn" onclick="showView('reports')">📊 التقارير</button>
+    <button id="nav-notices" class="nav-btn" onclick="showView('notices')">🔔 الإشعارات</button>
     <button id="nav-settings" class="nav-btn" onclick="showView('settings')">⚙️ الإعدادات</button>
     <button class="nav-btn mr-auto" onclick="toggleDarkMode()">🌙/☀️</button>
   </nav>
@@ -268,7 +547,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
       <div class="bg-white p-6 rounded-2xl border-r-4 border-emerald-500">
-        <p class="text-gray-500 dark:text-gray-400 text-sm font-semibold mb-1">إجمالي الإيجار السنوي</p>
+        <p id="total-rent-label" class="text-gray-500 dark:text-gray-400 text-sm font-semibold mb-1">إجمالي الإيجار السنوي</p>
         <p id="total-annual-rent" class="text-3xl font-bold text-gray-800 dark:text-white">0 AED</p>
       </div>
       <div class="bg-white p-6 rounded-2xl border-r-4 border-blue-500">
@@ -406,6 +685,7 @@
             <th>الحالة</th>
             <th>الاستحقاق</th>
             <th>المستأجر</th>
+            <th>الوحدة</th>
             <th>القيمة</th>
             <th>البنك / رقم الشيك</th>
             <th>صورة الشيك</th>
@@ -624,7 +904,7 @@
         </form>
 
         <div class="md:col-span-3">
-          <button onclick="showView('receipts-history')" id="back-to-source-btn" class="mb-4 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded">↩️ العودة لسجل السندات</button>
+          <button onclick="showView('receipts-history')" id="back-to-source-btn" class="mb-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 dark:border-slate-700 dark:bg-slate-800 dark:text-gray-100 dark:hover:bg-slate-700">↩️ العودة لسجل السندات</button>
 
           <div id="receipt-preview" class="bg-white p-8 rounded shadow-lg border relative">
             <div id="printable-receipt" class="p-4 border-2 border-double border-gray-300 text-gray-800 bg-white">
@@ -705,8 +985,181 @@
         <h3 class="font-bold text-lg mb-2 text-rose-700 border-r-4 border-rose-700 pr-2">المتأخرات المالية</h3>
         <ul id="late-tenants-list" class="space-y-2 mt-2 text-sm bg-rose-50 p-4 rounded text-gray-800"></ul>
       </div>
+
+      <div class="mt-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+          <h3 class="font-bold text-lg text-indigo-700 border-r-4 border-indigo-700 pr-2">سجل العقود (الحالية والسابقة)</h3>
+          <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
+            <select id="report-lease-status-filter" class="border p-2 rounded text-sm bg-white dark:bg-gray-800 dark:border-gray-600">
+              <option value="all">الكل</option>
+              <option value="مؤجرة">مؤجرة</option>
+              <option value="منتهية">منتهية</option>
+              <option value="ملغاة">ملغاة</option>
+              <option value="تجديد عقد">تجديد عقد</option>
+              <option value="مخلى">مخلى</option>
+            </select>
+            <input id="report-lease-search" placeholder="بحث بالمستأجر / رقم العقد / الوحدة..." class="border p-2 rounded text-sm w-full sm:w-72 bg-white dark:bg-gray-800 dark:border-gray-600" />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 text-xs mb-3">
+          <span id="report-leases-counts" class="px-3 py-1 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-900/20 dark:text-indigo-200 dark:border-indigo-800"></span>
+          <span class="px-3 py-1 rounded bg-gray-50 text-gray-700 border border-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700">
+            ملاحظة: العقود الملغاة/المجددة يتم حفظها تلقائياً ضمن السجل
+          </span>
+        </div>
+
+        <div class="table-wrap bg-white shadow-sm">
+          <table class="min-w-full">
+            <thead>
+              <tr>
+                <th class="w-[170px]">العقار / الوحدة</th>
+                <th class="w-[220px]">المستأجر</th>
+                <th class="w-[140px]">القيمة</th>
+                <th class="w-[180px]">رقم العقد</th>
+                <th class="w-[110px]">من</th>
+                <th class="w-[110px]">إلى</th>
+                <th class="w-[90px]">الحالة</th>
+                <th>ملاحظة</th>
+                <th class="w-[130px]">تاريخ الأرشفة</th>
+              </tr>
+            </thead>
+            <tbody id="report-leases-body" class="divide-y divide-gray-100 dark:divide-gray-700"></tbody>
+          </table>
+        </div>
+        <p id="report-leases-empty" class="hidden mt-3 text-sm text-gray-600 dark:text-gray-300"></p>
+      </div>
+
     </div>
   </section>
+
+
+  <!-- ============= NOTICES ============= -->
+  <section id="notices-view" class="view hidden">
+    <div class="flex flex-wrap items-center justify-between mb-6 gap-3 no-print">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">الإشعارات والإنذارات</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">إنشاء خطابات رسمية موجهة للمستأجرين وطباعتها</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- إعدادات الخطاب -->
+      <div class="bg-white p-6 rounded-2xl no-print">
+        <h3 class="font-bold mb-4 text-gray-700 dark:text-gray-200">إعداد الخطاب</h3>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-semibold mb-1">المستأجر</label>
+            <select id="notice-tenant-select" class="w-full border p-2 rounded-lg" onchange="onNoticeTenantChange()">
+              <option value="">اختر مستأجر...</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1">الوحدة</label>
+            <select id="notice-unit-select" class="w-full border p-2 rounded-lg" disabled>
+              <option value="">اختر وحدة...</option>
+            </select>
+            <p class="text-[11px] text-gray-400 mt-1">سيتم تفعيل اختيار الوحدة تلقائياً بعد اختيار المستأجر.</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1">نوع الخطاب</label>
+            <select id="notice-template-select" class="w-full border p-2 rounded-lg" onchange="resetNoticePreview()">
+              <option value="blank">خطاب رسمي فارغ (يُكتب حسب رغبة المسؤول)</option>
+              <option value="eviction">إخطار بعدم التجديد وإخلاء العين + براءة ذمة كهرباء/مياه</option>
+              <option value="increase5">إشعار زيادة قيمة العقد 5%</option>
+                          <option value="arrearsRenew">إنذار دفع متأخرات إيجارية + تجديد عقد</option>
+              <option value="arrearsCheque">إنذار دفع متأخرات (شيك راجع/دفعة أولى)</option>
+</select>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block text-sm font-semibold mb-1">التاريخ</label>
+              <input id="notice-date" type="date" class="w-full border p-2 rounded-lg dark:bg-gray-800 dark:text-white" onchange="resetNoticePreview()">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1">رقم الخطاب</label>
+              <input id="notice-ref" class="w-full border p-2 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-white" placeholder="NT-00001" oninput="resetNoticePreview()">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <input id="notice-bilingual" type="checkbox" class="h-4 w-4" onchange="resetNoticePreview()">
+            <label for="notice-bilingual" class="text-sm">إظهار نسخة English (عمودين)</label>
+          </div>
+
+          <div id="notice-extra-options" class="hidden p-3 rounded-xl border border-gray-200 dark:border-gray-700 space-y-3">
+            <!-- خيارات زيادة 5% -->
+            <div id="notice-extra-increase5">
+              <div class="flex items-center gap-2">
+                <input id="notice-no-reply-accept" type="checkbox" class="h-4 w-4" checked onchange="resetNoticePreview()">
+                <label for="notice-no-reply-accept" class="text-sm">اعتبار عدم الرد خلال 7 أيام موافقة على الزيادة</label>
+              </div>
+            </div>
+
+            <!-- خيارات إنذارات المتأخرات -->
+            <div id="notice-extra-arrears" class="hidden space-y-3">
+                            <div class="p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/40">
+                <div class="flex items-start gap-2">
+                  <input id="notice-arrears-autofill" type="checkbox" class="h-4 w-4 mt-1" checked>
+                  <div class="flex-1">
+                    <label for="notice-arrears-autofill" class="text-sm font-semibold">تعبئة تلقائية من النظام</label>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">يحسب المتأخرات من الدفعات/الشيكات المسجلة لهذا المستأجر وهذه الوحدة. يمكنك تعديل الأرقام يدويًا قبل الطباعة.</div>
+                    <button type="button" onclick="autofillNoticeArrears(true)" class="mt-2 px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🔄 تحديث تلقائي</button>
+                  </div>
+                </div>
+              </div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-sm font-semibold mb-1">قيمة العقد</label>
+                  <input id="notice-contract-value" type="number" class="w-full border p-2 rounded-lg dark:bg-gray-800 dark:text-white" placeholder="مثال: 47500" oninput="resetNoticePreview()">
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold mb-1">المتأخرات / المتبقي</label>
+                  <input id="notice-arrears-amount" type="number" class="w-full border p-2 rounded-lg dark:bg-gray-800 dark:text-white" placeholder="مثال: 14000" oninput="resetNoticePreview()">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold mb-1">تفاصيل المتأخرات (اختياري)</label>
+                <input id="notice-arrears-details" class="w-full border p-2 rounded-lg dark:bg-gray-800 dark:text-white" placeholder="مثال: الدفعة الأولى (شيك راجع لعدم كفاية الرصيد)" oninput="resetNoticePreview()">
+              </div>
+            </div>
+          </div>
+
+<div>
+            <label class="block text-sm font-semibold mb-1">عنوان/موضوع الخطاب (اختياري)</label>
+            <input id="notice-subject" class="w-full border p-2 rounded-lg" placeholder="مثال: إنذار رسمي..." oninput="resetNoticePreview()">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+            <button onclick="buildNoticePreview()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg shadow">إنشاء معاينة</button>
+            <button id="notice-print-btn" onclick="printNotice()" class="bg-gray-700 hover:bg-gray-800 text-white py-2 rounded-lg shadow disabled:opacity-50" disabled>🖨️ طباعة</button>
+          </div>
+
+          <div class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+            ملاحظة: في هذه الخطوة تم إنشاء الصفحة وربطها بالنظام. <b>نصوص القوالب الرسمية وتنسيق الطباعة</b> سيتم تفعيلها في الخطوة التالية حسب نموذج الخطاب المرفق.
+          </div>
+        </div>
+      </div>
+
+      <!-- معاينة -->
+      <div class="bg-white p-6 rounded-2xl lg:col-span-2">
+        <div class="flex items-center justify-between mb-3 no-print">
+          <h3 class="font-bold text-gray-700 dark:text-gray-200">معاينة الخطاب</h3>
+          <span id="notice-preview-status" class="text-xs text-gray-500 dark:text-gray-400"></span>
+        </div>
+
+        <div id="notice-preview" class="border rounded-2xl p-6 min-h-[460px] bg-gray-50 dark:bg-gray-900/20">
+          <div class="text-center text-gray-500 dark:text-gray-400">
+            اختر المستأجر ونوع الخطاب ثم اضغط <b>إنشاء معاينة</b>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ============= SETTINGS ============= -->
   <section id="settings-view" class="view hidden">
@@ -726,6 +1179,17 @@
         <input type="file" id="backup-file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 mb-3" onchange="importBackup(event)">
         <p id="backup-msg" class="text-xs h-4"></p>
       </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <h3 class="font-bold mb-4 flex items-center gap-2">💰 طريقة احتساب الإيجار</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">اختر هل قيمة الإيجار المدخلة للوحدة تمثل مبلغًا سنويًا أم قيمة العقد كاملة. سيؤثر هذا على لوحة المعلومات والتقارير.</p>
+        <label class="block text-sm font-semibold mb-2">القيمة تمثل</label>
+        <select id="rent-basis-select" class="w-full border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-white" onchange="saveRentBasisSetting()">
+          <option value="total">قيمة العقد كاملة</option>
+          <option value="annual">إيجار سنوي</option>
+        </select>
+        <p class="text-xs text-gray-400 mt-2">ملاحظة: إذا اخترت "إيجار سنوي" فسيتم ضربه في مدة العقد الفعلية.</p>
+      </div>
+
       <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 dark:border-rose-900">
         <h3 class="font-bold mb-4 text-rose-700">⚠️ منطقة الخطر</h3>
         <button onclick="if(confirm('هل أنت متأكد تماماً؟ سيتم حذف كل شيء وتفريغ النظام!')) clearAllData()" class="bg-rose-100 text-rose-700 hover:bg-rose-200 px-4 py-2 rounded w-full text-sm font-bold">فرمته النظام (حذف جميع البيانات)</button>
@@ -926,6 +1390,7 @@
           <button type="button" onclick="closeTenantModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded text-gray-800">إغلاق</button>
           <button class="px-4 py-2 bg-blue-600 text-white rounded">حفظ</button>
         </div>
+        <div id="tenant-save-status" class="text-xs text-gray-500 text-right"></div>
       </form>
     </div>
   </div>
@@ -934,7 +1399,7 @@
   <div id="cheque-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
       <form id="new-cheque-form" class="p-6 space-y-4">
-        <h3 class="font-bold text-lg border-b pb-2 dark:border-gray-600">تسجيل شيك جديد</h3>
+        <h3 id="cheque-modal-title" class="font-bold text-lg border-b pb-2 dark:border-gray-600">تسجيل شيك جديد</h3>
 
         <div>
           <label class="text-xs text-gray-500 dark:text-gray-400">المستأجر</label>
@@ -943,6 +1408,14 @@
             <option value="other">-- مستأجر جديد / آخر --</option>
           </select>
           <input id="cheque-tenant-manual" placeholder="أدخل اسم المستأجر يدوياً" class="w-full border p-2 rounded mt-2 hidden">
+        </div>
+
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">الوحدة (اختياري)</label>
+          <select id="cheque-unit-select" class="w-full border p-2 rounded" disabled>
+            <option value="">— بدون ربط وحدة —</option>
+          </select>
+          <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1">لتحسين التقارير واحتساب المتأخرات بدقة، يُفضّل ربط الشيك بوحدة محددة.</p>
         </div>
 
         <div class="grid grid-cols-2 gap-2">
@@ -978,11 +1451,31 @@
 
         <div class="flex justify-end gap-3 pt-4 border-t dark:border-gray-700">
           <button type="button" onclick="closeChequeModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded text-gray-800">إلغاء</button>
-          <button class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">حفظ الشيك</button>
+          <button class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded" id="cheque-modal-save-btn">حفظ الشيك</button>
         </div>
       </form>
     </div>
+  
+  <!-- ============= CHEQUE LINK MODAL (Link cheque to unit) ============= -->
+  <div id="cheque-link-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white modal-content rounded-xl shadow-2xl w-full max-w-lg">
+      <div class="p-6 space-y-4">
+        <h3 class="font-bold text-lg border-b pb-2 dark:border-gray-600">ربط الشيك بوحدة</h3>
+        <div id="cheque-link-info" class="text-sm text-gray-600 dark:text-gray-300"></div>
+        <div>
+          <label class="text-xs text-gray-500 dark:text-gray-400">اختر الوحدة</label>
+          <select id="cheque-link-unit-select" class="w-full border p-2 rounded"></select>
+          <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1">الربط يساعد في احتساب المتأخرات والتقارير الخاصة بكل وحدة.</p>
+        </div>
+        <div class="flex justify-end gap-3 pt-4 border-t dark:border-gray-700">
+          <button type="button" onclick="closeChequeLinkModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded text-gray-800">إلغاء</button>
+          <button type="button" onclick="confirmChequeLink()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">حفظ الربط</button>
+        </div>
+      </div>
+    </div>
   </div>
+
+</div>
 
 <script>
   // ================= DATA =================
@@ -1022,6 +1515,12 @@
   ];
 
   let properties = [], cheques = [], expenses = [], payments = [], tenantsContacts = {}, salaries = [];
+  let editingChequeId = null;
+  let pendingChequeAfterEditId = null;
+  let pendingChequeAfterEditStatus = '';
+
+  let currentTenantKey = null; // internal: active tenant key for modal
+
   let contractLogs = JSON.parse(localStorage.getItem('logs') || "[]");
 
   // Default header info
@@ -1036,8 +1535,330 @@
 
   // ================= UTILS & LOCAL STORAGE =================
   function formatAED(n){ return (n||0).toLocaleString('en-US') + ' AED'; }
+  function tenantKey(name){ return String(name||'').trim().replace(/\s+/g,' ').toLowerCase(); }
 
-  function logAction(msg){
+  function normalizeChequeStatus(status){
+    const s = String(status ?? '').trim();
+    if(!s) return '';
+    const ns = s.toLowerCase();
+
+    // Arabic / English mappings
+    if(ns.includes('مصروف') || ns.includes('تم الصرف') || ns.includes('صرف') || ns.includes('cashed') || ns.includes('cleared') || ns.includes('paid')) return 'مصروف';
+    if(ns.includes('راجع') || ns.includes('مرتجع') || ns.includes('مرفوض') || ns.includes('returned') || ns.includes('bounce') || ns.includes('bounced')) return 'راجع';
+    if(ns.includes('بانتظار') || ns.includes('قيد') || ns.includes('pending') || ns.includes('await') || ns.includes('waiting') || ns.includes('not cashed')) return 'بانتظار الصرف';
+
+    // Already canonical?
+    if(s === 'بانتظار الصرف' || s === 'مصروف' || s === 'راجع') return s;
+
+    return s; // keep as-is (won't match buckets unless mapped above)
+  }
+
+  function normalizeChequeRecord(c){
+    const out = { ...(c||{}) };
+
+    // Normalize common field names from older versions
+    out.id = out.id || out.chequeId || out.checkId || ('CHQ-' + Date.now() + Math.floor(Math.random()*1000));
+    out.tenant = out.tenant || out.tenantName || out.tenant_name || out.name || out.client || '';
+    out.chequeNo = out.chequeNo || out.number || out.chequeNumber || out.cheque_number || out.no || '';
+    out.value = Number(out.value ?? out.amount ?? out.due ?? out.total ?? 0) || 0;
+    out.dueDate = out.dueDate || out.date || out.due_date || out.due_at || '';
+    out.bank = out.bank || out.bankName || out.bank_name || '';
+    out.purpose = out.purpose || out.desc || out.description || '';
+    out.unitId = out.unitId || out.unit || out.unit_id || out.unitID || '';
+    out.unitLabel = out.unitLabel || out.unitName || out.unit_name || '';
+    out.imageUrl = out.imageUrl || out.image || out.imgUrl || null;
+
+    out.status = normalizeChequeStatus(out.status);
+    if(!out.status){
+      // Default based on due date (if any)
+      try{
+        out.status = (out.dueDate && new Date(out.dueDate) < new Date()) ? 'راجع' : 'بانتظار الصرف';
+      }catch(e){
+        out.status = 'بانتظار الصرف';
+      }
+    }
+    return out;
+  }
+
+  function chequeStatusBucket(status){
+    const s = normalizeChequeStatus(status);
+    if(s === 'راجع') return 'returned';
+    if(s === 'بانتظار الصرف') return 'pending';
+    if(s === 'مصروف') return 'cashed';
+    return 'other';
+  }
+
+
+  
+
+  // ======= Lease duration helpers (for reports: contract full value) =======
+  function toUTCDate(dateStr){
+    if(!dateStr) return null;
+    const parts = String(dateStr).split('-').map(Number);
+    if(parts.length !== 3) return null;
+    const [y,m,d] = parts;
+    if(!y || !m || !d) return null;
+    // noon UTC to avoid timezone edge cases
+    return new Date(Date.UTC(y, m-1, d, 12, 0, 0));
+  }
+
+  // Returns contract duration in years (can be fractional). End date is treated as inclusive.
+  function contractYears(startStr, endStr){
+    const start = toUTCDate(startStr);
+    const end = toUTCDate(endStr);
+    if(!start || !end) return 1;
+
+    const endPlus1 = new Date(end.getTime());
+    endPlus1.setUTCDate(endPlus1.getUTCDate() + 1);
+
+    // If aligned on same day-of-month => exact month count (handles leap years cleanly)
+    if(endPlus1.getUTCDate() === start.getUTCDate()){
+      const months = (endPlus1.getUTCFullYear() - start.getUTCFullYear()) * 12
+                   + (endPlus1.getUTCMonth() - start.getUTCMonth());
+      const years = months / 12;
+      return years > 0 ? years : 1;
+    }
+
+    const msPerDay = 24 * 60 * 60 * 1000;
+    const days = Math.round((endPlus1 - start) / msPerDay);
+    const years = days / 365.25;
+    return years > 0 ? years : 1;
+  }
+
+  function calcContractValueFromAnnual(annualRent, startStr, endStr){
+    const annual = Number(annualRent) || 0;
+    return annual * contractYears(startStr, endStr);
+  }
+
+
+  // ================= RENT BASIS (annual vs total) =================
+  function getRentBasis(){
+    return localStorage.getItem('re_rent_basis') || 'total'; // 'total' | 'annual'
+  }
+
+  function calcUnitContractValue(u){
+    const rent = (u && u.rent) ? Number(u.rent) : 0;
+    if(!rent) return 0;
+    const basis = getRentBasis();
+    if(basis === 'annual'){
+      return calcContractValueFromAnnual(rent, u.start, u.end);
+    }
+    return rent; // total contract value
+  }
+
+  function updateRentLabels(){
+    const basis = getRentBasis();
+    const lbl = document.getElementById('total-rent-label');
+    if(lbl){
+      lbl.textContent = (basis === 'annual')
+        ? 'إجمالي قيمة العقود (الإيجار السنوي × مدة العقد)'
+        : 'إجمالي قيمة العقود';
+    }
+  }
+
+  function loadRentBasisSetting(){
+    const sel = document.getElementById('rent-basis-select');
+    if(sel) sel.value = getRentBasis();
+    updateRentLabels();
+  }
+
+  function saveRentBasisSetting(){
+    const sel = document.getElementById('rent-basis-select');
+    if(!sel) return;
+    localStorage.setItem('re_rent_basis', sel.value);
+    updateRentLabels();
+    updateDashboard();
+    // تحديث التقارير لو كانت مفتوحة أو حتى لو كانت مخفية
+    try{ renderReports(); } catch(e){}
+  }
+
+
+  // ===== Lease History (Keep old contracts in reports) =====
+  function ensureLeaseHistory(u){
+    if(!u) return;
+    if(!Array.isArray(u.leaseHistory)) u.leaseHistory = [];
+  }
+
+  function unitHasLeaseData(u){
+    if(!u) return false;
+    const hasMoney = Number(u.rent || 0) > 0;
+    const hasText = !!(u.tenant || u.contractNo || u.start || u.end);
+    return hasMoney || hasText;
+  }
+
+  function archiveUnitLease(u, reason, statusOverride){
+    if(!u) return false;
+    if(!unitHasLeaseData(u)) return false;
+    ensureLeaseHistory(u);
+
+    const entry = {
+      tenant: u.tenant || '',
+      rent: Number(u.rent || 0),
+      contractNo: u.contractNo || '',
+      start: u.start || '',
+      end: u.end || '',
+      status: normalizeLeaseStatus(statusOverride || (u.status || '')),
+      prevStatus: u.status || '',
+      reason: reason || '',
+      archivedAt: new Date().toISOString()
+    };
+    u.leaseHistory.push(entry);
+    return true;
+  }
+
+  function getAllLeaseRecords(){
+    const records = [];
+    (properties || []).forEach(p=>{
+      (p.units || []).forEach(u=>{
+        // current
+        if(u.status !== 'شاغرة' && unitHasLeaseData(u)){
+          records.push({
+            propId: p.id,
+            propName: p.name,
+            unitId: u.id,
+            unitName: u.name,
+            tenant: u.tenant || '',
+            rent: Number(u.rent || 0),
+            contractNo: u.contractNo || '',
+            start: u.start || '',
+            end: u.end || '',
+            status: normalizeLeaseStatus(u.status || ''),
+            reason: 'حالي',
+            archivedAt: ''
+          });
+        }
+        // history
+        ensureLeaseHistory(u);
+        u.leaseHistory.forEach(h=>{
+          records.push({
+            propId: p.id,
+            propName: p.name,
+            unitId: u.id,
+            unitName: u.name,
+            tenant: h.tenant || '',
+            rent: Number(h.rent || 0),
+            contractNo: h.contractNo || '',
+            start: h.start || '',
+            end: h.end || '',
+            status: normalizeLeaseStatus(h.status || ''),
+            reason: h.reason || '',
+            archivedAt: h.archivedAt || ''
+          });
+        });
+      });
+    });
+    // sort: newest first (by archivedAt, else end, else start)
+    records.sort((a,b)=>{
+      const da = a.archivedAt ? new Date(a.archivedAt) : (a.end ? new Date(a.end) : (a.start ? new Date(a.start) : new Date(0)));
+      const db = b.archivedAt ? new Date(b.archivedAt) : (b.end ? new Date(b.end) : (b.start ? new Date(b.start) : new Date(0)));
+      return db - da;
+    });
+    return records;
+  }
+
+  function normalizeLeaseStatus(status){
+    const s = (status || '').trim();
+    if(s === 'مستبدلة' || s === 'استبدال') return 'تجديد عقد';
+    return s;
+  }
+
+  function leaseStatusLabel(status){
+    return normalizeLeaseStatus(status);
+  }
+
+  function leaseStatusBadge(status){
+    status = normalizeLeaseStatus(status);
+    if(status === 'مؤجرة') return 'badge badge-green';
+    if(status === 'منتهية') return 'badge badge-red';
+    if(status === 'ملغاة') return 'badge badge-red';
+    if(status === 'تجديد عقد') return 'badge badge-amber';
+    if(status === 'مستبدلة') return 'badge badge-amber';
+    if(status === 'مخلى') return 'badge badge-red';
+    return 'badge';
+  }
+
+  function renderLeaseArchiveReport(){
+    const tbody = document.getElementById('report-leases-body');
+    if(!tbody) return;
+
+    const statusSel = document.getElementById('report-lease-status-filter');
+    const qInput = document.getElementById('report-lease-search');
+    const empty = document.getElementById('report-leases-empty');
+    const counts = document.getElementById('report-leases-counts');
+
+    // bind once
+    if(statusSel && !statusSel.dataset.bound){
+      statusSel.dataset.bound = '1';
+      statusSel.addEventListener('change', renderLeaseArchiveReport);
+    }
+    if(qInput && !qInput.dataset.bound){
+      qInput.dataset.bound = '1';
+      qInput.addEventListener('input', renderLeaseArchiveReport);
+    }
+
+    const statusFilter = statusSel ? statusSel.value : 'all';
+    const q = (qInput ? qInput.value : '').trim().toLowerCase();
+
+    let recs = getAllLeaseRecords();
+
+    // counts
+    const c = { all: recs.length, active:0, ended:0, cancelled:0, renewed:0, vacated:0 };
+    recs.forEach(r=>{
+      if(normalizeLeaseStatus(r.status)==='مؤجرة') c.active++;
+      else if(normalizeLeaseStatus(r.status)==='منتهية') c.ended++;
+      else if(normalizeLeaseStatus(r.status)==='ملغاة') c.cancelled++;
+      else if(normalizeLeaseStatus(r.status)==='تجديد عقد') c.renewed++;
+      else if(normalizeLeaseStatus(r.status)==='مخلى') c.vacated++;
+    });
+    if(counts){
+      counts.textContent = `الإجمالي: ${c.all} • مؤجرة: ${c.active} • منتهية: ${c.ended} • ملغاة: ${c.cancelled} • تجديد عقد: ${c.renewed} • مخلى: ${c.vacated}`;
+    }
+
+    if(statusFilter !== 'all'){
+      recs = recs.filter(r => normalizeLeaseStatus(r.status) === statusFilter);
+    }
+
+    if(q){
+      recs = recs.filter(r=>{
+        const hay = `${r.propName} ${r.unitName} ${r.tenant} ${r.contractNo}`.toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    tbody.innerHTML = '';
+    if(empty) empty.classList.add('hidden');
+
+    if(recs.length === 0){
+      if(empty){
+        empty.textContent = 'لا توجد عقود مطابقة للبحث/الفلتر.';
+        empty.classList.remove('hidden');
+      }
+      return;
+    }
+
+    recs.forEach(r=>{
+      const tr = document.createElement('tr');
+      const archivedDate = r.archivedAt ? (new Date(r.archivedAt).toLocaleDateString('ar-AE')) : '-';
+      tr.innerHTML = `
+        <td class="px-3 py-3">
+          <div class="font-bold text-gray-800 dark:text-white">${r.unitName || '-'}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400">${r.propName || '-'}</div>
+        </td>
+        <td class="px-3 py-3 text-sm">${r.tenant || '-'}</td>
+        <td class="px-3 py-3 font-mono text-emerald-700 dark:text-emerald-400">${formatAED(r.rent || 0)}</td>
+        <td class="px-3 py-3 text-xs font-mono bg-gray-100 dark:bg-gray-800 rounded truncate-text" title="${r.contractNo || ''}">${r.contractNo || '-'}</td>
+        <td class="px-3 py-3 text-xs">${r.start || '-'}</td>
+        <td class="px-3 py-3 text-xs">${r.end || '-'}</td>
+        <td class="px-3 py-3"><span class="${leaseStatusBadge(r.status)}">${leaseStatusLabel(r.status) || '-'}</span></td>
+        <td class="px-3 py-3 text-xs text-gray-700 dark:text-gray-300">${r.reason || '-'}</td>
+        <td class="px-3 py-3 text-xs">${archivedDate}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+
+function logAction(msg){
     contractLogs.unshift({m:msg, t:new Date().toISOString()});
     if(contractLogs.length>50) contractLogs.pop();
     localStorage.setItem('logs', JSON.stringify(contractLogs));
@@ -1060,10 +1881,34 @@
       try {
         const o = JSON.parse(d);
         if(o.properties) properties = o.properties;
-        cheques = o.cheques || [];
+        
+        // Migration: ensure each unit has leaseHistory array (for keeping old contracts in reports)
+        if(Array.isArray(properties)){
+          properties.forEach(p=>{
+            if(!p.units) p.units = [];
+            p.units.forEach(u=>{
+              if(!Array.isArray(u.leaseHistory)) u.leaseHistory = [];
+            });
+          });
+        }
+cheques = o.cheques || [];
         expenses = o.expenses || [];
         payments = o.payments || [];
-        tenantsContacts = o.tenantsContacts || {};
+        // migrate tenantsContacts to normalized keys for reliable saving/loading
+        const rawContacts = o.tenantsContacts || {};
+        tenantsContacts = {};
+        Object.keys(rawContacts).forEach(k=>{
+          const v = rawContacts[k] || {};
+          const nk = tenantKey(v.name || k);
+          if(!nk) return;
+          if(!tenantsContacts[nk]){
+            tenantsContacts[nk] = { name: v.name || k, phone: v.phone || '', email: v.email || '' };
+          } else {
+            // merge (keep existing if already set)
+            tenantsContacts[nk].phone = tenantsContacts[nk].phone || (v.phone||'');
+            tenantsContacts[nk].email = tenantsContacts[nk].email || (v.email||'');
+          }
+        });
         salaries = o.salaries || [];
 
         // Migration: ensure expenses have ID & type
@@ -1076,14 +1921,29 @@
           voucherNo: e.voucherNo || null
         }));
 
-        // Migration: ensure cheques have ID, status, imageUrl
-        cheques = cheques.map(c => ({
-          ...c,
-          id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random()*1000),
-          status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'),
-          imageUrl: c.imageUrl || null
-        }));
-      } catch(e){
+        // Migration: normalize cheques (compatibility across versions)
+        cheques = (o.cheques || []).map(normalizeChequeRecord);
+        // Auto-infer unit link for cheques when the tenant has exactly one leased unit
+        cheques = cheques.map(c=>{
+          const nc = normalizeChequeRecord(c);
+          if(!nc.unitId){
+            const inferred = inferSingleLeasedUnitIdForTenant(nc.tenant);
+            if(inferred) nc.unitId = inferred;
+          }
+          if(nc.unitId && !nc.unitLabel){
+            nc.unitLabel = getUnitDisplayById(nc.unitId);
+          }
+          return nc;
+        });
+
+        // Migrate old cheque-linked payments to the proper unit label/unitId (if possible)
+        (payments||[]).forEach(p=>{
+          if(p && p.chequeId){
+            migrateChequePaymentsToUnit(p.chequeId);
+          }
+        });
+
+} catch(e){
         console.error("Error loading data", e);
       }
     } else {
@@ -1168,9 +2028,713 @@
     else if(id==='salaries') renderSalaries();
     else if(id==='receipts-history') renderReceiptsHistory();
     else if(id==='reports') renderReports();
+    else if(id==='notices') renderNotices();
   }
 
-  // ================= DASHBOARD =================
+
+  // ================= NOTICES / LETTERS =================
+
+  const NOTICE_LETTERHEAD = {
+    topLines: [
+      'بناية ورثة جمعة عبيد أبو الشوارب',
+      'العين، الصناعية، بطحاء الحائر',
+      '24-04-014-18'
+    ],
+    footerLines: [
+      'Mohammed Abdulrahim Ahli',
+      'UAE, Al Ain',
+      'Po Box: 1148',
+      '+971503343600',
+      'Mohd_Ahli@live.com'
+    ]
+  };
+
+  function getRentBasisSetting(){ return localStorage.getItem('re_rent_basis') || 'total'; }
+
+  function getNextNoticeNo(){
+    let n = parseInt(localStorage.getItem('re_notice_counter') || '1', 10);
+    if(!n || n < 1) n = 1;
+    const code = 'NT-' + String(n).padStart(5,'0');
+    localStorage.setItem('re_notice_counter', String(n + 1));
+    return code;
+  }
+
+  function formatEnglishDate(dateStr){
+    const d = dateStr ? new Date(dateStr) : new Date();
+    if(isNaN(d)) return '';
+    return d.toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+  }
+
+  function formatArabicDate(dateStr){
+    const d = dateStr ? new Date(dateStr) : new Date();
+    if(isNaN(d)) return '';
+    return d.toLocaleDateString('ar-AE', { year:'numeric', month:'long', day:'numeric' });
+  }
+
+  function findUnitByComposite(composite){
+    if(!composite) return { prop:null, unit:null };
+    const [pid, uid] = String(composite).split('::');
+    const prop = properties.find(p => String(p.id) === String(pid)) || null;
+    const unit = prop?.units?.find(u => String(u.id) === String(uid)) || null;
+    return { prop, unit };
+  }
+
+  function textToHtml(s){
+    const raw = String(s||'').replace(/\r\n/g,'\n').trim();
+    if(!raw) return '';
+    const blocks = raw.split(/\n\s*\n+/g);
+    const out = [];
+    for(const b of blocks){
+      const lines = b.split('\n').map(x=>x.trim()).filter(Boolean);
+      if(!lines.length) continue;
+      const isList = lines.every(l => /^[-•*]\s+/.test(l));
+      if(isList){
+        const items = lines.map(l => escHtml(l.replace(/^[-•*]\s+/, '').trim()));
+        out.push('<ul class="letter-list">' + items.map(i=>`<li>${i}</li>`).join('') + '</ul>');
+      }else{
+        const txt = escHtml(lines.join(' '));
+        out.push(`<p class="letter-p">${txt}</p>`);
+      }
+    }
+    return out.join('');
+  }
+
+  function updateNoticeExtraOptions(){
+    const tpl = document.getElementById('notice-template-select')?.value || 'blank';
+    const box = document.getElementById('notice-extra-options');
+    if(!box) return;
+
+    const isIncrease = tpl === 'increase5';
+    const isArrears = (tpl === 'arrearsRenew' || tpl === 'arrearsCheque');
+
+    box.classList.toggle('hidden', !(isIncrease || isArrears));
+
+    const incBox = document.getElementById('notice-extra-increase5');
+    if(incBox) incBox.classList.toggle('hidden', !isIncrease);
+
+    const arrBox = document.getElementById('notice-extra-arrears');
+    if(arrBox) arrBox.classList.toggle('hidden', !isArrears);
+  }
+
+
+  // ===== Notices: Auto arrears calculation =====
+  function normalizeMatchStr(v){
+    return String(v||'')
+      .toLowerCase()
+      .replace(/\s+/g,'')
+      .replace(/[–—\-_/\\]+/g,'');
+  }
+
+  function noticeUnitMatchTokens(ctx, unit, prop){
+    const strict = [];
+    const loose = [];
+    const add = (arr, x)=>{ if(x!==undefined && x!==null && String(x).trim()) arr.push(String(x).trim()); };
+
+    // Strict identifiers (reduce false matches)
+    add(strict, unit?.id);
+    add(strict, unit?.code);
+    add(strict, unit?.unitCode);
+    add(strict, unit?.name);
+    add(strict, ctx?.contractNo);
+
+    // Loose identifiers (fallback if no matches found)
+    strict.forEach(x=> add(loose, x));
+    add(loose, prop?.id);
+    add(loose, prop?.name);
+
+    const uniq = (arr)=> Array.from(new Set(arr));
+    return { strict: uniq(strict), loose: uniq(loose) };
+  }
+
+  function paymentMatchesNoticeUnit(p, tokens){
+    const hay = normalizeMatchStr([p.unit, p.contract, p.desc, p.type, p.voucherNo].filter(Boolean).join(' | '));
+    if(!hay) return false;
+    return tokens.some(t=>{
+      const nt = normalizeMatchStr(t);
+      return nt && hay.includes(nt);
+    });
+  }
+
+  function chequeMatchesUnitTokens(c, tokens){
+    const hay = normalizeMatchStr([c.tenant, c.purpose, c.chequeNo, c.bank].filter(Boolean).join(' | '));
+    if(!hay) return false;
+    return tokens.some(t=>{
+      const nt = normalizeMatchStr(t);
+      return nt && hay.includes(nt);
+    });
+  }
+
+  function computeNoticeUnitPaid(ctx, unit, prop){
+    const tokenSets = noticeUnitMatchTokens(ctx, unit, prop);
+    const tkey = tenantKey(ctx?.tenantName);
+
+    const matchTokens = (tokens)=> payments.filter(p=>{
+      if(tenantKey(p.tenant) !== tkey) return false;
+
+      // Direct unitId match (best signal when available)
+      if(p.unitId && unit && unit.id && p.unitId === unit.id) return true;
+
+      // Direct match (unit/contract/description)
+      if(paymentMatchesNoticeUnit(p, tokens)) return true;
+
+      // If this payment came from a cashed cheque, try to match on cheque purpose too
+      if(p.chequeId){
+        const chRaw = cheques.find(c=>c.id === p.chequeId);
+        const ch = chRaw ? normalizeChequeRecord(chRaw) : null;
+        if(ch){
+          const hay2 = normalizeMatchStr([ch.purpose, ch.chequeNo, ch.bank].filter(Boolean).join(' | '));
+          return tokens.some(t=>{
+            const nt = normalizeMatchStr(t);
+            return nt && hay2.includes(nt);
+          });
+        }
+      }
+      return false;
+    });
+
+    // Prefer strict matching; if nothing found, fallback to loose matching
+    let matchedPayments = matchTokens(tokenSets.strict);
+    if(matchedPayments.length === 0){
+      matchedPayments = matchTokens(tokenSets.loose);
+    }
+
+    let paid = matchedPayments.reduce((s,p)=> s + Number(p.amount||0), 0);
+
+    // ---- Cheques suggestions (returned / pending) ----
+    // We primarily filter by the same tenant; if we can match by unit tokens (purpose/cheque text), we prefer that.
+    const tenantChequesAll = cheques
+      .map(normalizeChequeRecord)
+      .filter(c => tenantKey(c.tenant) === tkey);
+
+    const unitId = unit && unit.id ? unit.id : '';
+    const linked = unitId ? tenantChequesAll.filter(c=> (c.unitId||'') === unitId) : [];
+    const tenantCheques = linked.length ? linked : tenantChequesAll;
+
+    // ---- Include cashed cheques as paid when no payment record exists (legacy/imported data) ----
+    // Some older data may have cheques marked as "مصروف" without a corresponding payment entry.
+    // To keep notices accurate, we add those cheque values to paid (while avoiding double counting).
+    const pickCashed = (tokens)=>{
+      const list = tenantCheques.filter(c => chequeStatusBucket(c.status) === 'cashed');
+      if(list.length === 0) return [];
+      const matched = list.filter(c => {
+        // Direct unitId match is best when available
+        if(unitId && (c.unitId||'') && (c.unitId||'') === unitId) return true;
+        return chequeMatchesUnitTokens(c, tokens);
+      });
+      return matched;
+    };
+
+    let cashedCheques = pickCashed(tokenSets.strict);
+    if(cashedCheques.length === 0) cashedCheques = pickCashed(tokenSets.loose);
+
+    const cashedMissingPayment = cashedCheques.filter(c => !(payments||[]).some(p => p.chequeId === c.id));
+    const cashedExtraPaid = cashedMissingPayment.reduce((s,c)=> s + Number(c.value||0), 0);
+    if(cashedExtraPaid) paid += cashedExtraPaid;
+
+
+    const pickCheques = (bucket, tokens)=>{
+      const list = tenantCheques.filter(c => chequeStatusBucket(c.status) === bucket);
+      if(list.length === 0) return [];
+
+      const matched = list.filter(c => {
+        // ✅ إذا كان الشيك مربوطًا بنفس الوحدة المختارة، اعتبره مطابق مباشرة
+        if(unitId && String(c.unitId || '') === String(unitId)) return true;
+        // ✅ احتياطياً: مطابقة بالنص إذا لم يكن هناك ربط للوحدة
+        return chequeMatchesUnitTokens(c, tokens);
+      });
+
+      return matched;
+    };
+
+    // Prefer strict tokens; fallback to loose
+    let returnedCheques = pickCheques('returned', tokenSets.strict);
+    let pendingCheques  = pickCheques('pending',  tokenSets.strict);
+    if(returnedCheques.length === 0 && pendingCheques.length === 0){
+      returnedCheques = pickCheques('returned', tokenSets.loose);
+      pendingCheques  = pickCheques('pending',  tokenSets.loose);
+    }
+
+    returnedCheques = returnedCheques.slice().sort((a,b)=> new Date(b.dueDate||'1970-01-01') - new Date(a.dueDate||'1970-01-01'));
+    pendingCheques  = pendingCheques.slice().sort((a,b)=> new Date(b.dueDate||'1970-01-01') - new Date(a.dueDate||'1970-01-01'));
+
+    const suggestedDetails = [];
+    returnedCheques.slice(0,5).forEach(c=>{
+      const extra = c.purpose ? ` — ${c.purpose}` : '';
+      suggestedDetails.push(`شيك راجع رقم ${c.chequeNo||'—'} بقيمة ${formatAED(c.value||0)} مستحق ${c.dueDate||''}${extra}`.trim());
+    });
+    pendingCheques.slice(0,5).forEach(c=>{
+      const extra = c.purpose ? ` — ${c.purpose}` : '';
+      suggestedDetails.push(`شيك بانتظار الصرف رقم ${c.chequeNo||'—'} بقيمة ${formatAED(c.value||0)} مستحق ${c.dueDate||''}${extra}`.trim());
+    });
+
+    return { paid, matchedPayments, returnedCheques, pendingCheques, cashedCheques, cashedMissingPayment, cashedExtraPaid, suggestedDetailsText: suggestedDetails.join('؛ ') };
+  }
+
+  function autofillNoticeArrears(force=false){
+    const tplSel = document.getElementById('notice-template-select');
+    const tenantSel = document.getElementById('notice-tenant-select');
+    const unitSel = document.getElementById('notice-unit-select');
+    if(!tplSel || !tenantSel || !unitSel) return;
+
+    const template = tplSel.value;
+    if(!(template === 'arrearsRenew' || template === 'arrearsCheque')) return;
+
+    const autoEl = document.getElementById('notice-arrears-autofill');
+    const autoOn = autoEl ? autoEl.checked : true;
+    if(!autoOn && !force) return;
+
+    const tenantKeyVal = tenantSel.value || '';
+    const unitVal = unitSel.value || '';
+    if(!tenantKeyVal || !unitVal) return;
+
+    const [propId, unitId] = unitVal.split('::');
+    const prop = properties.find(p=> String(p.id)===String(propId));
+    const unit = prop?.units?.find(u=> String(u.id)===String(unitId));
+    if(!prop || !unit) return;
+
+    const ctx = {
+      tenantName: unit?.tenant || '',
+      propName: prop?.name || '',
+      unitName: unit?.name || '',
+      contractNo: unit?.contractNo || '',
+      start: unit?.start || '',
+      end: unit?.end || '',
+      rent: unit?.rent || 0
+    };
+
+    const basis = getRentBasisSetting(); // 'total' | 'annual'
+    const oldVal = Number(ctx.rent || 0);
+    const contractTotal = (basis === 'annual') ? calcContractValueFromAnnual(oldVal, ctx.start, ctx.end) : oldVal;
+
+    const info = computeNoticeUnitPaid(ctx, unit, prop);
+    const balance = Math.max(0, Number(contractTotal||0) - Number(info.paid||0));
+
+    const contractValueInput = document.getElementById('notice-contract-value');
+    const arrearsAmountInput = document.getElementById('notice-arrears-amount');
+    const arrearsDetailsInput = document.getElementById('notice-arrears-details');
+
+    if(contractValueInput && (force || !contractValueInput.value || Number(contractValueInput.value)===0)){
+      if(contractTotal) contractValueInput.value = Math.round(Number(contractTotal));
+    }
+    if(arrearsAmountInput && (force || !arrearsAmountInput.value || Number(arrearsAmountInput.value)===0)){
+      arrearsAmountInput.value = Math.round(Number(balance));
+    }
+
+    // For arrears templates, propose details automatically (returned/pending cheques)
+// Note: we keep user edits. If the field was auto-generated before, we keep updating it automatically.
+// If user types manually, it stops auto-updating until they click "تحديث تلقائي".
+    if(arrearsDetailsInput){
+      const wasAuto = arrearsDetailsInput.dataset.autogen === '1';
+      const shouldUpdateDetails = force || !arrearsDetailsInput.value.trim() || wasAuto;
+      if(shouldUpdateDetails){
+        arrearsDetailsInput.value = info.suggestedDetailsText || '';
+        arrearsDetailsInput.dataset.autogen = '1';
+      }
+    }
+
+    const status = document.getElementById('notice-preview-status');
+    if(status){
+      status.textContent = `تم تحديث المتأخرات تلقائياً — المدفوعات: ${formatAED(info.paid)} ، المتبقي: ${formatAED(balance)} ، شيكات راجعة: ${info.returnedCheques.length} ، بانتظار الصرف: ${info.pendingCheques.length}`;
+    }
+  }
+
+
+
+  let noticePreviewReady = false;
+
+  function escHtml(v){
+    return String(v ?? '')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  function renderNotices(){
+    const tenantSel = document.getElementById('notice-tenant-select');
+    if(!tenantSel) return;
+
+    // defaults
+    const dateEl = document.getElementById('notice-date');
+    if(dateEl && !dateEl.value){
+      const d = new Date();
+      dateEl.value = new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+    }
+
+    updateNoticeExtraOptions();
+
+    const current = tenantSel.value || '';
+    const tenants = getTenantsData()
+      .slice()
+      .sort((a,b)=> String(a.name||'').localeCompare(String(b.name||'')));
+
+    tenantSel.innerHTML = '<option value="">اختر مستأجر...</option>'
+      + tenants.map(t => `<option value="${escHtml(t.key)}">${escHtml(t.name)}</option>`).join('');
+
+    if(current && tenants.some(t => t.key === current)) tenantSel.value = current;
+
+    // Units depend on tenant
+    onNoticeTenantChange(false);
+    resetNoticePreview();
+  }
+
+function onNoticeTenantChange(resetPreview=true){
+    const tenantSel = document.getElementById('notice-tenant-select');
+    const unitSel = document.getElementById('notice-unit-select');
+    if(!tenantSel || !unitSel) return;
+
+    const selectedKey = tenantSel.value || '';
+    if(!selectedKey){
+      unitSel.innerHTML = '<option value="">اختر وحدة...</option>';
+      unitSel.disabled = true;
+      if(resetPreview) resetNoticePreview();
+      return;
+    }
+
+    const units = [];
+    properties.forEach(p => (p.units||[]).forEach(u => {
+      if(u.status === 'مؤجرة' && u.tenant && tenantKey(u.tenant) === selectedKey){
+        units.push({
+          value: `${p.id}::${u.id}`,
+          label: `${p.name} - ${u.name}`
+        });
+      }
+    }));
+
+    unitSel.disabled = false;
+    unitSel.innerHTML = '<option value="">اختر وحدة...</option>'
+      + units.map(x => `<option value="${escHtml(x.value)}">${escHtml(x.label)}</option>`).join('');
+
+    if(resetPreview) resetNoticePreview();
+  }
+
+  function resetNoticePreview(){
+    noticePreviewReady = false;
+    updateNoticeExtraOptions();
+    autofillNoticeArrears(false);
+    const preview = document.getElementById('notice-preview');
+    const status = document.getElementById('notice-preview-status');
+    const printBtn = document.getElementById('notice-print-btn');
+    if(printBtn) printBtn.disabled = true;
+
+    if(status) status.textContent = '';
+    if(preview){
+      preview.innerHTML = `
+        <div class="text-center text-gray-500 dark:text-gray-400">
+          اختر المستأجر ونوع الخطاب ثم اضغط <b>إنشاء معاينة</b>.
+        </div>
+      `;
+    }
+  }
+
+  
+  function buildNoticePreview(){
+    updateNoticeExtraOptions();
+    autofillNoticeArrears(false);
+
+    const tenantSel = document.getElementById('notice-tenant-select');
+    const unitSel = document.getElementById('notice-unit-select');
+    const tplSel = document.getElementById('notice-template-select');
+    const subjectInput = document.getElementById('notice-subject');
+    const dateEl = document.getElementById('notice-date');
+    const refEl = document.getElementById('notice-ref');
+    const bilingualEl = document.getElementById('notice-bilingual');
+    const noReplyEl = document.getElementById('notice-no-reply-accept');
+
+    const preview = document.getElementById('notice-preview');
+    const status = document.getElementById('notice-preview-status');
+    const printBtn = document.getElementById('notice-print-btn');
+
+    const tenantKeyVal = tenantSel?.value || '';
+    if(!tenantKeyVal){
+      alert('الرجاء اختيار المستأجر أولاً.');
+      return;
+    }
+
+    const template = tplSel?.value || 'blank';
+    const bilingual = !!(bilingualEl && bilingualEl.checked);
+
+    // Require unit for eviction / increase
+    const unitVal = unitSel?.value || '';
+    if((template === 'eviction' || template === 'increase5') && !unitVal){
+      alert('الرجاء اختيار الوحدة لهذا الخطاب.');
+      return;
+    }
+
+    const tenant = getTenantsData().find(t => t.key === tenantKeyVal);
+    const { prop, unit } = findUnitByComposite(unitVal);
+
+    // default subject
+    if(subjectInput && !(subjectInput.value||'').trim()){
+      if(template === 'eviction') subjectInput.value = 'إخطار بعدم تجديد عقد الإيجار وإخلاء العين المؤجرة';
+      else if(template === 'increase5') subjectInput.value = 'إشعار بزيادة القيمة الإيجارية بنسبة 5%';
+      else subjectInput.value = '';
+    }
+
+    const subject = (subjectInput?.value || '').trim();
+    const dateStr = (dateEl?.value || '');
+    const dateEn = formatEnglishDate(dateStr);
+    const dateAr = formatArabicDate(dateStr);
+
+    if(refEl && !(refEl.value||'').trim()){
+      refEl.value = getNextNoticeNo();
+    }
+    const refNo = (refEl?.value || '').trim();
+
+    // Keep edited text if user re-builds
+    const prevAr = document.getElementById('notice-body-ar')?.innerText || '';
+    const prevEn = document.getElementById('notice-body-en')?.innerText || '';
+
+    const ctx = {
+      tenantName: tenant?.name || '',
+      propName: prop?.name || '',
+      unitName: unit?.name || '',
+      contractNo: unit?.contractNo || '',
+      start: unit?.start || '',
+      end: unit?.end || '',
+      rent: unit?.rent || 0
+    };
+
+    // Compute 5% increase numbers
+    const basis = getRentBasisSetting(); // 'total' | 'annual'
+    const years = (ctx.start && ctx.end) ? contractYears(ctx.start, ctx.end) : 1;
+    const oldVal = Number(ctx.rent || 0);
+    const newVal = Math.round(oldVal * 1.05);
+
+    const oldAnnual = basis === 'annual' ? oldVal : (years ? (oldVal / years) : oldVal);
+    const newAnnual = Math.round(oldAnnual * 1.05);
+
+    // ---- Arrears defaults (auto-fill inputs) ----
+    const unitCode = (unit && (unit.id || unit.code || unit.unitCode)) ? (unit.id || unit.code || unit.unitCode) : (unit?.name || '');
+    const contractTotal = (basis === 'annual') ? calcContractValueFromAnnual(oldVal, ctx.start, ctx.end) : oldVal;
+
+    const contractValueInput = document.getElementById('notice-contract-value');
+    const arrearsAmountInput = document.getElementById('notice-arrears-amount');
+    const arrearsDetailsInput = document.getElementById('notice-arrears-details');
+
+    // compute paid/balance for this unit (from recorded payments/cheques)
+    const paidInfo = computeNoticeUnitPaid(ctx, unit, prop);
+    const unitPaid = Number(paidInfo.paid||0);
+    const unitBalance = Math.max(0, (Number(contractTotal||0) - Number(unitPaid||0)));
+
+    if(contractValueInput && (!contractValueInput.value || Number(contractValueInput.value)===0)){
+      if(contractTotal) contractValueInput.value = Math.round(Number(contractTotal));
+    }
+    if(arrearsAmountInput && (!arrearsAmountInput.value || Number(arrearsAmountInput.value)===0)){
+      if(unitBalance) arrearsAmountInput.value = Math.round(Number(unitBalance));
+    }
+
+    // Templates
+    let titleAr = 'خطاب رسمي';
+    let titleEn = 'Official Letter';
+    let bodyAr = '';
+    let bodyEn = '';
+
+    if(template === 'blank'){
+      titleAr = 'خطاب رسمي';
+      titleEn = 'Official Letter';
+      bodyAr = prevAr.trim() || (
+`عزيزي المستأجر/السادة: ${ctx.tenantName || '______________'}\n\n` +
+`بالإشارة إلى عقد الإيجار رقم ${ctx.contractNo || '—'} الخاص بالعين المؤجرة (${ctx.propName} - ${ctx.unitName})، نود إشعاركم بأنه تقرر تعديل القيمة الإيجارية بنسبة 5% وفقًا لبنود عقد الإيجار.\n\n` +
+`القيمة الحالية: ${formatAED(oldAnnual)}\n` +
+`القيمة بعد الزيادة (5%): ${formatAED(newAnnual)}\n\n` +
+`تاريخ سريان الزيادة: عند التجديد / للفترة القادمة حسب الإجراءات المتبعة.\n\n` +
+`يرجى تزويدنا بموافقتكم أو ملاحظاتكم خلال 7 أيام من تاريخ هذا الإشعار، وفي حال عدم الرد خلال المدة المذكورة سيُعتبر ذلك قبولاً ضمنيًا بالزيادة.\n\n` +
+`وتفضلوا بقبول فائق الاحترام والتقدير،،`
+      );
+      bodyEn = prevEn.trim() || (
+`Dear Tenant,\n\n${ctx.tenantName || '______________'}\n\n` +
+`With reference to Lease Agreement No. ${ctx.contractNo || '—'} for the leased premises (${ctx.propName} - ${ctx.unitName}), please be informed that the rental value will be increased by 5% in accordance with the lease terms.\n\n` +
+`Current rental value: ${formatAED(oldAnnual)}\n` +
+`New rental value (5% increase): ${formatAED(newAnnual)}\n\n` +
+`Effective date: upon renewal / next rental period as per the applicable procedures.\n\n` +
+`Kindly provide your confirmation or remarks within 7 days from the date of this notice. Failure to respond within the said period shall be deemed as acceptance of the increase.\n\n` +
+`Regards ,,`
+      );
+} 
+else if(template === 'eviction'){
+      titleAr = 'إخطار رسمي بعدم تجديد عقد الإيجار وإخلاء العين المؤجرة';
+      titleEn = 'Eviction Notice and Non-Renewal of Lease Agreement';
+      bodyAr = prevAr.trim() || (
+`عزيزي المستأجر،\n\n${ctx.tenantName || '______________'}\n\n` +
+`بالإشارة إلى عقد الإيجار رقم ${ctx.contractNo || '—'} المبرم بينكم وبين الملاك بخصوص العين المؤجرة (${ctx.propName} - ${ctx.unitName})، والتي سينتهي عقدها بتاريخ ${ctx.end || '—'}، نود إنذاركم بما يلي:\n\n` +
+`قرر الملاك عدم تجديد عقد الإيجار بعد تاريخ انتهائه، ويُعد هذا الإخطار إنذارًا رسميًا ونهائيًا بوجوب الإخلاء.\n\n` +
+`وعليه، يُطلب منكم:\n\n` +
+`- إخلاء العين المؤجرة وتسليمها خالية من أي إشغال في موعد أقصاه تاريخ انتهاء العقد.\n` +
+`- تقديم براءة ذمة من طاقة للتوزيع (كهرباء/مياه) تفيد بعدم وجود أي التزامات مالية قبل التسليم.\n` +
+`- تسوية أي مستحقات متأخرة، وتسليم المفاتيح وكافة الملحقات عند التسليم.\n\n` +
+`ونؤكد أن هذا الإنذار يُعتبر ملزمًا، وفي حال عدم الالتزام بما ورد أعلاه، سيضطر الملاك إلى اتخاذ الإجراءات القانونية اللازمة وفقًا للقوانين والأنظمة المعمول بها في دولة الإمارات العربية المتحدة.\n\n` +
+`وتفضلوا بقبول فائق الاحترام والتقدير،،`
+      );
+      bodyEn = prevEn.trim() || (
+`Dear Tenant,\n\n${ctx.tenantName || '______________'}\n\n` +
+`Referring to Lease Agreement No. ${ctx.contractNo || '—'}, concluded between you and the landlords regarding the leased premises (${ctx.propName} - ${ctx.unitName}), which will expire on ${ctx.end || '—'}, we hereby notify you of the following:\n\n` +
+`The landlords have decided not to renew the lease agreement after its expiry date, and this notice shall be considered an official and final warning requiring eviction.\n\n` +
+`Therefore, you are required to:\n\n` +
+`- Vacate the leased premises and hand them over free of any occupation no later than the expiry date.\n` +
+`- Provide a clearance certificate from TAQA Distribution confirming that no financial obligations remain outstanding prior to handover.\n` +
+`- Settle any outstanding dues and hand over keys and all related attachments upon handover.\n\n` +
+`We emphasize that this notice is binding, and in the event of non-compliance, the landlords will be compelled to take legal action in accordance with the applicable laws and regulations of the United Arab Emirates.\n\n` +
+`Regards ,,`
+      );
+} else if(template === 'increase5'){
+      titleAr = 'إشعار رسمي بزيادة القيمة الإيجارية بنسبة 5%';
+      titleEn = 'Notice of 5% Rent Increase';
+
+      const noReplyClause = !!(noReplyEl && noReplyEl.checked);
+
+      const oldStr = basis === 'annual'
+        ? `القيمة الإيجارية السنوية الحالية: ${formatAED(oldVal)}`
+        : `قيمة العقد الحالية: ${formatAED(oldVal)}`;
+
+      const newStr = basis === 'annual'
+        ? `القيمة الإيجارية السنوية بعد الزيادة (5%): ${formatAED(newAnnual)}`
+        : `قيمة العقد بعد الزيادة (5%): ${formatAED(newVal)}`;
+
+      bodyAr = prevAr.trim() || (
+`عزيزي المستأجر/السادة: ${ctx.tenantName}\n\n` +
+`بالإشارة إلى عقد الإيجار رقم ${ctx.contractNo || '—'} الخاص بالعين المؤجرة (${ctx.propName} - ${ctx.unitName})، نود إشعاركم بما يلي:\n\n` +
+`${oldStr}\n${newStr}\n\n` +
+`وسيتم تطبيق الزيادة عند التجديد / الفترة القادمة حسب الإجراءات المتبعة.\n` +
+(noReplyClause ? `\nعدم الرد خلال (7) أيام من تاريخ هذا الإشعار سيُعتبر موافقة على الشروط الجديدة.\n` : ``) +
+`\nوتفضلوا بقبول فائق الاحترام والتقدير ،،`
+      );
+
+      bodyEn = prevEn.trim() || (
+`Dear Tenant,\n\n` +
+`Referring to Lease Agreement No. ${ctx.contractNo || '—'} for the leased premises (${ctx.propName} - ${ctx.unitName}), please be advised:\n\n` +
+(basis === 'annual'
+  ? `Current annual rent: ${formatAED(oldVal)}\nNew annual rent (+5%): ${formatAED(newAnnual)}\n\n`
+  : `Current contract value: ${formatAED(oldVal)}\nNew contract value (+5%): ${formatAED(newVal)}\n\n`
+) +
+`The increase will be applied upon renewal / the upcoming period as per applicable procedures.\n` +
+(noReplyClause ? `\nNo response within 7 days from this notice date shall be considered acceptance.\n` : ``) +
+`\nRegards ,,`
+      );
+    }
+else if(template === 'arrearsRenew'){
+      titleAr = 'إنذار دفع متأخرات إيجارية';
+      titleEn = 'Rental Arrears Notice';
+
+      const cv = Number(contractValueInput?.value || contractTotal || 0);
+      const arAmt = Number(arrearsAmountInput?.value || unitBalance || 0);
+      const details = String(arrearsDetailsInput?.value || '').trim();
+      const unitLabel = unitCode || ctx.unitName || '—';
+
+      bodyAr = prevAr.trim() || (
+`عزيزي المستأجر،\n\n${ctx.tenantName || '______________'}\n\n` +
+`بالإشارة إلى الموضوع المشار إليه أعلاه، يرجى التكرم بدفع المتأخرات الإيجارية على عقد الإيجار للوحدة ${unitLabel} والمؤجرة لكم، وتجديد العقد المنتهي بتاريخ ${ctx.end || '—'} خلال مدة أقصاها أسبوعين من تاريخه.\n\n` +
+`وعليه، يجب سداد الإيجارات المتأخرة على العقد الموثق في بلدية مدينة العين ورقمه (${ctx.contractNo || '—'}) وتجديد العقد بأسرع وقت ممكن حتى لا نضطر آسفين لاتخاذ الإجراءات القانونية ضدكم.\n\n` +
+`قيمة العقد: ${cv ? cv.toLocaleString('en-US') : '—'} درهم\n` +
+`المتبقي: ${arAmt ? arAmt.toLocaleString('en-US') : '—'} درهم\n` +
+(details ? `\nتفاصيل المتأخرات: ${details}\n` : ``) +
+`\nفي حال تعذركم عن السداد خلال المهلة الممنوحة لكم سيتم اتخاذ الإجراءات القانونية ضدكم مما يترتب عليكم سداد الإيجارات المتأخرة من تاريخ نهاية العقد المذكور أعلاه وحتى الإخلاء الفعلي، وتسليم براءة ذمة الماء والكهرباء وصيانة العين المؤجرة.\n\n` +
+`شاكرين لكم حسن تعاونكم معنا،،\nوتفضلوا بقبول فائق الاحترام والتقدير ،،`
+      );
+
+      bodyEn = prevEn.trim() || (
+`Dear Tenant,\n\n${ctx.tenantName || '______________'}\n\n` +
+`With reference to the above subject, kindly pay the rental arrears for the lease contract of Unit ${unitLabel} leased to you, and renew the lease contract expired on ${ctx.end || '—'} within a maximum period of two weeks.\n\n` +
+`Accordingly, you must pay the late rents on the contract documented in Al Ain Municipality No. (${ctx.contractNo || '—'}) and renew the contract as soon as possible so that we do not have to take legal action against you.\n\n` +
+`Rental Value: ${cv ? cv.toLocaleString('en-US') : '—'} AED\n` +
+`Remaining: ${arAmt ? arAmt.toLocaleString('en-US') : '—'} AED\n` +
+(details ? `\nArrears details: ${details}\n` : ``) +
+`\nIf you fail to pay within the period given to you, legal action will be taken against you. You will have to pay the late rents from the contract expiry date mentioned above until the actual eviction, provide the water and electricity clearance, and maintain the leased property.\n\n` +
+`Thank you for your cooperation with us,,\nRegards ,,`
+      );
+
+    } else if(template === 'arrearsCheque'){
+      titleAr = 'إنذار دفع متأخرات إيجارية';
+      titleEn = 'Legal Notice - Rental Arrears';
+
+      const cv = Number(contractValueInput?.value || contractTotal || 0);
+      const arAmt = Number(arrearsAmountInput?.value || unitBalance || 0);
+      const details = String(arrearsDetailsInput?.value || '').trim();
+      const unitLabel = unitCode || ctx.unitName || '—';
+
+      bodyAr = prevAr.trim() || (
+`عزيزي المستأجر،\n\n${ctx.tenantName || '______________'}\n\n` +
+`بالإشارة إلى الموضوع المشار إليه أعلاه، يعد هذا الإنذار لكم لدفع الإيجارات المتأخرة على عقد الإيجار الموثق الخاص بكم ورقمه: ${ctx.contractNo || '—'} للوحدة رقم: ${unitLabel} خلال مدة أقصاها أسبوعين من تاريخه.\n\n` +
+`وعليه، يجب المبادرة وسداد الإيجارات المتأخرة على العقد الموثق في بلدية مدينة العين بأسرع وقت ممكن حتى لا نضطر آسفين لاتخاذ الإجراءات القانونية ضدكم.\n\n` +
+`قيمة العقد: ${cv ? cv.toLocaleString('en-US') : '—'} درهم\n` +
+`المتأخرات: ${details ? details : (arAmt ? arAmt.toLocaleString('en-US') + ' درهم' : '—')}\n\n` +
+`في حال تعذركم عن السداد خلال المهلة الممنوحة لكم سيتم اتخاذ الإجراءات القانونية ضدكم مما يترتب عليكم سداد الإيجارات المتأخرة المذكورة أعلاه وحتى الإخلاء الفعلي، وتسليم براءة ذمة الماء والكهرباء وصيانة العين المؤجرة.\n\n` +
+`شاكرين لكم حسن تعاونكم معنا،،\nوتفضلوا بقبول فائق الاحترام والتقدير ،،`
+      );
+
+      bodyEn = prevEn.trim() || (
+`Dear Tenant,\n\n${ctx.tenantName || '______________'}\n\n` +
+`With reference to the above subject matter, this is the notice to pay overdue rents on your tenancy lease: ${ctx.contractNo || '—'}\n` +
+`Unit No.: ${unitLabel}\nwithin a maximum period of two weeks.\n\n` +
+`Accordingly, you must pay the arrears on the contract documented in Al Ain Municipality as soon as possible so that we do not have to take legal action against you.\n\n` +
+`Contract Value: ${cv ? cv.toLocaleString('en-US') : '—'} AED\n` +
+`Arrears: ${details ? details : (arAmt ? arAmt.toLocaleString('en-US') + ' AED' : '—')}\n\n` +
+`If you fail to pay within the period given to you, legal action will be taken against you. You will have to pay the late rents mentioned above until the actual eviction, provide the water and electricity clearance, and maintain the leased property.\n\n` +
+`Thank you for your cooperation with us,,\nRegards ,,`
+      );
+    }
+
+
+    const headerLinesHtml = NOTICE_LETTERHEAD.topLines.map(l => `<div>${escHtml(l)}</div>`).join('');
+    const footerLinesHtml = NOTICE_LETTERHEAD.footerLines.map((l,i) => (i===0 ? `<div class="sig">${escHtml(l)}</div>` : `<div>${escHtml(l)}</div>`)).join('');
+
+    const titleHtml = `
+      <div class="letter-title-ar">${escHtml(titleAr || '')}</div>
+      ${bilingual ? `<div class="letter-title-en" dir="ltr">${escHtml(titleEn || '')}</div>` : ''}
+    `;
+
+    const metaHtml = `
+      <div><b>رقم الخطاب:</b> ${escHtml(refNo || '—')}</div>
+      <div dir="ltr"><b>Date:</b> ${escHtml(dateEn || '')}</div>
+      <div><b>التاريخ:</b> ${escHtml(dateAr || '')}</div>
+      ${subject ? `<div style="flex-basis:100%"><b>الموضوع:</b> ${escHtml(subject)}</div>` : ''}
+    `;
+
+    const bodyHtml = bilingual ? `
+      <div class="letter-columns">
+        <div class="letter-col" dir="rtl">
+          <div id="notice-body-ar" class="letter-body letter-edit" contenteditable="true">${textToHtml(bodyAr)}</div>
+        </div>
+        <div class="letter-col" dir="ltr">
+          <div id="notice-body-en" class="letter-body letter-edit" contenteditable="true">${textToHtml(bodyEn)}</div>
+        </div>
+      </div>
+    ` : `
+      <div id="notice-body-ar" class="letter-body letter-edit" dir="rtl" contenteditable="true">${textToHtml(bodyAr)}</div>
+    `;
+
+    preview.innerHTML = `
+      <div class="letter-paper" id="notice-letter">
+        <div class="letter-head">
+          <div class="letter-head-lines">${headerLinesHtml}</div>
+          <div class="letter-date" dir="ltr">${escHtml(dateEn || '')}</div>
+        </div>
+
+        <div class="letter-title">${titleHtml}</div>
+
+        <div class="letter-meta">${metaHtml}</div>
+
+        ${bodyHtml}
+
+        <div class="letter-footer">${footerLinesHtml}</div>
+      </div>
+    `;
+
+    noticePreviewReady = true;
+    if(printBtn) printBtn.disabled = false;
+    if(status) status.textContent = 'جاهز للطباعة — يمكنك تعديل نص الخطاب مباشرة داخل المعاينة قبل الطباعة.';
+  }
+
+  function printNotice(){
+    if(!noticePreviewReady){
+      alert('الرجاء إنشاء المعاينة أولاً.');
+      return;
+    }
+    window.print();
+  }
+
+// ================= DASHBOARD =================
   let leasesChart, financeChart;
 
   function updateDashboard(){
@@ -1180,7 +2744,7 @@
 
     const stats = { active:0, empty:0, expired:0, totalRent:0 };
     properties.forEach(p=>p.units.forEach(u=>{
-      if(u.status==='مؤجرة'){ stats.active++; stats.totalRent += (u.rent||0); }
+      if(u.status==='مؤجرة'){ stats.active++; stats.totalRent += calcUnitContractValue(u); }
       else if(u.status==='منتهية') stats.expired++;
       else stats.empty++;
     }));
@@ -1527,7 +3091,9 @@
     const uid = document.getElementById('unit-id').value;
     const p = properties.find(x=>x.id===pid);
 
-    const newUnit = {
+    
+    const existingUnit = uid ? p.units.find(x=>x.id===uid) : null;
+const newUnit = {
       id: uid || 'U'+Date.now(),
       name: document.getElementById('unit-name').value,
       type: document.getElementById('unit-type').value,
@@ -1540,7 +3106,29 @@
       end: document.getElementById('unit-end').value
     };
 
-    if(uid){
+    
+    // إذا تم تحويل الوحدة إلى شاغرة من صفحة الوحدات، نحفظ العقد السابق في سجل العقود ثم ننظّف بيانات العقد
+    if(newUnit.status === 'شاغرة'){
+      if(existingUnit && unitHasLeaseData(existingUnit) && (existingUnit.status !== 'شاغرة')){
+        archiveUnitLease(existingUnit, 'إخلاء/تعديل من صفحة الوحدات', 'مخلى');
+        // نقل السجل إلى الوحدة الجديدة حتى لا نفقد التاريخ
+        ensureLeaseHistory(newUnit);
+        newUnit.leaseHistory = (existingUnit.leaseHistory || []).slice();
+      } else if(existingUnit && Array.isArray(existingUnit.leaseHistory)){
+        newUnit.leaseHistory = existingUnit.leaseHistory;
+      }
+      newUnit.tenant = '';
+      newUnit.rent = 0;
+      newUnit.contractNo = '';
+      newUnit.start = '';
+      newUnit.end = '';
+    } else if(existingUnit && Array.isArray(existingUnit.leaseHistory)){
+      // حافظ على السجل عند التعديل
+      newUnit.leaseHistory = existingUnit.leaseHistory;
+    } else {
+      ensureLeaseHistory(newUnit);
+    }
+if(uid){
       const idx = p.units.findIndex(x=>x.id===uid);
       p.units[idx] = newUnit;
     } else {
@@ -1595,7 +3183,13 @@
     }
     const prop = properties.find(p => p.id === propId);
     const unit = prop.units.find(u => u.id === unitId);
-    unit.status = 'مؤجرة';
+    
+    // إذا كانت الوحدة تحتوي على عقد سابق (مثلاً: منتهية) سيتم حفظه في سجل العقود قبل الاستبدال
+    const newContractNo = document.getElementById('add-lease-contractNo').value;
+    if(unitHasLeaseData(unit) && unit.status !== 'شاغرة'){
+      archiveUnitLease(unit, `تم تجديد العقد بعقد جديد (${newContractNo || 'بدون رقم'})`, 'تجديد عقد');
+    }
+unit.status = 'مؤجرة';
     unit.tenant = document.getElementById('add-lease-tenant').value;
     unit.rent = parseFloat(document.getElementById('add-lease-rent').value || 0);
     unit.contractNo = document.getElementById('add-lease-contractNo').value;
@@ -1633,7 +3227,9 @@
     const p = properties.find(x=>x.id===pid);
     const u = p.units.find(x=>x.id===uid);
 
-    u.tenant = document.getElementById('lease-tenant').value;
+    
+    ensureLeaseHistory(u);
+u.tenant = document.getElementById('lease-tenant').value;
     u.rent = parseFloat(document.getElementById('lease-rent').value||0);
     u.contractNo = document.getElementById('lease-contractNo').value;
     u.start = document.getElementById('lease-start').value;
@@ -1653,7 +3249,11 @@
     const pid = document.getElementById('lease-prop-id').value;
     const uid = document.getElementById('lease-unit-id').value;
     const u = properties.find(x=>x.id===pid).units.find(x=>x.id===uid);
-    u.status='شاغرة';
+    // حفظ العقد الحالي ضمن سجل العقود قبل الإخلاء/الإلغاء (لظهوره في التقارير)
+    const overrideStatus = (u.status === 'منتهية') ? 'منتهية' : 'ملغاة';
+    const reason = (u.status === 'منتهية') ? 'إخلاء الوحدة بعد انتهاء العقد' : 'إلغاء العقد وإخلاء الوحدة';
+    archiveUnitLease(u, reason, overrideStatus);
+u.status='شاغرة';
     u.tenant='';
     u.rent=0;
     u.contractNo='';
@@ -1671,19 +3271,25 @@
     const map = {};
     properties.forEach(p=>p.units.forEach(u=>{
       if(u.status==='مؤجرة' && u.tenant){
-        if(!map[u.tenant]) map[u.tenant] = { name:u.tenant, phone:'', email:'', units:[], rent:0, paid:0 };
-        map[u.tenant].units.push(u.name);
-        map[u.tenant].rent += (u.rent||0);
+        const key = tenantKey(u.tenant);
+        if(!key) return;
+        if(!map[key]) map[key] = { key, name:String(u.tenant).trim(), phone:'', email:'', units:[], rent:0, paid:0 };
+        map[key].units.push(u.name);
+        map[key].rent += (u.rent||0);
       }
     }));
-    Object.keys(map).forEach(name=>{
-      if(tenantsContacts[name]){
-        map[name].phone = tenantsContacts[name].phone;
-        map[name].email = tenantsContacts[name].email;
+    Object.keys(map).forEach(key=>{
+      const c = tenantsContacts[key];
+      if(c){
+        map[key].phone = c.phone || '';
+        map[key].email = c.email || '';
+        // keep a preferred display name if available
+        if(c.name) map[key].name = c.name;
       }
     });
     payments.forEach(pay=>{
-      if(map[pay.tenant]) map[pay.tenant].paid += pay.amount;
+      const key = tenantKey(pay.tenant);
+      if(map[key]) map[key].paid += pay.amount;
     });
     return Object.values(map).map(t=>({...t, balance: t.rent - t.paid}));
   }
@@ -1697,14 +3303,101 @@
     );
   }
 
+  // ======= Units lookup helpers (for linking cheques to units) =======
+  function findUnitById(unitId){
+    if(!unitId) return null;
+    for(const p of (properties||[])){
+      for(const u of (p.units||[])){
+        if(u.id === unitId){
+          return { property: p, unit: u };
+        }
+      }
+    }
+    return null;
+  }
+
+  function getTenantLeasedUnitsDetailed(tenantName){
+    const tkey = tenantKey(tenantName);
+    const out = [];
+    if(!tkey) return out;
+    (properties||[]).forEach(p=>{
+      (p.units||[]).forEach(u=>{
+        if(u.status === 'مؤجرة' && tenantKey(u.tenant) === tkey){
+          out.push({
+            unitId: u.id,
+            unitName: u.name,
+            propertyId: p.id,
+            propertyName: p.name,
+            contractNo: u.contractNo || '',
+            start: u.start || '',
+            end: u.end || '',
+            label: `${u.name} - ${p.name}`
+          });
+        }
+      });
+    });
+    return out;
+  }
+
+  function inferSingleLeasedUnitIdForTenant(tenantName){
+    const list = getTenantLeasedUnitsDetailed(tenantName);
+    return list.length === 1 ? list[0].unitId : '';
+  }
+
+  function getUnitDisplayById(unitId){
+    const hit = findUnitById(unitId);
+    if(!hit) return '';
+    return `${hit.unit.name} - ${hit.property.name}`;
+  }
+
+  function resolveChequeUnitInfo(cheque){
+    const c = normalizeChequeRecord(cheque||{});
+    let unitId = c.unitId || '';
+    if(!unitId){
+      unitId = inferSingleLeasedUnitIdForTenant(c.tenant);
+    }
+    const hit = findUnitById(unitId);
+    const unitLabel = hit ? `${hit.unit.name} - ${hit.property.name}` : (c.unitLabel || '');
+    const contractNo = hit ? (hit.unit.contractNo || '') : '';
+    return { unitId, unitLabel, contractNo };
+  }
+
+  function migrateChequePaymentsToUnit(chequeId){
+    const chRaw = (cheques||[]).find(x=>x.id===chequeId);
+    if(!chRaw) return;
+    const info = resolveChequeUnitInfo(chRaw);
+    if(!info.unitId) return;
+
+    // Update cheque record
+    const idx = cheques.findIndex(x=>x.id===chequeId);
+    if(idx>=0){
+      cheques[idx] = { ...cheques[idx], unitId: info.unitId, unitLabel: info.unitLabel };
+    }
+
+    // Update linked payment record (if created earlier with generic unit)
+    const pIdx = (payments||[]).findIndex(p=>p.chequeId===chequeId);
+    if(pIdx>=0){
+      const p = payments[pIdx];
+      const needs = (!p.unit || p.unit === 'شيك مصرف' || p.unit === 'شيك مصرف' || p.unit === 'شيك مصرف');
+      if(needs){
+        payments[pIdx] = { ...p, unit: info.unitLabel || p.unit, unitId: info.unitId, contract: info.contractNo || p.contract };
+      } else {
+        // still store unitId for future matching
+        payments[pIdx] = { ...p, unitId: info.unitId };
+      }
+    }
+  }
+
+
   function renderTenants(){
     const tbody = document.getElementById('tenants-table-body');
     tbody.innerHTML = '';
     const search = document.getElementById('tenants-search').value.toLowerCase();
-    const data = getTenantsData().filter(t=> t.name.toLowerCase().includes(search));
+    const data = getTenantsData().filter(t=> (t.name||'').toLowerCase().includes(search));
 
     data.forEach(t=>{
       const tr = document.createElement('tr');
+
       tr.innerHTML = `
         <td class="font-bold">${t.name}</td>
         <td class="text-sm">
@@ -1715,43 +3408,122 @@
         <td class="font-mono">${formatAED(t.rent)}</td>
         <td class="font-mono text-green-600">${formatAED(t.paid)}</td>
         <td class="font-mono font-bold ${t.balance>0?'text-rose-600 dark:text-rose-400':'text-gray-400'}">${formatAED(t.balance)}</td>
-        <td>
-          <button onclick="openTenantModal('${t.name}')" class="text-blue-600 dark:text-blue-400 text-xs border border-blue-200 dark:border-blue-800 px-2 py-1 rounded">تحديث</button>
-        </td>
+        <td class="tenant-actions"></td>
       `;
+
+      const td = tr.querySelector('.tenant-actions');
+      const btn = document.createElement('button');
+      btn.textContent = 'تحديث';
+      btn.className = 'text-blue-600 hover:text-blue-800 border border-blue-200 dark:border-blue-800 px-2 py-1 rounded';
+      btn.addEventListener('click', ()=> openTenantModal(t.key, t.name));
+      td.appendChild(btn);
+
       tbody.appendChild(tr);
     });
   }
 
-  function openTenantModal(name=''){
+  
+  // ================= TENANT CONTACTS (reliable save) =================
+  let tenantAutosaveTimer = null;
+
+  function setTenantSaveStatus(msg=''){
+    const el = document.getElementById('tenant-save-status');
+    if(!el) return;
+    el.textContent = msg;
+  }
+
+  function persistTenantContact({silent=false} = {}){
+    const nameEl  = document.getElementById('tenant-name');
+    const phoneEl = document.getElementById('tenant-phone');
+    const emailEl = document.getElementById('tenant-email');
+
+    const displayName = (nameEl?.value || '').trim();
+    const key = currentTenantKey || tenantKey(displayName);
+    if(!key) return null;
+
+    tenantsContacts[key] = {
+      name: displayName || (tenantsContacts[key]?.name || ''),
+      phone: phoneEl?.value || '',
+      email: emailEl?.value || ''
+    };
+
+    saveToLocal();
+    if(!silent) setTenantSaveStatus('✅ تم الحفظ');
+    return key;
+  }
+
+  function scheduleTenantAutosave(){
+    clearTimeout(tenantAutosaveTimer);
+    setTenantSaveStatus('… جارٍ الحفظ');
+    tenantAutosaveTimer = setTimeout(()=>{
+      persistTenantContact({silent:true});
+      setTenantSaveStatus('✅ تم الحفظ');
+    }, 500);
+  }
+
+  function setupTenantModalUX(){
+    const modal = document.getElementById('tenant-modal');
+    if(!modal || modal.dataset.bound === '1') return;
+    modal.dataset.bound = '1';
+
+    // autosave on input (phone/email)
+    ['tenant-phone','tenant-email'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){
+        el.addEventListener('input', scheduleTenantAutosave);
+      }
+    });
+
+    // ESC closes (and saves)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && !document.getElementById('tenant-modal').classList.contains('hidden')){
+        closeTenantModal();
+      }
+    });
+
+    // click backdrop closes (and saves)
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal){
+        closeTenantModal();
+      }
+    });
+  }
+
+function openTenantModal(key='', displayName=''){
     const modal = document.getElementById('tenant-modal');
     modal.classList.remove('hidden');
+
+    setupTenantModalUX();
+    setTenantSaveStatus('');
+
+    currentTenantKey = key || tenantKey(displayName);
 
     const nameInput  = document.getElementById('tenant-name');
     const phoneInput = document.getElementById('tenant-phone');
     const emailInput = document.getElementById('tenant-email');
 
-    nameInput.value = name || '';
+    nameInput.value = displayName || '';
     phoneInput.value = '';
     emailInput.value = '';
 
-    if(name && tenantsContacts[name]){
-      phoneInput.value = tenantsContacts[name].phone || '';
-      emailInput.value = tenantsContacts[name].email || '';
+    const c = tenantsContacts[currentTenantKey];
+    if(c){
+      phoneInput.value = c.phone || '';
+      emailInput.value = c.email || '';
+      // keep stored preferred name if present
+      if(c.name && !displayName) nameInput.value = c.name;
     }
   }
 
   function closeTenantModal(){
-    const name = document.getElementById('tenant-name').value;
-    if(name){
-      tenantsContacts[name] = {
-        phone: document.getElementById('tenant-phone').value,
-        email: document.getElementById('tenant-email').value
-      };
-      saveToLocal();
-      renderTenants();
-    }
+    // finalize any pending autosave
+    clearTimeout(tenantAutosaveTimer);
+    persistTenantContact({silent:true});
+    renderTenants();
+
+    currentTenantKey = null;
     document.getElementById('tenant-modal').classList.add('hidden');
+    setTenantSaveStatus('');
   }
 
   document.getElementById('tenant-form').addEventListener('submit', function(e){
@@ -1844,23 +3616,48 @@
   function toggleTenantInput() {
     const selectEl = document.getElementById('cheque-tenant-select');
     const manualEl = document.getElementById('cheque-tenant-manual');
-    if (selectEl.value === 'other') {
+    const unitSel  = document.getElementById('cheque-unit-select');
+
+    const selected = selectEl ? selectEl.value : '';
+    if (selected === 'other') {
       manualEl.classList.remove('hidden');
       manualEl.setAttribute('required', 'required');
+      if(unitSel){
+        unitSel.innerHTML = '<option value="">— بدون ربط وحدة —</option>';
+        unitSel.disabled = true;
+      }
     } else {
       manualEl.classList.add('hidden');
       manualEl.removeAttribute('required');
+      const tenantName = selected;
+      if(unitSel){
+        unitSel.innerHTML = '<option value="">— بدون ربط وحدة —</option>';
+        const units = getTenantLeasedUnitsDetailed(tenantName);
+        units.forEach(x=>{
+          const opt = document.createElement('option');
+          opt.value = x.unitId;
+          opt.textContent = x.label;
+          unitSel.appendChild(opt);
+        });
+        unitSel.disabled = units.length === 0;
+      }
     }
   }
 
-  function openChequeModal(){
-    const m = document.getElementById('cheque-modal');
-    m.classList.remove('hidden');
-    document.getElementById('new-cheque-form').reset();
+  
+  function openChequeModal(chequeId=''){
+    const modal = document.getElementById('cheque-modal');
+    const form  = document.getElementById('new-cheque-form');
+    const title = document.getElementById('cheque-modal-title');
+    const saveBtn = document.getElementById('cheque-modal-save-btn');
+    if(!modal || !form) return;
 
+    modal.classList.remove('hidden');
+    form.reset();
+
+    // Populate tenant select
     const selectEl = document.getElementById('cheque-tenant-select');
     selectEl.innerHTML = '<option value="">اختر مستأجر حالي...</option>';
-
     getTenantNames().forEach(name => {
       const opt = document.createElement('option');
       opt.value = name;
@@ -1869,11 +3666,61 @@
     });
     selectEl.innerHTML += '<option value="other">-- مستأجر جديد / آخر --</option>';
 
-    toggleTenantInput();
-  }
+    // Default (Add)
+    editingChequeId = null;
+    if(title) title.textContent = 'تسجيل شيك جديد';
+    if(saveBtn) saveBtn.textContent = 'حفظ الشيك';
 
-  function closeChequeModal(){
-    document.getElementById('cheque-modal').classList.add('hidden');
+    // If edit
+    if(chequeId){
+      const raw = (cheques||[]).find(c=>c.id===chequeId);
+      const ch = raw ? normalizeChequeRecord(raw) : null;
+      if(ch){
+        editingChequeId = chequeId;
+        if(title) title.textContent = 'تعديل شيك';
+        if(saveBtn) saveBtn.textContent = 'حفظ التعديل';
+
+        // Tenant selection
+        const inList = getTenantNames().some(n => tenantKey(n) === tenantKey(ch.tenant));
+        if(inList){
+          selectEl.value = getTenantNames().find(n => tenantKey(n) === tenantKey(ch.tenant)) || '';
+        } else {
+          selectEl.value = 'other';
+          document.getElementById('cheque-tenant-manual').value = ch.tenant || '';
+        }
+
+        // Populate unit list for selected tenant
+        toggleTenantInput();
+
+        // Set unit if available
+        const unitSel = document.getElementById('cheque-unit-select');
+        if(unitSel){
+          unitSel.value = ch.unitId || '';
+        }
+
+        // Fill fields
+        document.getElementById('cheque-number').value = ch.chequeNo || '';
+        document.getElementById('cheque-value').value = (ch.value ?? '') === null ? '' : (ch.value ?? '');
+        document.getElementById('cheque-due-date').value = ch.dueDate || '';
+        document.getElementById('cheque-bank').value = ch.bank || '';
+        document.getElementById('cheque-purpose').value = ch.purpose || '';
+      } else {
+        toggleTenantInput();
+      }
+    } else {
+      toggleTenantInput();
+    }
+  }
+function closeChequeModal(){
+    const modal = document.getElementById('cheque-modal');
+    if(modal) modal.classList.add('hidden');
+    editingChequeId = null;
+    pendingChequeAfterEditId = null;
+    pendingChequeAfterEditStatus = '';
+    const title = document.getElementById('cheque-modal-title');
+    const saveBtn = document.getElementById('cheque-modal-save-btn');
+    if(title) title.textContent = 'تسجيل شيك جديد';
+    if(saveBtn) saveBtn.textContent = 'حفظ الشيك';
   }
 
   document.getElementById('new-cheque-form').addEventListener('submit', async e=>{
@@ -1883,39 +3730,164 @@
     const tenantManual = document.getElementById('cheque-tenant-manual').value;
     const tenantName = tenantSelect === 'other' ? tenantManual : tenantSelect;
 
+    const unitId = (document.getElementById('cheque-unit-select') ? document.getElementById('cheque-unit-select').value : '') || '';
+
     if (!tenantName) {
       alert("الرجاء تحديد أو إدخال اسم المستأجر.");
       return;
     }
+const newImageFile = document.getElementById('cheque-image').files[0];
+    const newImageUrl = await fileToBase64(newImageFile);
 
-    const imageFile = document.getElementById('cheque-image').files[0];
-    const imageUrl = await fileToBase64(imageFile);
-
-    cheques.push({
-      id: 'CHQ-'+Date.now(),
+    const payload = {
       tenant: tenantName,
+      unitId: unitId,
       chequeNo: document.getElementById('cheque-number').value,
       value: parseFloat(document.getElementById('cheque-value').value),
       dueDate: document.getElementById('cheque-due-date').value,
       bank: document.getElementById('cheque-bank').value,
       purpose: document.getElementById('cheque-purpose').value,
-      status: 'بانتظار الصرف',
-      imageUrl: imageUrl
-    });
+    };
+
+    if(editingChequeId){
+      const i = cheques.findIndex(c=>c.id===editingChequeId);
+      if(i !== -1){
+        const old = normalizeChequeRecord(cheques[i]);
+        cheques[i] = {
+          ...cheques[i],
+          ...payload,
+          status: old.status || cheques[i].status || 'بانتظار الصرف',
+          imageUrl: newImageUrl || old.imageUrl || cheques[i].imageUrl || ''
+        };
+      }
+    } else {
+      cheques.push({
+        id: 'CHQ-'+Date.now(),
+        ...payload,
+        status: 'بانتظار الصرف',
+        imageUrl: newImageUrl
+      });
+    }
+
     saveToLocal();
-    closeChequeModal();
+    
+    // If this edit was triggered to complete a status change (مثل: صرف الشيك)، نفّذها الآن بعد حفظ ربط الوحدة
+    if(editingChequeId && pendingChequeAfterEditId === editingChequeId && pendingChequeAfterEditStatus){
+      const updated = (cheques||[]).find(c=>c.id===editingChequeId);
+      const info = updated ? resolveChequeUnitInfo(updated) : null;
+      if(info && info.unitId){
+        const st = pendingChequeAfterEditStatus;
+        pendingChequeAfterEditId = null;
+        pendingChequeAfterEditStatus = '';
+        // Apply status change with the now-known unit
+        setTimeout(()=>changeChequeStatus(editingChequeId, st, info.unitId), 0);
+      }
+    }
+closeChequeModal();
     renderCheques();
     logAction(`تم تسجيل شيك جديد للمستأجر: ${tenantName}`);
   });
 
-  function changeChequeStatus(id, newStatus) {
+  
+  // ======= Cheque ↔ Unit linking (for accurate notices/reports) =======
+  let pendingChequeLinkId = null;
+  let pendingChequeLinkNextStatus = '';
+
+  function openChequeLinkModal(chequeId, nextStatus=''){
+    pendingChequeLinkId = chequeId;
+    pendingChequeLinkNextStatus = nextStatus || '';
+    const modal = document.getElementById('cheque-link-modal');
+    const infoEl = document.getElementById('cheque-link-info');
+    const sel = document.getElementById('cheque-link-unit-select');
+
+    const raw = (cheques||[]).find(c=>c.id===chequeId);
+    const ch = raw ? normalizeChequeRecord(raw) : null;
+    if(!modal || !infoEl || !sel || !ch) return;
+
+    const units = getTenantLeasedUnitsDetailed(ch.tenant);
+    sel.innerHTML = '';
+    if(units.length === 0){
+      sel.innerHTML = '<option value="">— لا توجد وحدات مؤجرة لهذا المستأجر —</option>';
+      sel.disabled = true;
+    } else {
+      sel.disabled = false;
+      const opts = ['<option value="">— اختر الوحدة —</option>']
+        .concat(units.map(u=>`<option value="${u.unitId}">${u.label}</option>`));
+      sel.innerHTML = opts.join('');
+      // preselect
+      if(ch.unitId){
+        sel.value = ch.unitId;
+      } else if(units.length === 1){
+        sel.value = units[0].unitId;
+      }
+    }
+
+    infoEl.textContent = `المستأجر: ${ch.tenant} — الشيك: #${ch.chequeNo||'—'} — القيمة: ${formatAED(ch.value||0)}`;
+    modal.classList.remove('hidden');
+  }
+
+  function closeChequeLinkModal(){
+    const modal = document.getElementById('cheque-link-modal');
+    if(modal) modal.classList.add('hidden');
+    pendingChequeLinkId = null;
+    pendingChequeLinkNextStatus = '';
+  }
+
+  function confirmChequeLink(){
+    const chequeId = pendingChequeLinkId;
+    const nextStatus = pendingChequeLinkNextStatus;
+    const sel = document.getElementById('cheque-link-unit-select');
+    const unitId = sel ? (sel.value || '') : '';
+    if(!chequeId) { closeChequeLinkModal(); return; }
+
+    if(nextStatus === 'مصروف' && !unitId){
+      alert('الرجاء اختيار الوحدة قبل صرف الشيك حتى يتم تسجيله ضمن الدفعات الخاصة بالوحدة.');
+      return;
+    }
+
+    const idx = cheques.findIndex(c=>c.id===chequeId);
+    if(idx >= 0){
+      const hit = findUnitById(unitId);
+      const label = hit ? `${hit.unit.name} - ${hit.property.name}` : '';
+      cheques[idx] = { ...cheques[idx], unitId: unitId, unitLabel: label };
+      migrateChequePaymentsToUnit(chequeId);
+      saveToLocal();
+      renderCheques();
+      renderPayments();
+      updateDashboard();
+      renderReceiptsHistory();
+    }
+
+    closeChequeLinkModal();
+
+    if(nextStatus){
+      changeChequeStatus(chequeId, nextStatus, unitId);
+    }
+  }
+
+
+function changeChequeStatus(id, newStatus, unitIdOverride='') {
     const chequeIndex = cheques.findIndex(c => c.id === id);
     if (chequeIndex === -1) return;
 
     const cheque = cheques[chequeIndex];
-    cheque.status = newStatus;
 
+    if(unitIdOverride){
+      cheque.unitId = unitIdOverride;
+    }
+
+    // If cashing the cheque, we must know which unit it belongs to (to record payment correctly)
     if (newStatus === 'مصروف') {
+      const info = resolveChequeUnitInfo(cheque);
+      if(!info.unitId){
+        // Ask user to link the cheque first
+        pendingChequeAfterEditId = id; pendingChequeAfterEditStatus = 'مصروف'; alert('يرجى تحديد الوحدة للشيك ثم حفظ التعديل ليتم صرفه وتسجيله كدفعة تلقائياً.'); openChequeModal(id);
+        return;
+      }
+
+      cheque.unitId = info.unitId;
+      cheque.unitLabel = info.unitLabel || cheque.unitLabel || '';
+
       const paymentExists = payments.some(p => p.chequeId === id);
 
       if (!paymentExists) {
@@ -1924,17 +3896,25 @@
           chequeId: id,
           date: new Date().toISOString().substring(0, 10),
           tenant: cheque.tenant,
-          unit: 'شيك مصرف',
-          contract: cheque.chequeNo,
+          unit: info.unitLabel || 'شيك مصرف',
+          unitId: info.unitId,
+          contract: info.contractNo || cheque.chequeNo,
           due: cheque.value,
           type: 'شيك مصرف',
           amount: cheque.value,
-          desc: cheque.purpose || `تحصيل الشيك رقم ${cheque.chequeNo} من ${cheque.tenant}`,
+          desc: cheque.purpose || `تحصيل الشيك رقم ${cheque.chequeNo} (${info.unitLabel||''}) من ${cheque.tenant}`,
           voucherNo: nextVoucherNumber('receipt')
         });
-        logAction(`تم صرف الشيك رقم ${cheque.chequeNo} وتم تسجيله كدفعة مقبوضة.`);
+        logAction(`تم صرف الشيك رقم ${cheque.chequeNo} وتم تسجيله كدفعة مقبوضة للوحدة: ${info.unitLabel||info.unitId}.`);
+      } else {
+        // Ensure existing payment record is linked to the unit (older versions)
+        migrateChequePaymentsToUnit(id);
       }
+
+      cheque.status = newStatus;
     } else {
+      // If status was changed away from "مصروف", remove the linked payment (to avoid double counting)
+      cheque.status = newStatus;
       payments = payments.filter(p => p.chequeId !== id);
     }
 
@@ -1944,6 +3924,7 @@
     renderPayments();
     renderReceiptsHistory();
   }
+
 
   function viewChequeImage(imageUrl) {
     if (!imageUrl) return;
@@ -1981,6 +3962,7 @@
         <td><span class="badge ${statusClass}">${c.status}</span></td>
         <td class="font-mono">${c.dueDate}</td>
         <td>${c.tenant}</td>
+        <td class="text-xs text-gray-600 dark:text-gray-300">${escHtml(getUnitDisplayById(c.unitId) || '-') }</td>
         <td class="font-bold">${formatAED(c.value)}</td>
         <td class="text-xs text-gray-500 dark:text-gray-400">${c.bank} - #${c.chequeNo}</td>
         <td>
@@ -1990,6 +3972,7 @@
           <select onchange="changeChequeStatus('${c.id}', this.value)" class="text-sm border p-1 rounded bg-white dark:bg-gray-800 dark:text-white">
             ${selectOptions}
           </select>
+          <button type="button" onclick="openChequeModal('${c.id}')" class="text-xs px-2 py-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 ml-2" title="تعديل الشيك">✏️ تعديل</button>
           <button onclick="deleteCheque('${c.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 p-1 rounded transition ml-2" title="حذف">🗑️</button>
         </td>
       `;
@@ -2321,25 +4304,45 @@
   function renderReports(){
     const date = new Date().toLocaleDateString('ar-AE');
     document.getElementById('report-date').textContent = date;
+
     const tenants = getTenantsData();
+
+    // Full contract value — rent amount is treated as the full contract amount (not annual) inside reports
+    const contractTotals = {};
+    properties.forEach(p=>p.units.forEach(u=>{
+      if(u.status==='مؤجرة' && u.tenant){
+        if(!contractTotals[u.tenant]) contractTotals[u.tenant] = 0;
+        contractTotals[u.tenant] += calcUnitContractValue(u);
+      }
+    }));
+    const tenantsR = tenants.map(t=>{
+      const contractValue = Number(contractTotals[t.name] ?? t.rent) || 0;
+      const paid = Number(t.paid) || 0;
+      return {...t, contractValue, contractBalance: contractValue - paid};
+    });
+
     const list = document.getElementById('tenants-summary-list');
     list.innerHTML='';
-    tenants.forEach(t=>{
+    tenantsR.forEach(t=>{
       const div = document.createElement('div');
       div.className = "border p-3 rounded bg-gray-50 flex justify-between";
-      div.innerHTML = `<span><strong>${t.name}</strong> (${t.units.length} وحدات)</span> <span class="font-bold text-emerald-700">${formatAED(t.rent)}</span>`;
+      div.innerHTML = `<span><strong>${t.name}</strong> (${t.units.join(', ')})</span>
+        <span class="font-bold text-emerald-700">${formatAED(t.contractValue)}</span>`;
       list.appendChild(div);
     });
+
     const lateList = document.getElementById('late-tenants-list');
     lateList.innerHTML='';
-    const late = tenants.filter(t=>t.balance>0);
+    const late = tenantsR.filter(t=>t.contractBalance>0);
     if(late.length===0) lateList.innerHTML = '<li class="text-green-700">لا يوجد متأخرات ولله الحمد</li>';
     else late.forEach(t=>{
       const li = document.createElement('li');
-      li.innerHTML = `⚠️ <strong>${t.name}</strong> - متبقي عليه: <span class="font-bold text-red-700">${formatAED(t.balance)}</span>`;
+      li.innerHTML = `⚠️ <strong>${t.name}</strong> - متبقي عليه: <span class="font-bold text-red-700">${formatAED(t.contractBalance)}</span>`;
       lateList.appendChild(li);
     });
-  }
+  
+    renderLeaseArchiveReport();
+}
 
   // ================= SETTINGS & BACKUP =================
   function exportBackupJSON(){
@@ -2385,13 +4388,19 @@
           details: e.details,
           voucherNo: e.voucherNo || null
         }));
-        cheques = cheques.map(c => ({
-          ...c,
-          id: c.id || 'CHQ-' + Date.now() + Math.floor(Math.random()*1000),
-          status: c.status || (new Date(c.dueDate) < new Date() ? 'راجع' : 'بانتظار الصرف'),
-          imageUrl: c.imageUrl || null
-        }));
-
+        cheques = (cheques||[]).map(normalizeChequeRecord);
+        cheques = cheques.map(c=>{
+          const nc = normalizeChequeRecord(c);
+          if(!nc.unitId){
+            const inferred = inferSingleLeasedUnitIdForTenant(nc.tenant);
+            if(inferred) nc.unitId = inferred;
+          }
+          if(nc.unitId && !nc.unitLabel){
+            nc.unitLabel = getUnitDisplayById(nc.unitId);
+          }
+          return nc;
+        });
+        (payments||[]).forEach(p=>{ if(p && p.chequeId){ migrateChequePaymentsToUnit(p.chequeId); } });
         saveToLocal();
         ensureVoucherNumbers();
         document.getElementById('backup-msg').textContent = "✅ تم استعادة البيانات بنجاح!";
@@ -2442,10 +4451,22 @@
     }
   }
 
-  // ================= INIT =================
+  
+  // Bind once: mark arrears details as "user edited" so auto-fill won't overwrite unless forced
+  function initNoticeArrearsAutogenTracking(){
+    const details = document.getElementById('notice-arrears-details');
+    if(details && details.dataset.bound !== '1'){
+      details.dataset.bound = '1';
+      details.addEventListener('input', ()=>{ details.dataset.autogen = '0'; });
+    }
+  }
+
+// ================= INIT =================
   window.onload = function(){
     initTheme();
+    loadRentBasisSetting();
     loadFromLocal();
+    initNoticeArrearsAutogenTracking();
     showView('dashboard');
   };
 </script>
